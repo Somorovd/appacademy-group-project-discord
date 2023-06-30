@@ -16,8 +16,9 @@ class Server(db.Model):
     created_at = db.Column(db.DateTime(Timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    def to_dict(self):
-        return {
+
+    def to_dict(self, timestamps=False):
+        dct = {
             'id': self.id,
             'ownerId': self.owner_d,
             'name': self.name,
@@ -25,3 +26,9 @@ class Server(db.Model):
             'image': self.image,
             'private': self.private
         }
+
+        if timestamps:
+            dct["createdAt"] = self.created_at
+            dct["updatedAt"] = self.updated_at
+
+        return dct
