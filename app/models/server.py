@@ -8,13 +8,15 @@ class Server(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String, nullable=False)
     about = db.Column(db.String(500), nullable=False)
     image = db.Column(db.String, nullable=True)
     private = db.Column(db.Boolean, nullable=False)
     created_at = db.Column(db.DateTime(Timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
+
+    owner = db.relationship("User", back_populates="users")
 
 
     def to_dict(self, timestamps=False):
