@@ -1,10 +1,11 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users
-from .servers import seed_servers, undo_servers
-from .memberships import seed_memberships, undo_memberships
+from .channels import seed_channels, undo_channels
 from .communications import seed_communications, undo_communications
 from .direct_messages import seed_direct_messages, undo_direct_messages
-from .channels import seed_channels, undo_channels
+from .memberships import seed_memberships, undo_memberships
+from .messages import seed_messages, undo_messages
+from .servers import seed_servers, undo_servers
+from .users import seed_users, undo_users
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,6 +24,7 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_direct_messages()
         undo_communications()
+        undo_messages()
         undo_channels()
         undo_memberships()
         undo_servers()
@@ -31,6 +33,7 @@ def seed():
     seed_servers()
     seed_memberships()
     seed_channels()
+    seed_messages()
     seed_communications()
     seed_direct_messages()
     # Add other seed functions here
@@ -42,6 +45,7 @@ def undo():
     undo_direct_messages()
     undo_communications()
     undo_channels()
+    undo_messages()
     undo_memberships()
     undo_servers()
     undo_users()

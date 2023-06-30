@@ -7,14 +7,14 @@ from random import randint
 # Adds a demo user, you can add other users here if you want
 def seed_channels():
     for i in range(1, 4):
-        db.add(
+        db.session.add(
             Channel(
                 server_id=i,
                 name="General",
                 type=types.text,
             )
         )
-        db.add(
+        db.session.add(
             Channel(
                 server_id=i,
                 name="Voice Chat",
@@ -22,7 +22,7 @@ def seed_channels():
             )
         )
         for j in range(4):
-            db.add(
+            db.session.add(
                 Channel(
                     server_id=i,
                     name=f"Channel-{randint(1, 100)}",

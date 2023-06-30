@@ -22,7 +22,9 @@ class Channel(db.Model):
     name = db.Column(db.String(50), nullable=False)
     type = db.Column(db.Enum(types))
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
+    updated_at = db.Column(
+        db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
 
     server = db.relationship("Server", back_populates="channels")
     messages = db.relationship("Message", back_populates="channel")

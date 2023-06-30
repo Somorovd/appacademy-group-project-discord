@@ -19,7 +19,9 @@ class Membership(db.Model):
     server_id = db.Column(db.Integer, db.ForeignKey("servers.id"), nullable=False)
     role = db.Column(db.Enum(roles), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
+    updated_at = db.Column(
+        db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
 
     user = db.relationship("User", back_populates="memberships")
     server = db.relationship("Server", back_populates="memberships")

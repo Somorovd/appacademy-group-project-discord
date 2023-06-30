@@ -18,10 +18,9 @@ class User(db.Model, UserMixin):
     profile_pic = db.Column(db.String(255))
     birthday = db.Column(db.Date)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
-
-    communications1 = db.relationship("Communication", back_populates="user1")
-    communications2 = db.relationship("Communication", back_populates="user2")
+    updated_at = db.Column(
+        db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
 
     servers = db.relationship("Server", back_populates="owner")
     direct_messages = db.relationship("DirectMessage", back_populates="user")

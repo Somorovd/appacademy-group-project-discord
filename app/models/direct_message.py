@@ -15,11 +15,9 @@ class DirectMessage(db.Model):
     )
     content = db.Column(db.String(500), nullable=False)
     was_edited = db.Column(db.Boolean, nullable=False, default=False)
-    created_at = db.Column(
-        db.DateTime(timezone=True), nullable=False, server_default=func.now()
-    )
+    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     uptaded_at = db.Column(
-        db.DateTime(timezone=True), nullable=False, onupdate=func.now()
+        db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
     user = db.relationship("User", back_populates="direct_messages")

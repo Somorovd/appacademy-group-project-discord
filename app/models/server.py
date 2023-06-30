@@ -15,7 +15,9 @@ class Server(db.Model):
     image = db.Column(db.String, nullable=True)
     private = db.Column(db.Boolean, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
+    updated_at = db.Column(
+        db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
 
     owner = db.relationship("User", back_populates="servers")
     channels = db.relationship("Channel", back_populates="server")

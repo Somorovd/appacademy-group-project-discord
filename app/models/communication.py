@@ -11,19 +11,13 @@ class Communication(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user1_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     user2_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    created_at = db.Column(
-        db.DateTime(timezone=True), nullable=False, server_default=func.now()
-    )
-    uptaded_at = db.Column(
-        db.DateTime(timezone=True), nullable=False, onupdate=func.now()
+    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    updated_at = db.Column(
+        db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    user1 = db.relationship(
-        "User", foreign_keys=[user1_id], back_populates="communications1"
-    )
-    user2 = db.relationship(
-        "User", foreign_keys=[user2_id], back_populates="communications2"
-    )
+    user1 = db.relationship("User", foreign_keys=[user1_id])
+    user2 = db.relationship("User", foreign_keys=[user2_id])
 
     direct_messages = db.relationship("DirectMessage", back_populates="communication")
 
