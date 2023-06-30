@@ -11,7 +11,7 @@ types = Enum(
 )
 
 
-class Channel(db.Model, UserMixin):
+class Channel(db.Model):
     __tablename__ = "channels"
 
     if environment == "production":
