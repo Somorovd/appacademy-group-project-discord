@@ -20,6 +20,9 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
+    communications1 = db.relationship("Communication", back_populates="user1")
+    communications2 = db.relationship("Communication", back_populates="user2")
+
     @property
     def password(self):
         return self.hashed_password
