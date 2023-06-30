@@ -1,8 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from datetime import datetime
+from sqlalchemy.sql import func
 
-
-class Communications(db.Model):
+class Communication(db.Model):
     __tablename__ = "communications"
 
     if environment == "production":
@@ -11,21 +10,21 @@ class Communications(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user1_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user2_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    created_at = db.Column(db.Timestamp, nullable=False, default=datetime.now())
-    uptaded_at = db.Column(db.Timestamp, nullable=False, default=datetime.now())
+    created_at = db.Column(db.Datetime(timezone=True), nullable=False, server_default=func.now())
+    uptaded_at = db.Column(db.Datetime(timezone=True), nullable=False, onupdate=func.now())
 
-    user1 = db.relationship("User", back_populates="users")
-    user2 = db.relationship("User", back_populates="users")
+    user1 = db.relationship("User", back_populates="communications")
+    user2 = db.relationship("User", back_populates="communications")
 
 
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
-            "user1_id": self.user1_id,
-            "user2_id": self.user2_id,
+            "user1Id": self.user1_id,
+            "user2Id": self.user2_id,
         }
         if timestamps:
-            dct["created_at"] = self.created_at
-            dct["updated_at"] = self.uptaded_at
+            dct["createdAt"] = self.created_at
+            dct["updatedAt"] = self.uptaded_at
 
         return dct
