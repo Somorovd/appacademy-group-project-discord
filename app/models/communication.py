@@ -25,6 +25,8 @@ class Communication(db.Model):
         "User", foreign_keys=[user2_id], back_populates="communications2"
     )
 
+    direct_messages = db.relationship("DirectMessage", back_populates="communication")
+
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,

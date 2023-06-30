@@ -25,6 +25,7 @@ class Channel(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     server = db.relationship("Server", back_populates="channels")
+    messages = db.relationship("Message", back_populates="channel")
 
     def to_dict(self, timestamps=False):
         dct = {

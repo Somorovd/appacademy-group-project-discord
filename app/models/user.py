@@ -23,6 +23,11 @@ class User(db.Model, UserMixin):
     communications1 = db.relationship("Communication", back_populates="user1")
     communications2 = db.relationship("Communication", back_populates="user2")
 
+    servers = db.relationship("Server", back_populates="owner")
+    direct_messages = db.relationship("DirectMessage", back_populates="user")
+    memberships = db.relationship("Membership", back_populates="user")
+    messages = db.relationship("Message", back_populates="user")
+
     @property
     def password(self):
         return self.hashed_password

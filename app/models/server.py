@@ -17,7 +17,7 @@ class Server(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    owner = db.relationship("User", back_populates="users")
+    owner = db.relationship("User", back_populates="servers")
 
     def to_dict(self, timestamps=False):
         dct = {
