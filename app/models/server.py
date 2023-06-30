@@ -18,6 +18,8 @@ class Server(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     owner = db.relationship("User", back_populates="servers")
+    channels = db.relationship("Channel", back_populates="server")
+    memberships = db.relationship("Membership", back_populates="server")
 
     def to_dict(self, timestamps=False):
         dct = {

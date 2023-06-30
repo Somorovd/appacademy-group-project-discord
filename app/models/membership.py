@@ -21,7 +21,7 @@ class Membership(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    user = db.relationship("User", back_populates="membership")
+    user = db.relationship("User", back_populates="memberships")
     server = db.relationship("Server", back_populates="memberships")
 
     def to_dict(self, timestamps=False):
