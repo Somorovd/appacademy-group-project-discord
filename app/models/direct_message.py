@@ -9,9 +9,13 @@ class DirectMessage(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    sender_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
+    )
     communication_id = db.Column(
-        db.Integer, db.ForeignKey("communications.id"), nullable=False
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod("communications.id")),
+        nullable=False,
     )
     content = db.Column(db.String(500), nullable=False)
     was_edited = db.Column(db.Boolean, nullable=False, default=False)
