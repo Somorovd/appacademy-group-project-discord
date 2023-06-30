@@ -48,6 +48,9 @@ def upgrade():
         sa.UniqueConstraint("email"),
         sa.UniqueConstraint("username"),
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.create_table(
         "communications",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -75,6 +78,10 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE communications SET SCHEMA {SCHEMA};")
+
     op.create_table(
         "servers",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -101,6 +108,10 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE servers SET SCHEMA {SCHEMA};")
+
     op.create_table(
         "channels",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -125,6 +136,10 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE channels SET SCHEMA {SCHEMA};")
+
     op.create_table(
         "direct_messages",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -154,6 +169,10 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE direct_messages SET SCHEMA {SCHEMA};")
+
     op.create_table(
         "memberships",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -186,6 +205,10 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE memberships SET SCHEMA {SCHEMA};")
+
     op.create_table(
         "messages",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -217,13 +240,7 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE channels SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE communications SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE direct_messages SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE memberships SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE servers SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

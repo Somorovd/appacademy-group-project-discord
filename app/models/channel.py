@@ -18,7 +18,9 @@ class Channel(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    server_id = db.Column(db.Integer, db.ForeignKey("servers.id"), nullable=False)
+    server_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("servers.id")), nullable=False
+    )
     name = db.Column(db.String(50), nullable=False)
     type = db.Column(db.Enum(types))
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
