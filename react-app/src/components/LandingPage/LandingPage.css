@@ -1,12 +1,3 @@
-/*
-    might want to move the location of this, without it causes
-    white border around the page
- */
-
-* {
-    margin: 0px
-}
-
 .button__rounded {
     padding: .5rem 1rem;
     border-radius: 3rem;
