@@ -50,110 +50,115 @@ function SignupFormPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Phone Number
-          <input
-            type="text"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            pattern="\d{3}-\d{3}-\d{4}"
-            placeholder="123-456-7890"
-            required
-          />
-        </label>
-        <label>
-          Date of Birth
-          <div>
-            <select
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
-            >
-              <option value={""} hidden disabled>Month</option>
-              {
-                months.map((month, i) => {
-                  return (
-                    <option value={i + 1} key={i} >
-                      {month}
-                    </option>
-                  )
-                })
-              }
-            </select>
-            <select
-              value={day}
-              onChange={(e) => setDay(e.target.value)}
-            >
-              <option value={""} hidden disabled>Day</option>
-              {
-                Array.from({ length: 31 }, (_, i) => {
-                  return (
-                    <option value={i + 1} key={i}>
-                      {i + 1}
-                    </option>
-                  )
-                })
-              }
-            </select>
-            <select
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-            >
-              <option value={""} hidden disabled>Year</option>
-              {
-                Array.from({ length: numYears }, (_, i) => {
-                  return (
-                    <option value={currentYear - i} key={i}>
-                      {currentYear - i}
-                    </option>
-                  )
-                })
-              }
-            </select>
-          </div>
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form >
+      <div className="form-wrapper">
+        <form
+          className="auth-form"
+          onSubmit={handleSubmit}
+        >
+          <h1>Create an account</h1>
+          <ul>
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul>
+          <label>
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Username
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Phone Number
+            <input
+              type="text"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              pattern="\d{3}-\d{3}-\d{4}"
+              placeholder="123-456-7890"
+              required
+            />
+          </label>
+          <label>
+            Date of Birth
+            <div className="date-selectors">
+              <select
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+              >
+                <option value={""} hidden disabled>Month</option>
+                {
+                  months.map((month, i) => {
+                    return (
+                      <option value={i + 1} key={i} >
+                        {month}
+                      </option>
+                    )
+                  })
+                }
+              </select>
+              <select
+                value={day}
+                onChange={(e) => setDay(e.target.value)}
+              >
+                <option value={""} hidden disabled>Day</option>
+                {
+                  Array.from({ length: 31 }, (_, i) => {
+                    return (
+                      <option value={i + 1} key={i}>
+                        {i + 1}
+                      </option>
+                    )
+                  })
+                }
+              </select>
+              <select
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+              >
+                <option value={""} hidden disabled>Year</option>
+                {
+                  Array.from({ length: numYears }, (_, i) => {
+                    return (
+                      <option value={currentYear - i} key={i}>
+                        {currentYear - i}
+                      </option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Confirm Password
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </label>
+          <button type="submit">Sign Up</button>
+        </form >
+      </div>
     </>
   );
 }
