@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import User, Communication
+from app.models import User, Communication, DirectMessage
 from sqlalchemy import or_
 
 communication_routes = Blueprint('communications', __name__)
@@ -24,3 +24,23 @@ def get_DMs():
     # print(current_user.id)
 
     return { "dms": dms }
+
+@communication_routes.route("/<int:communication_id>")
+@login_required
+def get_single_dm(communication_id):
+    dms_query = DirectMessage.query.filter(DirectMessage.communication_id == communication_id).all()
+    dms = [dm.to_dict(timestamps = True) for dm in dms_query]
+    # print("--------------------------")
+    # print(dms)
+    # print("--------------------------")
+
+    communication_query = Communication.query.get(communication_id)
+    if communication_query is None:
+        return { "messages": [], "communication": {} }
+
+    communication = communication_query.to_dict()
+
+    if current_user.id != communication['user1Id'] and current_user.id != communication['user2Id']:
+        return { "messages": [], "communication": {} }
+
+    return { "messages": dms, "communication": communication}

@@ -10,7 +10,7 @@ export default function MainAppPage() {
       <div className="app-wrapper">
         <ServerSidebar />
         <Switch>
-          <Route path="/main/conversations">
+          <Route path={["/main/conversations/:communicationId", "/main/conversations"]}>
             <ConversationsPage />
           </Route>
           <Route path="/main/channels">

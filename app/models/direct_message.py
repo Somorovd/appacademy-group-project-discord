@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+from .user import User
 
 
 class DirectMessage(db.Model):
@@ -36,7 +37,10 @@ class DirectMessage(db.Model):
             "wasEdited": self.was_edited,
         }
         if timestamps:
-            dct["created_at"] = self.created_at
-            dct["updated_at"] = self.uptaded_at
+            dct["createdAt"] = self.created_at
+            dct["updatedAt"] = self.uptaded_at
+        sender = User.query.get(self.sender_id)
+        dct["sender"] = sender.username
+        dct["senderPic"] = sender.profile_pic
 
         return dct
