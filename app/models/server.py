@@ -28,7 +28,7 @@ class Server(db.Model):
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
-            "ownerId": self.owner_d,
+            "ownerId": self.owner_id,
             "name": self.name,
             "about": self.about,
             "image": self.image,
@@ -39,4 +39,11 @@ class Server(db.Model):
             dct["createdAt"] = self.created_at
             dct["updatedAt"] = self.updated_at
 
+        return dct
+
+    def to_dict_single(self):
+        dct = self.to_dict()
+        dct["channels"] = {}
+        for channel in self.channels:
+            dct["channels"][channel.id] = channel.to_dict()
         return dct

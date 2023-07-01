@@ -2,7 +2,7 @@
   display: grid;
   grid-template-areas:
     "servers app-nav messages";
-  grid-template-columns: 65px 250px 1fr;
+  grid-template-columns: 70px 250px 1fr;
   height: 100%;
   color: white;
   background-color: #222;

@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+from .user import User
 
 
 class Communication(db.Model):
@@ -34,5 +35,23 @@ class Communication(db.Model):
         if timestamps:
             dct["createdAt"] = self.created_at
             dct["updatedAt"] = self.uptaded_at
+
+        return dct
+
+    def to_dict_specific(self, userId):
+        dct = {
+            "id": self.id,
+        }
+
+        if self.user1_id != userId:
+            dct["otherUser"] = self.user1_id
+
+        if self.user2_id != userId:
+            dct["otherUser"] = self.user2_id
+
+        otherUser = User.query.get(dct["otherUser"]).to_dict()
+
+        dct["userName"] = otherUser["username"]
+        dct["userPic"] = otherUser["profilePic"]
 
         return dct
