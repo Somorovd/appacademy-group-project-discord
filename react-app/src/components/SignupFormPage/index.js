@@ -28,19 +28,20 @@ function SignupFormPage() {
     e.preventDefault();
     if (password === confirmPassword) {
 
-      const birthday = new Date(`${month} ${day}, ${year}`)
+      const birthday = `${year}-${month}-${day}`
 
       const user_obj = {
         username,
         email,
-        phoneNumber,
         birthday,
-        password
+        password,
+        phone_number: phoneNumber,
       }
 
       const data = await dispatch(signUp(user_obj));
       if (data) {
         setErrors(data)
+        console.log(data);
       }
     } else {
       setErrors(['Confirm Password field must be the same as the Password field']);
@@ -78,6 +79,8 @@ function SignupFormPage() {
             type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
+            pattern="\d{3}-\d{3}-\d{4}"
+            placeholder="123-456-7890"
             required
           />
         </label>
@@ -92,7 +95,7 @@ function SignupFormPage() {
               {
                 months.map((month, i) => {
                   return (
-                    <option value={i + 1}>
+                    <option value={i + 1} key={i} >
                       {month}
                     </option>
                   )
@@ -107,7 +110,7 @@ function SignupFormPage() {
               {
                 Array.from({ length: 31 }, (_, i) => {
                   return (
-                    <option value={i + 1}>
+                    <option value={i + 1} key={i}>
                       {i + 1}
                     </option>
                   )
@@ -122,7 +125,7 @@ function SignupFormPage() {
               {
                 Array.from({ length: numYears }, (_, i) => {
                   return (
-                    <option value={currentYear - i}>
+                    <option value={currentYear - i} key={i}>
                       {currentYear - i}
                     </option>
                   )
