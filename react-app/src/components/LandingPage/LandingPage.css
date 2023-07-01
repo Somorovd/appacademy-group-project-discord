@@ -1,0 +1,215 @@
+.landing-page__top {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 187, 255);
+    background-image: url('../../Images/clouds.svg');
+    padding-top: 50px;
+}
+.landing-page__nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.landing-page__nav-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.landing-page__nav-options {
+    display: flex;
+    flex-direction: row;
+    gap: 55px
+}
+.landing-page__nav-options > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+}
+.landing-page__nav-options-button {
+    display: flex;
+    align-items: center;
+}
+.landing-page__nav-options-button > Link {
+    height: 40px;
+    width: 80px;
+    border-radius: 100px;
+}
+
+.landing-page__button--rounded {
+    padding: .5rem 1rem;
+    border-radius: 3rem;
+    font-size: 1rem;
+    border: none;
+    padding: 15px
+}
+
+.landing-page__top-mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-page__top-mid > p {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.landing-page__top-mid > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px
+}
+
+.landing-page__top-mid > div > Link {
+    height: 50px;
+    width: 250px;
+    border-radius: 100px;
+}
+
+#landing-page__top-mid-left-button {
+    color: black;
+    background-color: white;
+}
+
+#landing-page__top-mid-right-button {
+    color: white;
+    background-color: black;
+}
+
+.landing-page__top-bottom-pics {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.landing-page__top-pic2 {
+
+}
+
+.landing-page__top-pic2 {
+
+}
+/* Landing Page Top Images */
+/* .landing__top__pic1 {
+    border: 1px red solid;
+}
+.LandingTop {
+    background-image: url('../../Images/clouds.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.landing__top__pic2 {
+    border: 1px red solid;
+    position: absolute
+}
+
+.landing__top__pic3 {
+    border: 1px red solid;
+    position: absolute
+}
+
+.landing__top__bottom__pics {
+    display: flex;
+    justify-content: space-between;
+} */
+
+/* Section Styling */
+
+.landing-page__sections {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0px;
+}
+
+.landing-page__sections-descriptions {
+    width: 20%;
+}
+
+.landing-page__big-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0px;
+}
+
+.landing-page__big-section-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.landing-page__big-section-description > p {
+    text-align: center;
+    width: 80%;
+}
+
+.landing-page__big-section-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.landing-page__section--light {
+    background-color: white;
+}
+
+.landing-page__section--dark {
+    background-color: rgb(230, 230, 230);
+}
+
+/* Landing page Footer */
+.landing-page__footer-section {
+    background-color: #333;
+    padding: 100px;
+}
+
+.landing-page__footer-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+.landing-page__footer-column {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.landing-page__footer-column > div {
+    color: white;
+}
+
+.landing-page__footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px rgb(0, 151, 227) solid;
+    padding-top: 15px;
+}
+
+.landing-page__footer-bottom-left {
+    display: flex;
+    align-items: center;
+}
+/* individual ID changes */
+
+#landing-page__second-download-button {
+    color: white;
+    background-color: rgb(25, 159, 255);
+}
+
+#landing-page__footer-column-top {
+    color: rgb(0, 140, 227)
+}
