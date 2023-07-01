@@ -1,0 +1,179 @@
+.button__rounded {
+    padding: .5rem 1rem;
+    border-radius: 3rem;
+    font-size: 1rem;
+    border: none
+}
+
+.LandingTop {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 187, 255);
+    padding-top: 50px;
+}
+/* Landing Page Nav Bar */
+.LandingNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.LandingNavIcon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.LandingNavOptions {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    gap: 55px
+}
+.LandingNavOptions > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+}
+.LandingNavLoginButton {
+    display: flex;
+    align-items: center;
+}
+.LandingNavLoginButton > button {
+    height: 40px;
+    width: 80px;
+    border-radius: 100px;
+}
+
+
+/* Right Under Nav, mid portion */
+
+.LandingTopMid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LandingTopMid > p {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.LandingTopMid > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px
+}
+
+.LandingTopMid > div > button {
+    height: 50px;
+    width: 250px;
+    border-radius: 100px;
+}
+
+#LandingTopMidLeftButton {
+    color: black;
+    background-color: white;
+}
+
+#LandingTopMidRightButton {
+    color: white;
+    background-color: black;
+}
+
+/* Section Styling */
+
+.landing__sections {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0px;
+}
+
+.landing__sections__descriptions {
+    width: 20%;
+}
+
+.landing__big__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0px;
+}
+
+.landing__big__section__description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.landing__big__section__description > p {
+    text-align: center;
+    width: 80%;
+}
+
+.landing__big__section__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.landing__section__light {
+    background-color: white;
+}
+
+.landing__section__dark {
+    background-color: rgb(230, 230, 230);
+}
+
+/* Landing page Footer */
+.landing__footer__section {
+    background-color: darkslategray;
+    padding: 100px;
+}
+
+.footer__links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+.landing__footer__column {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.landing__footer__column > div {
+    color: white;
+}
+
+.landing__footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px rgb(0, 151, 227) solid;
+}
+
+.landing__footer__bottom__left {
+    display: flex;
+    align-items: center;
+}
+/* individual ID changes */
+
+#landing__second__download__button {
+    color: white;
+    background-color: rgb(25, 159, 255);
+}
+
+#landing__footer__column__top {
+    color: rgb(0, 140, 227)
+}
