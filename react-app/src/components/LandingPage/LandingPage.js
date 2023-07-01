@@ -10,7 +10,8 @@ import "./LandingPage.css";
 
 export default function LandingPage() {
   return (
-    <div className="LandingWhole">
+    <div className="landing__whole__page">
+
       <div className="LandingTop">
         <div className="LandingNav">
           <div className="LandingNavIcon">
@@ -52,10 +53,10 @@ export default function LandingPage() {
             </button>
           </div>
         </div>
-        <img src={Clouds} />
-        <div className="LandingTopBottomPictures">
-          <img src={FriendsLeft} />
-          <img src={FriendsRight} />
+        <img className="landing__top__pic1" src={Clouds} />
+        <div className="landing__top__bottom__pics">
+          <img className="landing__top__pic2" src={FriendsLeft} />
+          <img className="landing__top__pic3" src={FriendsRight} />
         </div>
       </div>
 

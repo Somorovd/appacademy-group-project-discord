@@ -1,3 +1,12 @@
+/*
+    might want to move the location of this, without it causes
+    white border around the page
+ */
+
+* {
+    margin: 0px
+}
+
 .button__rounded {
     padding: .5rem 1rem;
     border-radius: 3rem;
@@ -83,6 +92,30 @@
     background-color: black;
 }
 
+/* Landing Page Top Images */
+/* .landing__top__pic1 {
+    border: 1px red solid;
+}
+.LandingTop {
+    background-image: url('../../Images/clouds.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.landing__top__pic2 {
+    border: 1px red solid;
+    position: absolute
+}
+
+.landing__top__pic3 {
+    border: 1px red solid;
+    position: absolute
+}
+
+.landing__top__bottom__pics {
+    display: flex;
+    justify-content: space-between;
+} */
+
 /* Section Styling */
 
 .landing__sections {
@@ -161,6 +194,7 @@
     align-items: center;
     justify-content: space-between;
     border-top: 1px rgb(0, 151, 227) solid;
+    padding-top: 15px;
 }
 
 .landing__footer__bottom__left {
