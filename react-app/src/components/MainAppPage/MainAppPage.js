@@ -13,7 +13,11 @@ export default function MainAppPage() {
           <Route path="/main/conversations">
             <ConversationsPage />
           </Route>
-          <Route path="/main/channels">
+          <Route path={[
+            "/main/channels/:serverId/:channelId",
+            "/main/channels/:serverId",
+            "/main/channels",
+          ]}>
             <ChannelsPage />
           </Route>
         </Switch>
