@@ -28,7 +28,7 @@ class Server(db.Model):
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
-            "ownerId": self.owner_d,
+            "ownerId": self.owner_id,
             "name": self.name,
             "about": self.about,
             "image": self.image,
