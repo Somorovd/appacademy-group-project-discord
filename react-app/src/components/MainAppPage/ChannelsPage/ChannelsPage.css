@@ -1,0 +1,20 @@
+.channels-nav {
+  padding: 10px;
+}
+
+.channels-nav ul {
+  padding: 0px;
+}
+
+.channel-item {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.channel-item:hover {
+  background-color: #444;
+}

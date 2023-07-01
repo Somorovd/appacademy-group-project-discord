@@ -40,3 +40,10 @@ class Server(db.Model):
             dct["updatedAt"] = self.updated_at
 
         return dct
+
+    def to_dict_single(self):
+        dct = self.to_dict()
+        dct["channels"] = {}
+        for channel in self.channels:
+            dct["channels"][channel.id] = channel.to_dict()
+        return dct
