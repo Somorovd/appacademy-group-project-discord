@@ -7,18 +7,18 @@ import JustChillin from "../../Images/JustChillin.svg";
 import Coach from "../../Images/Coach.svg";
 import LandingBigChillin from "../../Images/LandingBigChillin.svg";
 import "./LandingPage.css";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   return (
-    <div className="landing__whole__page">
-
-      <div className="LandingTop">
-        <div className="LandingNav">
-          <div className="LandingNavIcon">
-            <img src={LandingIcon} /> Discord
+    <div className="landing-page">
+      <div className="landing-page__top">
+        <div className="landing-page__nav">
+          <div className="landing-page__nav-icon">
+            <img src={LandingIcon} alt="Discord Logo" /> Discord
           </div>
 
-          <div className="LandingNavOptions">
+          <div className="landing-page__nav-options">
             <div>Download</div>
             <div>Nitro</div>
             <div>Discover</div>
@@ -28,41 +28,46 @@ export default function LandingPage() {
             <div>Careers</div>
           </div>
 
-          <div>
-            <button className="button__rounded">Login</button>
+          <div className="landing-page__nav-options-button">
+            <Link to="/login" className="landing-page__button--rounded">
+              Login
+            </Link>
           </div>
+
         </div>
 
-        <div className="LandingTopMid">
+        <div className="landing-page__top-mid">
           <h1>IMAGINE A PLACE...</h1>
           <p>
             ...where you can belong to a school club, a gaming group, or a
-            worldwide art community.
-            <br />
-            Where just you and a handful of friends can spend time together. A
-            place that makes it easy
-            <br />
-            to talk every day and hang out more often.
+            worldwide art community. Where just you and a handful of friends can
+            spend time together. A place that makes it easy to talk every day
+            and hang out more often.
           </p>
           <div>
-            <button className="button__rounded" id="LandingTopMidLeftButton">
-              Download for Windows
-            </button>
-            <button className="button__rounded" id="LandingTopMidRightButton">
-              Open Discord in your browser
-            </button>
+            <Link
+              to="/login"
+              className="landing-page__button--rounded"
+              id="landing-page__top-mid-left-button">
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              className="landing-page__button--rounded"
+              id="landing-page__top-mid-right-button">
+              Signup
+            </Link>
           </div>
         </div>
-        <img className="landing__top__pic1" src={Clouds} />
-        <div className="landing__top__bottom__pics">
-          <img className="landing__top__pic2" src={FriendsLeft} />
-          <img className="landing__top__pic3" src={FriendsRight} />
+        <div className="landing-page__top-bottom-pics">
+          <img className="landing-page__top-pic-left" src={FriendsLeft} />
+          <img className="landing-page__top-pic-right" src={FriendsRight} />
         </div>
       </div>
 
-      <div className="landing__sections landing__section__light">
+      <div className="landing-page__sections landing-page__section--light">
         <img src={StudyGroup} />
-        <div className="landing__sections__descriptions">
+        <div className="landing-page__sections-descriptions">
           <h1>Create an invite-only place where you belong</h1>
           <p>
             Discord servers are organized into topic-based channels where you
@@ -72,8 +77,8 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="landing__sections landing__section__dark">
-        <div className="landing__sections__descriptions">
+      <div className="landing-page__sections landing-page__section--dark">
+        <div className="landing-page__sections-descriptions">
           <h1>Where hanging out is easy</h1>
           <p>
             Grab a seat in a voice channel when you’re free. Friends in your
@@ -84,9 +89,9 @@ export default function LandingPage() {
         <img src={JustChillin} />
       </div>
 
-      <div className="landing__sections landing__section__light">
+      <div className="landing-page__sections landing-page__section--light">
         <img src={Coach} />
-        <div className="landing__sections__descriptions">
+        <div className="landing-page__sections-descriptionss">
           <h1>From few to a fandom</h1>
           <p>
             Get any community running with moderation tools and custom member
@@ -96,8 +101,8 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="landing__big__section landing__section__dark">
-        <div className="landing__big__section__description">
+      <div className="landing-page__big-section landing-page__section--dark">
+        <div className="landing-page__big-section-description">
           <h1>RELIABLE TECH FOR STAYING CLOSE</h1>
           <p>
             Low-latency voice and video feels like you’re in the same room. Wave
@@ -108,41 +113,40 @@ export default function LandingPage() {
 
         <img src={LandingBigChillin} />
 
-        <div className="landing__big__section__bottom">
+        <div className="landing-page__big-section-bottom">
           <h3>Ready to start your journey?</h3>
           <button
-            id="landing__second__download__button"
-            className="button__rounded">
+            id="landing-page__second-download-button"
+            className="landing-page__button--rounded">
             Download for Windows
           </button>
         </div>
       </div>
 
-      <div className="landing__footer__section">
-
-        <div className="footer__links">
-          <div className="landing__footer__column">
+      <div className="landing-page__footer-section">
+        <div className="landing-page__footer-links">
+          <div className="landing-page__footer-column">
             <div>English, USA</div>
             <div>Icon1, icon2, Icon3, Icon4, Icon5</div>
           </div>
 
-          <div className="landing__footer__column">
-            <div id="landing__footer__column__top">Product</div>
+          <div className="landing-page__footer-column">
+            <div id="landing-page__footer-column-top">Product</div>
             <div>Download</div>
             <div>Nitro</div>
             <div>Status</div>
           </div>
 
-          <div className="landing__footer__column">
-            <div id="landing__footer__column__top">Company</div>
+          <div className="landing-page__footer-column">
+            <div id="landing-page__footer-column-top">Company</div>
             <div>About</div>
             <div>Jobs</div>
             <div>Brand</div>
             <div>Newsroom</div>
           </div>
 
-          <div className="landing__footer__column">
-            <div id="landing__footer__column__top">Resources</div>
+          <div className="landing-page__footer-column">
+            <div id="landing-page__footer-column-top">Resources</div>
             <div>College</div>
             <div>Support</div>
             <div>Safety</div>
@@ -155,8 +159,8 @@ export default function LandingPage() {
             <div>Official 3rd Party Merch</div>
           </div>
 
-          <div className="landing__footer__column">
-            <div id="landing__footer__column__top">Policies</div>
+          <div className="landing-page__footer-column">
+            <div id="landing-page__footer-column-top">Policies</div>
             <div>Terms</div>
             <div>Privacy</div>
             <div>Cookie Settings</div>
@@ -166,17 +170,16 @@ export default function LandingPage() {
             <div>Moderation</div>
             <div>Company Information</div>
           </div>
-
         </div>
 
-        <div className="landing__footer__bottom">
+        <div className="landing-page__footer-bottom">
           <div className="landing__footer__bottom__left">
             <img src={LandingIcon} />
             Discord
           </div>
 
-          <div className="landing__footer__bottom__right">
-            <button className="button__rounded">Sign Up</button>
+          <div className="landing-page__footer-bottom-right">
+            <button className="landing-page__button--rounded">Sign Up</button>
           </div>
         </div>
       </div>
