@@ -1,1 +1,46 @@
 .server-sidebar {}
+
+.server-list {
+  list-style: none;
+  margin: 0px;
+  padding: 10px;
+}
+
+.server-icon {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.server-icon__image {
+  background-color: palevioletred;
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  border-radius: 100%;
+  transition-property: border-radius;
+  transition-duration: 0.5s;
+  transition-delay: 0s;
+}
+
+.server-icon__image:hover {
+  border-radius: 35%;
+}
+
+.server-icon__tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0px, -50%);
+  left: calc(100% + 10px);
+  width: 120px;
+  text-align: center;
+  z-index: 1;
+}
+
+.server-icon:hover .server-icon__tooltip {
+  visibility: visible;
+}
