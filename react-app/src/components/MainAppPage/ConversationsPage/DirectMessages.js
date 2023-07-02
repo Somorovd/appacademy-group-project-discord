@@ -23,6 +23,7 @@ export default function DirectMessages() {
   useEffect(() => {
     (async () => {
       const res = await dispatch(thunkLoadSingleCommunication(communicationId));
+      setChatMessages(Object.values(res.payload.messages))
       if (res.payload.communication.id === undefined) {
         setRedi(true);
       }
@@ -43,7 +44,7 @@ export default function DirectMessages() {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [communicationId]);
 
   //checks to see if currentUser has active communication by searching comId, if not setRedi is set to True
   //and is redirected to DMS with no conversations open
@@ -60,15 +61,16 @@ export default function DirectMessages() {
   function handleSubmit(e) {
     e.preventDefault()
     // emit a message
-    socket.emit("chat", { user: user.username, msg: currentMessage });
+    socket.emit("chat", { user, content: currentMessage, to:communicationId });
     // clear the input field after the message is sent
     setCurrentMessage("");
   }
 
+
   return (
     <div className="DM-page">
       <ul className="DM-page__list">
-        {messages.map((message) => {
+        {chatMessages.map((message) => {
           return (
             <li key={message.id}>
               <div>
@@ -86,7 +88,7 @@ export default function DirectMessages() {
             type="text"
             placeholder="Send a message!"
             value={currentMessage}
-            onChange={(e) => setCurrentMessage(e.value)}
+            onChange={(e) => setCurrentMessage(e.target.value)}
           />
           <button type="submit">send</button>
         </form>

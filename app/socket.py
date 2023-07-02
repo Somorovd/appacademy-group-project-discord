@@ -1,4 +1,5 @@
 from flask_socketio import SocketIO, emit
+from .models import Communication, DirectMessage, User
 import os
 
 # configure cors_allowed_origins
@@ -18,4 +19,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 
 @socketio.on("chat")
 def handle_chat(data):
-    emit("chat", data, broadcast=True)
+    print("____________________________________")
+    print(data)
+    print("____________________________________")
+    emit("chat", data, broadcast=True, room=data.communicationId)
