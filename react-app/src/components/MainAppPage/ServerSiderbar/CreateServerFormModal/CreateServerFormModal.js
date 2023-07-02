@@ -18,13 +18,14 @@ export default function CreateServerFormModal() {
     e.preventDefault();
 
     const serverObject = {
+      owner_id: user.id,
       name,
       image,
       private: true,
       about: ""
     }
 
-    const data = await dispatch(serverActions.actionCreateServer(serverObject));
+    const data = await dispatch(serverActions.thunkCreateServer(serverObject));
     if (data) setErrors(data);
 
     closeModal()
@@ -56,7 +57,6 @@ export default function CreateServerFormModal() {
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            required
           />
         </label>
         <button type="submit">Create Server</button>

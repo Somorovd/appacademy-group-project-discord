@@ -2,12 +2,13 @@
   position: relative;
   margin-bottom: 15px;
   background-color: palevioletred;
-  display: block;
+  display: flex;
   border-radius: 50%;
   transition-property: border-radius;
   transition-duration: 0.3s;
   transition-delay: 0s;
   aspect-ratio: 1;
+  overflow: hidden;
 }
 
 .server-icon:hover {
@@ -32,6 +33,16 @@
 
 .server-icon:hover .server-icon__tooltip {
   visibility: visible;
+}
+
+.server-icon__image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.server-icon__image[src=""] {
+  display: none;
 }
 
 .server-icon--messages {

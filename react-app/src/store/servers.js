@@ -77,9 +77,11 @@ export default function serversReducer(state = initialState, action) {
     case GET_SINGLE_SERVER:
       return { ...state, singleUserServer: action.payload };
     case CREATE_SERVER:
-      const newState = { ...state, singleUserServer: action.payload };
-      newState.allUserServers[action.payload.id] = action.payload;
-      return newState;
+      const allUserServers = {
+        ...state.allUserServers,
+        [action.payload.id]: action.payload
+      }
+      return { ...state, allUserServers, singleUserServer: action.payload };
     default:
       return state;
   }
