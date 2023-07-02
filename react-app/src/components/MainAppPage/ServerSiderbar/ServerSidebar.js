@@ -53,6 +53,7 @@ export default function ServerSidebar() {
           <OpenModalButton
             modalComponent={<CreateServerFormModal />}
           />
+          <span className="server-icon__tooltip">Add Server</span>
         </div>
         <ServerSidebarIcon
           server={browseServersLink}
