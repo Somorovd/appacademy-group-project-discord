@@ -1,38 +1,50 @@
 .server-icon {
   position: relative;
   margin-bottom: 15px;
-}
-
-.server-icon__image {
   background-color: palevioletred;
-  width: 100%;
-  aspect-ratio: 1;
   display: block;
   border-radius: 50%;
   transition-property: border-radius;
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
   transition-delay: 0s;
+  aspect-ratio: 1;
 }
 
-.server-icon__image:hover {
-  border-radius: 30%;
+.server-icon:hover {
+  border-radius: 35%;
 }
+
+.server-icon__image {}
+
 
 .server-icon__tooltip {
   visibility: hidden;
+  width: 180px;
+  padding: 7px;
   background-color: black;
   color: white;
-  padding: 5px 0;
-  border-radius: 6px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px #252525;
   position: absolute;
   top: 50%;
   transform: translate(0px, -50%);
-  left: calc(100% + 10px);
-  width: 120px;
-  text-align: center;
+  left: calc(100% + 20px);
+  font-size: 1.2rem;
   z-index: 1;
 }
 
 .server-icon:hover .server-icon__tooltip {
   visibility: visible;
+}
+
+.server-icon--messages {
+  background-color: aquamarine;
+}
+
+.server-icon--add-server {
+  background-color: lightgray;
+}
+
+.server-icon--browse-servers {
+  background-color: purple;
 }

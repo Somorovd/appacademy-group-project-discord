@@ -2,12 +2,12 @@ import { useHistory } from "react-router-dom"
 
 import "./ServerSidebarIcon.css"
 
-export default function ServerSidebarIcon({ server }) {
+export default function ServerSidebarIcon({ server, nav, className }) {
 
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(`/main/channels/${server.id}`)
+    history.push(nav)
   }
 
   if (!server) return <></>
@@ -15,7 +15,7 @@ export default function ServerSidebarIcon({ server }) {
   return (
     <>
       <li
-        className="server-icon"
+        className={"server-icon " + (className || "")}
         onClick={handleClick}
       >
         <img
