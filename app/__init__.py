@@ -11,6 +11,7 @@ from .api.communications_routes import communication_routes
 from .api.server_routes import server_routes
 from .seeds import seed_commands
 from .config import Config
+from .socket import socketio
 
 app = Flask(__name__, static_folder="../react-app/build", static_url_path="/")
 
@@ -34,12 +35,13 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(communication_routes, url_prefix='/api/communications')
 app.register_blueprint(server_routes, url_prefix="/api/servers")
 
+socketio.init_app(app)
+
 db.init_app(app)
 Migrate(app, db)
 
 # Application Security
 CORS(app)
-
 
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
@@ -100,3 +102,7 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file("index.html")
+
+# print(__name__)
+if __name__ == '__main__':
+    socketio.run(app)

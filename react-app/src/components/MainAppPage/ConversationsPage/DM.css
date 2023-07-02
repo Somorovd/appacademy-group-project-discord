@@ -1,0 +1,17 @@
+.DM-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.DM-page__list {
+  height: 90%;
+  overflow-y: scroll;
+  border: 1px red solid;
+}
+
+.DM-page__chat-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
