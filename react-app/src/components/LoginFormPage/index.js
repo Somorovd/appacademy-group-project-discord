@@ -28,7 +28,7 @@ function LoginFormPage() {
         password: "password"
       },
       2: {
-        email: "katie@aa.io",
+        email: "demo@aa.io",
         password: "password"
       },
     }
