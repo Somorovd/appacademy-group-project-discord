@@ -17,9 +17,17 @@ export default function ChannelsPage() {
     dispatch(serverActions.thunkGetSingleServer(serverId));
   }, [dispatch, serverId])
 
+  useEffect(() => {
+    if (singleUserServer.channels) {
+      const channelId = Math.min(...Object.keys(singleUserServer.channels));
+      history.push(`/main/channels/${serverId}/${channelId}`)
+    }
+  }, [singleUserServer])
+
   if (!serverId || !singleUserServer.channels) return <></>
 
   const channels = Object.values(singleUserServer.channels);
+  const singleChannel = singleUserServer.channels[channelId];
 
   return (
     <>
@@ -28,9 +36,12 @@ export default function ChannelsPage() {
           {
             channels.map((channel) => (
               <>
-                <li className="channel-item">
+                <li
+                  className="channel-item"
+                  onClick={() => history.push(`/main/channels/${serverId}/${channel.id}`)}
+                >
                   <span>
-                    IC
+                    📄
                   </span>
                   <span>
                     {channel.name}
@@ -42,7 +53,11 @@ export default function ChannelsPage() {
         </ul>
       </div>
       <div className="messages channels-messages">
-        here are some messages
+        {
+          singleChannel
+            ? `Displaying messages for ${singleUserServer.name} -- ${singleChannel.name}`
+            : ""
+        }
       </div>
     </>
   )
