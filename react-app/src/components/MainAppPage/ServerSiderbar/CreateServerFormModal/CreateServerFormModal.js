@@ -10,6 +10,7 @@ export default function CreateServerFormModal() {
   const user = useSelector((state) => state.session.user)
   const [name, setName] = useState(`${user.username}'s server`);
   const [image, setImage] = useState("");
+  const [preview, setPreview] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
@@ -27,8 +28,9 @@ export default function CreateServerFormModal() {
 
     const data = await dispatch(serverActions.thunkCreateServer(serverObject));
     if (data) setErrors(data);
+    else closeModal()
 
-    closeModal()
+    console.log(errors);
   }
 
   return (
@@ -41,7 +43,10 @@ export default function CreateServerFormModal() {
           Give your new server a personality with a name and an icon.
           You can always change it later.
         </p>
-        <img src={image} alt="" />
+        <img src={preview} alt="" />
+        <ul>
+          {errors.map((e) => (<li>{e}</li>))}
+        </ul>
         <label>
           Server Name
           <input
@@ -57,6 +62,7 @@ export default function CreateServerFormModal() {
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
+            onBlurCapture={(e) => setPreview(e.target.value)}
           />
         </label>
         <button type="submit">Create Server</button>
