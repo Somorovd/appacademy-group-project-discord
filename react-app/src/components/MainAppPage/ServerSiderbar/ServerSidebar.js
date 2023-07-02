@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 
 import * as serverActions from "../../../store/servers"
-
 import ServerSidebarIcon from "./ServerSidebarIcon";
+import OpenModalButton from "../../OpenModalButton";
 import "./ServerSidebar.css"
+import CreateServerFormModal from "./CreateServerFormModal";
+import LoginFormModal from "../../LoginFormModal";
 
 const directMessageLink = {
   name: "Direct Messages",
@@ -47,11 +49,11 @@ export default function ServerSidebar() {
               key={i} />
           ))
         }
-        <ServerSidebarIcon
-          server={addServerLink}
-          nav="/main/conversations"
-          className="server-icon--add-server"
-        />
+        <div className="server-icon server-icon--add-server">
+          <OpenModalButton
+            modalComponent={<CreateServerFormModal />}
+          />
+        </div>
         <ServerSidebarIcon
           server={browseServersLink}
           nav="/main/channels"
