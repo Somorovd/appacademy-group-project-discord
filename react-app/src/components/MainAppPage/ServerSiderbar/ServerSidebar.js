@@ -30,7 +30,6 @@ export default function ServerSidebar() {
         {userServers.map((server, i) => (
           <ServerSidebarIcon
             server={server}
-            nav={`/main/channels/${server.id}`}
             key={i}
           />
         ))}
