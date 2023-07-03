@@ -4,7 +4,10 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import * as serverActions from '../../../store/servers';
 
+import OpenModalButton from '../../OpenModalButton';
+
 import './ChannelsPage.css';
+import CreateChannelFormModal from './CreateChannelFormModal/CreateChannelFormModal';
 
 export default function ChannelsPage() {
   const dispatch = useDispatch();
@@ -32,6 +35,14 @@ export default function ChannelsPage() {
   return (
     <>
       <div className="app-nav channels-nav">
+        <div className="channels-nav__header">
+          <h2>Channels</h2>
+          <OpenModalButton
+            modalComponent={CreateChannelFormModal}
+            buttonClass="channels-nav__create-channel-btn"
+            buttonText={'+'}
+          />
+        </div>
         <ul>
           {channels.map(channel => (
             <>
