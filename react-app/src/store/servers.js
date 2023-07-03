@@ -59,12 +59,13 @@ export const thunkCreateServer = server => async dispatch => {
   if (res.ok) {
     const server = resBody;
     dispatch(actionCreateServer(server));
+    return server;
   } else if (res.status < 500) {
     if (resBody.errors) {
-      return resBody.errors;
+      return { errors: resBody.errors };
     }
   } else {
-    return ['An error occurred. Please try again.'];
+    return { errors: ['An error occurred. Please try again.'] };
   }
 };
 
@@ -82,12 +83,13 @@ export const thunkCreateChannel = (channel, serverId) => async dispatch => {
   if (res.ok) {
     const channel = resBody;
     dispatch(actionCreateChannel(channel));
+    return channel;
   } else if (res.status < 500) {
     if (resBody.errors) {
-      return resBody.errors;
+      return { errors: resBody.errors };
     }
   } else {
-    return ['An error occurred. Please try again.'];
+    return { errors: ['An error occurred. Please try again.'] };
   }
 };
 
