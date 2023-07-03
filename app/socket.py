@@ -2,6 +2,7 @@ from flask_socketio import SocketIO, emit, join_room, send
 from .models import Communication, DirectMessage, User, db
 import os
 from sqlalchemy import delete
+from flask_login import current_user
 
 # configure cors_allowed_origins
 if os.environ.get("FLASK_ENV") == "production":
@@ -27,6 +28,8 @@ def handle_DMs(data):
 
     if data["deleted"]:
         deleted_dm = DirectMessage.query.get(int(data["deleted"]))
+        if current_user.id != deleted_dm.sender_id:
+            return
         db.session.delete(deleted_dm)
         db.session.commit()
         emit("chat", "refresh", room=room)
@@ -34,6 +37,8 @@ def handle_DMs(data):
 
     if data["edited"]:
         edited_dm = DirectMessage.query.get(int(data["edited"]))
+        if current_user.id != edited_dm.sender_id:
+            return
         edited_dm.content = data["content"]
         edited_dm.was_edited = True
         db.session.commit()

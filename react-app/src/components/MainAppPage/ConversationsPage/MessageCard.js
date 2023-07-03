@@ -27,7 +27,6 @@ export default function MessageCard({ message, socket, user, communicationId }) 
          setEditing(false)
       }
 
-
     let formattedDate = new Date(message.updatedAt).toLocaleDateString("en-US",{
         month: "2-digit",
         day: "2-digit",
@@ -38,13 +37,13 @@ export default function MessageCard({ message, socket, user, communicationId }) 
       }
     );
     return (
-      <li key={message.id} className="DM-page__list-message">
+      <>
         <div className="DM-page__list-message-user">
           <img src={message.senderPic} />
           {message.sender} <span className="DM-page__list-message-date">{formattedDate}{" "}</span>
           {message.wasEdited && <span className="DM-page__list-message-date">- edited</span>}
-          <button onClick={() => setEditing(!editing)}>Edit</button>
-          <button onClick={() => handleDelete(message.id)}>Delete</button>
+          {user.id === message.senderId && <><button onClick={() => setEditing(!editing)}>Edit</button>
+          <button onClick={() => handleDelete(message.id)}>Delete</button></>}
         </div>
         <div className={`DM-page__list-message-content ${!editing ? "" : "hidden"}`}>{message.content}</div>
         <div className={editing ? "" : "hidden"}>
@@ -52,6 +51,6 @@ export default function MessageCard({ message, socket, user, communicationId }) 
             <button onClick={() => handleEdit(message.id, editMessage)}>Save</button>
             <button onClick={() => {setEditMessage(message.content); setEditing(false)}}>Cancel</button>
         </div>
-      </li>
+      </>
     );
 }

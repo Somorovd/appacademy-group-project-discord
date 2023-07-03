@@ -83,7 +83,11 @@ export default function DirectMessages() {
     <div className="DM-page">
       <ul className="DM-page__list">
         {chatMessages.map((message) => {
-          return <MessageCard message={message} socket={socket} user={user} communicationId={communicationId} />
+          return (
+            <li key={message.id} className="DM-page__list-message">
+              <MessageCard message={message} socket={socket} user={user} communicationId={communicationId} />
+            </li>
+          )
         })}
       </ul>
       <div className="DM-page__chat-box">
