@@ -78,8 +78,6 @@ export default function DirectMessages() {
     <div className="DM-page">
       <ul className="DM-page__list">
         {chatMessages.map((message) => {
-          console.log(message);
-          // come back to this tomorrow morning
           let formattedDate = new Date(message.updatedAt).toLocaleDateString("en-US",{
               month: "2-digit",
               day: "2-digit",
