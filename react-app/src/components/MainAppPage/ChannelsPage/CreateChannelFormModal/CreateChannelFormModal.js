@@ -3,15 +3,17 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
 import * as serverActions from '../../../../store/servers';
 import './CreateChannelFormModal.css';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateChannelFormModal({ serverId }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { closeModal } = useModal();
   const [type, setType] = useState('text');
   const [name, setName] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const channel = {
       server_id: serverId,
@@ -19,9 +21,15 @@ export default function CreateChannelFormModal({ serverId }) {
       name,
     };
 
-    const data = dispatch(serverActions.thunkCreateChannel(channel, serverId));
-    if (data) setErrors(data);
-    else closeModal();
+    const data = await dispatch(
+      serverActions.thunkCreateChannel(channel, serverId)
+    );
+    if (data.errors) {
+      setErrors(data.errors);
+    } else {
+      closeModal();
+      history.push(`/main/channels/${serverId}/${data.id}`);
+    }
   };
 
   return (
