@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Communication, DirectMessage
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
+from ..models import db
+
 
 
 communication_routes = Blueprint('communications', __name__)
@@ -24,6 +26,37 @@ def get_DMs():
     # print(current_user.id)
 
     return { "dms": dms }
+
+@communication_routes.route('/users')
+@login_required
+def get_all_users():
+    all_users_query = User.query.filter(User.id != current_user.id).all()
+    all_users = [ user.to_dict() for user in all_users_query ]
+    return { "users": all_users}
+
+@communication_routes.route('/new/<int:otherUserId>', methods=["POST"])
+@login_required
+def create_new_dm(otherUserId):
+    print("___________________________________")
+    print(otherUserId)
+    print("___________________________________")
+    print(current_user.id)
+    print("___________________________________")
+
+    exists = Communication.query.filter(or_(
+        and_(Communication.user1_id == otherUserId, Communication.user2_id == current_user.id),
+        and_(Communication.user1_id == current_user.id, Communication.user2_id == otherUserId)
+    )).one_or_none()
+
+    if exists is None:
+        new_communication = Communication(user1_id=current_user.id, user2_id=otherUserId)
+        db.session.add(new_communication)
+        db.session.commit()
+        return { "id" : new_communication.id }
+
+
+    return { "id" : exists.id}
+
 
 @communication_routes.route("/<int:communication_id>")
 @login_required
