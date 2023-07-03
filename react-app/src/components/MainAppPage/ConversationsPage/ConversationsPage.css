@@ -1,3 +1,10 @@
+.conversations-page__list {
+    list-style-type: none;
+    font-weight: bold;
+    gap: 10px;
+}
+
+
 .app-nav__list {
     color: white
 }
