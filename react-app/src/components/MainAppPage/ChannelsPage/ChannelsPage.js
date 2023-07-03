@@ -38,24 +38,23 @@ export default function ChannelsPage() {
         <div className="channels-nav__header">
           <h2>Channels</h2>
           <OpenModalButton
-            modalComponent={CreateChannelFormModal}
+            modalComponent={<CreateChannelFormModal serverId={serverId} />}
             buttonClass="channels-nav__create-channel-btn"
             buttonText={'+'}
           />
         </div>
         <ul>
           {channels.map(channel => (
-            <>
-              <li
-                className="channel-item"
-                onClick={() =>
-                  history.push(`/main/channels/${serverId}/${channel.id}`)
-                }
-              >
-                <span>📄</span>
-                <span>{channel.name}</span>
-              </li>
-            </>
+            <li
+              key={channel.id}
+              className="channel-item"
+              onClick={() =>
+                history.push(`/main/channels/${serverId}/${channel.id}`)
+              }
+            >
+              <span>📄</span>
+              <span>{channel.name}</span>
+            </li>
           ))}
         </ul>
       </div>
