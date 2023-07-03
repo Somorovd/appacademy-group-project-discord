@@ -38,12 +38,16 @@ def single_server(server_id):
     """
     Query for a single server details by id
     """
-    server = (
-        Server.query.join(Channel)
-        .filter(Server.id == server_id)
-        .order_by(Channel.created_at)
-    )
-    return server[0].to_dict_single()
+    # server = Server.query.join(Channel).filter(Server.id == server_id).all()
+
+    server = Server.query.get(server_id)
+
+    if server == None:
+        return
+
+    channels = Channel.query.filter(Channel.server_id == server_id).all()
+    server.channels = channels
+    return server.to_dict_single()
 
 
 @server_routes.route("/new", methods=["POST"])

@@ -22,7 +22,10 @@ export default function ChannelsPage() {
 
   useEffect(() => {
     if (singleUserServer.channels) {
-      const channelId = Math.min(...Object.keys(singleUserServer.channels));
+      const keys = Object.keys(singleUserServer.channels);
+      if (!keys.length) return;
+
+      const channelId = Math.min(...keys);
       history.push(`/main/channels/${serverId}/${channelId}`);
     }
   }, [singleUserServer]);
