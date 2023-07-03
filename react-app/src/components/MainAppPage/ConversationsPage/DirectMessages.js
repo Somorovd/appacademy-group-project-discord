@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { thunkLoadSingleCommunication } from "../../../store/communications";
-import "./DM.css";
-// import the socket
 import { io } from "socket.io-client";
+import MessageCard from "./MessageCard";
+import "./DM.css";
 
-// outside of your component, initialize the socket variable
+
 let socket;
 
 export default function DirectMessages() {
@@ -19,6 +19,8 @@ export default function DirectMessages() {
   );
   const user = useSelector((state) => state.session.user);
   const [chatMessages, setChatMessages] = useState(messages);
+  const [refresh, setRefresh] = useState(false);
+
 
   useEffect(() => {
     (async () => {
@@ -27,31 +29,32 @@ export default function DirectMessages() {
       if (res.payload.communication.id === undefined) {
         setRedi(true);
       }
+      setRefresh(false)
     })();
-  }, [dispatch, communicationId]);
+  }, [dispatch, communicationId, refresh]);
 
   useEffect(() => {
-    // create websocket
     socket = io();
 
-    // listen for chat events
     socket.on("chat", (chat) => {
-      // when we recieve a chat, add it into our messages array in state
-      setChatMessages((chatMessages) => [...chatMessages, chat]);
+
+      if(chat === "refresh") {
+        setRefresh(true)
+      } else {
+        setChatMessages((chatMessages) => [...chatMessages, chat]);
+      }
     });
 
     socket.emit("join", {
       room: communicationId
-    })
+    });
 
-    // when component unmounts, disconnect
     return () => {
       socket.disconnect();
     };
-  }, [communicationId]);
+  }, [dispatch, communicationId]);
 
-  //checks to see if currentUser has active communication by searching comId, if not setRedi is set to True
-  //and is redirected to DMS with no conversations open
+
   if (currentRedi) {
     return <Redirect to="/main/conversations" />;
   }
@@ -64,13 +67,15 @@ export default function DirectMessages() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // emit a message
+
     socket.emit("chat", {
       user,
       content: currentMessage,
-      room: communicationId
+      room: communicationId,
+      edited: false,
+      deleted: false
      });
-    // clear the input field after the message is sent
+
     setCurrentMessage("");
   }
 
@@ -78,25 +83,7 @@ export default function DirectMessages() {
     <div className="DM-page">
       <ul className="DM-page__list">
         {chatMessages.map((message) => {
-          let formattedDate = new Date(message.updatedAt).toLocaleDateString("en-US",{
-              month: "2-digit",
-              day: "2-digit",
-              year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: true,
-            }
-          );
-          return (
-            <li key={message.id} className="DM-page__list-message">
-              <div className="DM-page__list-message-user">
-                <img src={message.senderPic} />
-                {message.sender} <span className="DM-page__list-message-date">{formattedDate}{" "}</span>
-                {message.wasEdited && <span>- edited</span>}
-              </div>
-              <div className="DM-page__list-message-content">{message.content}</div>
-            </li>
-          );
+          return <MessageCard message={message} socket={socket} user={user} communicationId={communicationId} />
         })}
       </ul>
       <div className="DM-page__chat-box">
