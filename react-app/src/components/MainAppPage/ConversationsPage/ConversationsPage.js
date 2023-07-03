@@ -9,13 +9,13 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 export default function ConversationsPage() {
   const DMs = useSelector((state) => state.communications.allCommunications);
   const dispatch = useDispatch();
-  const { communicationId } = useParams()
+  const { communicationId } = useParams();
 
   useEffect(() => {
     // (async () => {
     //   await dispatch(thunkLoadAllCommunications());
     // })();
-    dispatch(thunkLoadAllCommunications())
+    dispatch(thunkLoadAllCommunications());
   }, [dispatch]);
 
   if (Object.keys(DMs).length < 1) {
@@ -25,18 +25,19 @@ export default function ConversationsPage() {
   return (
     <>
       <div className="app-nav conversations-nav">
-        <ul>
+        <ul className="conversations-page__list">
           {Object.values(DMs).map((user) => {
             return (
               <li key={user.id} className="app-nav__list">
                 <Link id="app-nav__list" to={`/main/conversations/${user.id}`}>
-                  {user.userName}
+                  <img src={user.userPic} /> {user.userName}
                 </Link>
               </li>
             );
           })}
         </ul>
       </div>
+
       <div className="messages conversations-messages">
         {communicationId && <DirectMessages />}
       </div>

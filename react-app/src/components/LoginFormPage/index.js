@@ -14,12 +14,30 @@ function LoginFormPage() {
   if (sessionUser) return <Redirect to="/main/conversations" />;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     }
   };
+
+  const handleClickDemo = (id) => {
+    const demoUsers = {
+      1: {
+        email: "bobbie@aa.io",
+        password: "password"
+      },
+      2: {
+        email: "demo@aa.io",
+        password: "password"
+      },
+    }
+
+    const user = demoUsers[id];
+    setEmail(user.email);
+    setPassword(user.password);
+    handleSubmit();
+  }
 
   return (
     <>
@@ -52,7 +70,19 @@ function LoginFormPage() {
               required
             />
           </label>
-          <button type="submit">Log In</button>
+          <button type="submit" className="auth-button">Log In</button>
+          <button
+            className="auth-button"
+            onClick={() => handleClickDemo(1)}
+          >
+            Log In as Demo User 1
+          </button>
+          <button
+            className="auth-button"
+            onClick={() => handleClickDemo(2)}
+          >
+            Log In as Demo User 2
+          </button>
         </form>
       </div>
     </>
