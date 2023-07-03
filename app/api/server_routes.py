@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Server, Membership, Channel
 from ..forms.create_server_form import CreateServerForm
+from ..forms.create_channel_form import CreateChannelForm
 
 server_routes = Blueprint("servers", __name__)
 
@@ -70,4 +71,22 @@ def create_server():
         created_server = Server.query.get(server.id)
         return created_server.to_dict()
 
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+
+@server_routes.route("/<int:server_id>/channels", methods=["POST"])
+@login_required
+def create_channel(server_id):
+    form = CreateChannelForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        data = form.data
+        channel = Channel(
+            server_id=data["server_id"], type=data["type"], name=data["name"]
+        )
+        db.session.add(channel)
+        db.session.commit()
+
+        return channel.to_dict()
+
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
