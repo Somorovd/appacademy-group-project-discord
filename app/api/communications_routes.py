@@ -3,8 +3,8 @@ from flask_login import login_required, current_user
 from app.models import User, Communication, DirectMessage
 from sqlalchemy import or_
 
-communication_routes = Blueprint('communications', __name__)
 
+communication_routes = Blueprint('communications', __name__)
 
 @communication_routes.route("/current")
 @login_required
