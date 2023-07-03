@@ -20,7 +20,7 @@ export default function ServerSidebarIcon({ server, nav, className }) {
       >
         <img
           className="server-icon__image"
-          src={server.image}
+          src={server.image || ""}
           alt=""
         />
         <span className="server-icon__tooltip">
