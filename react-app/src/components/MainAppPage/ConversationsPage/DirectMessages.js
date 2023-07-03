@@ -17,13 +17,13 @@ export default function DirectMessages() {
   const messages = useSelector((state) =>
     Object.values(state.communications.singleCommunication.messages)
   );
-  const user = useSelector(state => state.session.user)
-  const [chatMessages, setChatMessages] = useState(messages)
+  const user = useSelector((state) => state.session.user);
+  const [chatMessages, setChatMessages] = useState(messages);
 
   useEffect(() => {
     (async () => {
       const res = await dispatch(thunkLoadSingleCommunication(communicationId));
-      setChatMessages(Object.values(res.payload.messages))
+      setChatMessages(Object.values(res.payload.messages));
       if (res.payload.communication.id === undefined) {
         setRedi(true);
       }
@@ -59,25 +59,36 @@ export default function DirectMessages() {
   });
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     // emit a message
-    socket.emit("chat", { user, content: currentMessage, to:communicationId });
+    socket.emit("chat", { user, content: currentMessage, to: communicationId });
     // clear the input field after the message is sent
     setCurrentMessage("");
   }
-
 
   return (
     <div className="DM-page">
       <ul className="DM-page__list">
         {chatMessages.map((message) => {
+          console.log(message);
+          // come back to this tomorrow morning
+          let formattedDate = new Date(message.updatedAt).toLocaleDateString("en-US",{
+              month: "2-digit",
+              day: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            }
+          );
           return (
-            <li key={message.id}>
-              <div>
+            <li key={message.id} className="DM-page__list-message">
+              <div className="DM-page__list-message-user">
                 <img src={message.senderPic} />
-                {message.sender}
+                {message.sender} <span className="DM-page__list-message-date">{formattedDate}{" "}</span>
+                {message.wasEdited && <span>- edited</span>}
               </div>
-              <div>{message.content}</div>
+              <div className="DM-page__list-message-content">{message.content}</div>
             </li>
           );
         })}

@@ -7,11 +7,26 @@
 .DM-page__list {
   height: 90%;
   overflow-y: scroll;
+  list-style-type: none;
   border: 1px red solid;
+}
+
+.DM-page__list-message {
+  padding: 10px 0px;
 }
 
 .DM-page__chat-box {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.DM-page__list-message-user {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.DM-page__list-message-date {
+  color: lightslategray;
+  font-size: 15px;
 }
