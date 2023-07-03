@@ -29,3 +29,4 @@ werkzeug==2.2.2
 wtforms==3.0.1
 faker==18.11.2
 email-validator==2.0.0.post2
+flask-socketio==5.3.4
