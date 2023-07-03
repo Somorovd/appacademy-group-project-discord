@@ -40,6 +40,10 @@ export default function DirectMessages() {
       setChatMessages((chatMessages) => [...chatMessages, chat]);
     });
 
+    socket.emit("join", {
+      room: communicationId
+    })
+
     // when component unmounts, disconnect
     return () => {
       socket.disconnect();
@@ -61,7 +65,11 @@ export default function DirectMessages() {
   function handleSubmit(e) {
     e.preventDefault();
     // emit a message
-    socket.emit("chat", { user, content: currentMessage, to: communicationId });
+    socket.emit("chat", {
+      user,
+      content: currentMessage,
+      room: communicationId
+     });
     // clear the input field after the message is sent
     setCurrentMessage("");
   }
