@@ -8,7 +8,7 @@
   transition-duration: 0.3s;
   transition-delay: 0s;
   aspect-ratio: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .server-icon:hover {
@@ -38,7 +38,8 @@
 .server-icon__image {
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  border-radius: inherit;
+  object-fit: cover;
 }
 
 .server-icon__image[src=""] {
