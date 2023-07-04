@@ -72,6 +72,13 @@ def create_server():
         db.session.add(membership)
         db.session.commit()
 
+        general_channel = Channel(server_id=server.id, name="General", type="text")
+        voice_channel = Channel(server_id=server.id, name="Voice Chat", type="voice")
+
+        db.session.add(general_channel)
+        db.session.add(voice_channel)
+        db.session.commit()
+
         created_server = Server.query.get(server.id)
         return created_server.to_dict()
 
