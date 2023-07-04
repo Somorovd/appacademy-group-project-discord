@@ -34,7 +34,7 @@ class Communication(db.Model):
         }
         if timestamps:
             dct["createdAt"] = self.created_at
-            dct["updatedAt"] = self.uptaded_at
+            dct["updatedAt"] = self.updated_at
 
         return dct
 

@@ -47,7 +47,8 @@
 }
 
 .server-icon--messages {
-  background-color: aquamarine;
+  background: url('../../../../Images/discord-mark-white.svg') no-repeat center var(--bg-light-gray);
+  background-size: 60%;
 }
 
 .server-icon--add-server {
