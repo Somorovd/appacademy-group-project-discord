@@ -1,10 +1,49 @@
 /* TODO Add site wide styles */
 
 #root {
-  width: 100vw;
   height: 100vh;
 }
 
-* {
-  margin: 0px;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+:root {
+  /* COLORS */
+  --primary-blue: hsl(235, 86%, 65%);
+  --primary-green: hsl(139, 48%, 44%);
+  --primary-red: hsl(359, 87%, 60%);
+  --bg-profile-dark: hsl(220, 8%, 7%);
+  --bg-dark-gray: hsl(225, 6%, 13%);
+  --bg-medium-gray: hsl(214, 8%, 18%);
+  --bg-light-gray: hsl(218, 8%, 20%);
+  --bg-light-gray-hover: hsl(213, 7%, 24%);
+  --font-white: hsl(220, 13%, 95%);
+  --font-gray: hsl(212, 9%, 61%);
+  --icon-light-gray: hsl(213, 8%, 73%);
+  --icon-white-active: hsl(0, 0%, 100%);
+
+  /* NEED FONT FAMILY */
+
+  /* FONT SIZES */
+  --font-size-lg: 32px;
+  --font-size-md: 16px;
+  --font-size-sm: 14px;
+
+  /* FONT WEIGHTS */
+  --font-weight-lg: 700;
+  --font-weight-md: 500;
 }
