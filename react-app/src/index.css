@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'gg sans Medium', sans-serif;
 }
 
 ul,
@@ -27,7 +28,7 @@ button {
   --primary-green: hsl(139, 48%, 44%);
   --primary-red: hsl(359, 87%, 60%);
   --bg-profile-dark: hsl(220, 8%, 7%);
-  --bg-dark-gray: hsl(225, 6%, 13%);
+  --bg-dark-gray: hsl(225, 9%, 8%);
   --bg-medium-gray: hsl(214, 8%, 18%);
   --bg-light-gray: hsl(218, 8%, 20%);
   --bg-light-gray-hover: hsl(213, 7%, 24%);

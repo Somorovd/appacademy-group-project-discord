@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 2f40b641518c
-Revises: 
+Revises:
 Create Date: 2023-06-30 16:13:48.737834
 
 """
@@ -154,7 +154,7 @@ def upgrade():
             nullable=True,
         ),
         sa.Column(
-            "uptaded_at",
+            "updated_at",
             sa.DateTime(timezone=True),
             server_default=sa.text("(CURRENT_TIMESTAMP)"),
             nullable=True,
