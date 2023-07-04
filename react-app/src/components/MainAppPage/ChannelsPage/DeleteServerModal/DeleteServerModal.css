@@ -1,0 +1,8 @@
+.delete-server-modal {
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.delete-server-modal form>* {
+  margin-bottom: 0.5rem;
+}

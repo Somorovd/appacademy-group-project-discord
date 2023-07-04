@@ -22,8 +22,12 @@ class Server(db.Model):
     )
 
     owner = db.relationship("User", back_populates="servers")
-    channels = db.relationship("Channel", back_populates="server")
-    memberships = db.relationship("Membership", back_populates="server")
+    channels = db.relationship(
+        "Channel", back_populates="server", cascade="all, delete-orphan"
+    )
+    memberships = db.relationship(
+        "Membership", back_populates="server", cascade="all, delete-orphan"
+    )
 
     def to_dict(self, timestamps=False):
         dct = {

@@ -72,10 +72,30 @@ def create_server():
         db.session.add(membership)
         db.session.commit()
 
+        general_channel = Channel(server_id=server.id, name="General", type="text")
+        voice_channel = Channel(server_id=server.id, name="Voice Chat", type="voice")
+
+        db.session.add(general_channel)
+        db.session.add(voice_channel)
+        db.session.commit()
+
         created_server = Server.query.get(server.id)
         return created_server.to_dict()
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+
+@server_routes.route("/<int:server_id>/delete", methods=["DELETE"])
+@login_required
+def delete_channel(server_id):
+    server = Server.query.get(server_id)
+
+    if server == None:
+        return {"errors": "Server ID not found"}, 400
+
+    db.session.delete(server)
+    db.session.commit()
+    return {"message": "Successfully deleted"}
 
 
 @server_routes.route("/<int:server_id>/channels", methods=["POST"])
