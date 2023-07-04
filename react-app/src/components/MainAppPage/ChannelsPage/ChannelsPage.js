@@ -7,19 +7,17 @@ import * as serverActions from '../../../store/servers';
 import CreateChannelFormModal from './CreateChannelFormModal';
 import DeleteServerModal from './DeleteServerModal';
 import OpenModalButton from '../../OpenModalButton';
+import EditServerModal from './EditServerModal/EditServerModal';
 import './ChannelsPage.css';
 
 function DropdownListButton({ text, icon }) {
   return (
     <>
-      <p>
-        {text}
-      </p>
+      <p>{text}</p>
       <i className={icon}></i>
     </>
-  )
+  );
 }
-
 
 export default function ChannelsPage() {
   const dispatch = useDispatch();
@@ -51,14 +49,12 @@ export default function ChannelsPage() {
     <>
       <div className="app-nav">
         <div className="server-menu">
-          <h2>
-            {singleUserServer.name}
-          </h2>
+          <h2>{singleUserServer.name}</h2>
           <div className="server-dropdown">
             <ul>
-              <li className='dropdown__item'>
+              <li className="dropdown__item">
                 <OpenModalButton
-                  modalComponent={<DeleteServerModal />}
+                  modalComponent={<EditServerModal />}
                   buttonClass="list-button"
                   ButtonComponent={
                     <DropdownListButton
@@ -68,7 +64,7 @@ export default function ChannelsPage() {
                   }
                 />
               </li>
-              <li className='dropdown__item'>
+              <li className="dropdown__item">
                 <OpenModalButton
                   modalComponent={
                     <DeleteServerModal serverToDelete={singleUserServer} />
@@ -79,13 +75,14 @@ export default function ChannelsPage() {
                       text="Delete Server"
                       icon="fa-solid fa-trash"
                     />
-                  } />
+                  }
+                />
               </li>
             </ul>
           </div>
         </div>
 
-        <div className='channel-nav'>
+        <div className="channel-nav">
           <div className="channels-nav__header">
             <h2>Channels</h2>
             <OpenModalButton
@@ -109,7 +106,7 @@ export default function ChannelsPage() {
             ))}
           </ul>
         </div>
-      </div >
+      </div>
       <div className="messages channels-messages">
         {singleChannel
           ? `Displaying messages for ${singleUserServer.name} -- ${singleChannel.name}`
