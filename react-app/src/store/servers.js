@@ -76,7 +76,7 @@ export const thunkCreateServer = server => async dispatch => {
 };
 
 export const thunkDeleteServer = serverId => async dispatch => {
-  const res = await fetch(`/api/servers/${serverId}`, {
+  const res = await fetch(`/api/servers/${serverId}/delete`, {
     method: 'delete'
   });
   const resBody = await res.json();

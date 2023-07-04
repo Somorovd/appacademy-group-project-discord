@@ -78,6 +78,19 @@ def create_server():
     return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 
+@server_routes.route("/<int:server_id>/delete", methods=["DELETE"])
+@login_required
+def delete_channel(server_id):
+    server = Server.query.get(server_id)
+
+    if server == None:
+        return {"errors": "Server ID not found"}, 400
+
+    db.session.delete(server)
+    db.session.commit()
+    return {"message": "Successfully deleted"}
+
+
 @server_routes.route("/<int:server_id>/channels", methods=["POST"])
 @login_required
 def create_channel(server_id):
