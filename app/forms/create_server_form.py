@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, Length, ValidationError
-from app.models import Server
 
 
 def is_image_url(form, field):

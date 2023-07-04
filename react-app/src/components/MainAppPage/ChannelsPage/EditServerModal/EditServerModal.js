@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as serverActions from '../../../../store/servers';
 import './EditServerModal.css';
 
-export default function EditServerModal({ server }) {
+export default function EditServerModal({ serverToEdit }) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const [name, setName] = useState('');
@@ -17,7 +17,7 @@ export default function EditServerModal({ server }) {
     e.preventDefault();
 
     const updatedServer = {
-      id: server.id,
+      id: serverToEdit.id,
       name,
       image,
       private: isPrivate,
