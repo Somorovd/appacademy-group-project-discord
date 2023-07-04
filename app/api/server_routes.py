@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import db, Server, Membership, Channel
 from ..forms.create_server_form import CreateServerForm
 from ..forms.create_channel_form import CreateChannelForm
+from ..forms.edit_server_form import EditServerForm
 
 server_routes = Blueprint("servers", __name__)
 
@@ -81,6 +82,30 @@ def create_server():
 
         created_server = Server.query.get(server.id)
         return created_server.to_dict()
+
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+
+@server_routes.route("/<int:server_id>/edit", methods=["PUT"])
+@login_required
+def edit_server(server_id):
+    form = EditServerForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        data = form.data
+
+        server = Server.query.get(server_id)
+        server.name = data["name"]
+        server.image = data["image"]
+        server.private = data["private"]
+        server.about = data["about"]
+
+        db.session.commit()
+
+        channels = Channel.query.filter(Channel.server_id == server_id).all()
+        server.channels = channels
+
+        return server.to_dict_single()
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
