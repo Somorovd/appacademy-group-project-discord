@@ -4,10 +4,22 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import * as serverActions from '../../../store/servers';
 
+import CreateChannelFormModal from './CreateChannelFormModal';
+import DeleteServerModal from './DeleteServerModal';
 import OpenModalButton from '../../OpenModalButton';
-
 import './ChannelsPage.css';
-import CreateChannelFormModal from './CreateChannelFormModal/CreateChannelFormModal';
+
+function DropdownListButton({ text, icon }) {
+  return (
+    <>
+      <p>
+        {text}
+      </p>
+      <i className={icon}></i>
+    </>
+  )
+}
+
 
 export default function ChannelsPage() {
   const dispatch = useDispatch();
@@ -37,30 +49,67 @@ export default function ChannelsPage() {
 
   return (
     <>
-      <div className="app-nav channels-nav">
-        <div className="channels-nav__header">
-          <h2>Channels</h2>
-          <OpenModalButton
-            modalComponent={<CreateChannelFormModal serverId={serverId} />}
-            buttonClass="channels-nav__create-channel-btn"
-            buttonText={'+'}
-          />
+      <div className="app-nav">
+        <div className="server-menu">
+          <h2>
+            {singleUserServer.name}
+          </h2>
+          <div className="server-dropdown">
+            <ul>
+              <li className='dropdown__item'>
+                <OpenModalButton
+                  modalComponent={<DeleteServerModal />}
+                  buttonClass="list-button"
+                  ButtonComponent={
+                    <DropdownListButton
+                      text="Edit Server"
+                      icon="fa-solid fa-pencil"
+                    />
+                  }
+                />
+              </li>
+              <li className='dropdown__item'>
+                <OpenModalButton
+                  modalComponent={
+                    <DeleteServerModal serverToDelete={singleUserServer} />
+                  }
+                  buttonClass="list-button"
+                  ButtonComponent={
+                    <DropdownListButton
+                      text="Delete Server"
+                      icon="fa-solid fa-trash"
+                    />
+                  } />
+              </li>
+            </ul>
+          </div>
         </div>
-        <ul>
-          {channels.map(channel => (
-            <li
-              key={channel.id}
-              className="channel-item"
-              onClick={() =>
-                history.push(`/main/channels/${serverId}/${channel.id}`)
-              }
-            >
-              <span>📄</span>
-              <span>{channel.name}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+
+        <div className='channel-nav'>
+          <div className="channels-nav__header">
+            <h2>Channels</h2>
+            <OpenModalButton
+              modalComponent={<CreateChannelFormModal serverId={serverId} />}
+              buttonClass="channels-nav__create-channel-btn"
+              buttonText={'+'}
+            />
+          </div>
+          <ul>
+            {channels.map(channel => (
+              <li
+                key={channel.id}
+                className="channel-item"
+                onClick={() =>
+                  history.push(`/main/channels/${serverId}/${channel.id}`)
+                }
+              >
+                <span>📄</span>
+                <span>{channel.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div >
       <div className="messages channels-messages">
         {singleChannel
           ? `Displaying messages for ${singleUserServer.name} -- ${singleChannel.name}`

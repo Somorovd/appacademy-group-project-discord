@@ -1,6 +1,7 @@
 const GET_USER_SERVERS = 'servers/GET_USER_SERVERS';
 const GET_SINGLE_SERVER = 'servers/GET_SINGLE_SERVER';
 const CREATE_SERVER = 'servers/CREATE_SERVER';
+const DELETE_SERVER = 'servers/DELETE_SERVER';
 const CREATE_CHANNEL = 'servers/CREATE_CHANNEL';
 
 const actionGetAllUserServers = servers => ({
@@ -16,6 +17,11 @@ const actionGetSingleServer = server => ({
 const actionCreateServer = server => ({
   type: CREATE_SERVER,
   payload: server,
+});
+
+const actionDeleteServer = serverId => ({
+  type: DELETE_SERVER,
+  payload: serverId,
 });
 
 const actionCreateChannel = channel => ({
@@ -69,6 +75,24 @@ export const thunkCreateServer = server => async dispatch => {
   }
 };
 
+export const thunkDeleteServer = serverId => async dispatch => {
+  const res = await fetch(`/api/servers/${serverId}/delete`, {
+    method: 'delete'
+  });
+  const resBody = await res.json();
+
+  if (res.ok) {
+    dispatch(actionDeleteServer(serverId));
+    return resBody;
+  } else if (res.status < 500) {
+    if (resBody.errors) {
+      return { errors: resBody.errors };
+    }
+  } else {
+    return { errors: ['An error occurred. Please try again.'] };
+  }
+}
+
 export const thunkCreateChannel = (channel, serverId) => async dispatch => {
   const res = await fetch(`/api/servers/${serverId}/channels`, {
     method: 'POST',
@@ -111,6 +135,15 @@ export default function serversReducer(state = initialState, action) {
         [action.payload.id]: action.payload,
       };
       return { ...state, allUserServers, singleUserServer: action.payload };
+    case DELETE_SERVER:
+      const newState = {
+        allServers: { ...state.allServers },
+        allUserServers: { ...state.allUserServers },
+        singleUserServer: {}
+      };
+      delete newState.allServers[action.payload];
+      delete newState.allUserServers[action.payload];
+      return newState;
     case CREATE_CHANNEL:
       return {
         ...state,
