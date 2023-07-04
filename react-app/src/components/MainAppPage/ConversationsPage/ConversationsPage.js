@@ -7,6 +7,7 @@ import DirectMessages from "./DirectMessages";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../../OpenModalButton";
 import NewDmForm from "./NewDmForm";
+import UserProfile from "../UserProfile/UserProfile";
 
 export default function ConversationsPage() {
   const DMs = useSelector((state) => state.communications.allCommunications);
@@ -34,6 +35,7 @@ export default function ConversationsPage() {
             );
           })}
         </ul>
+        <UserProfile />
       </div>
 
       <div className="messages conversations-messages">

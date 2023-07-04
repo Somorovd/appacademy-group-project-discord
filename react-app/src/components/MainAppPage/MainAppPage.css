@@ -21,7 +21,6 @@
   grid-area: app-nav;
   background-color: var(--bg-medium-gray);
   border-radius: 10px 0px 0px 0px;
-  padding-left: 8px;
 }
 
 .messages {

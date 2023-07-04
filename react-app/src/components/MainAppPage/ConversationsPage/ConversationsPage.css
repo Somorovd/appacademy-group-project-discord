@@ -1,6 +1,8 @@
 .conversations-page__list {
     list-style-type: none;
     width: 95%;
+    height: 90%;
+    padding-left: 8px;
 }
 
 .app-nav__link {
@@ -29,13 +31,16 @@
 
 .conversations-nav {
     color: var(--font-gray);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .conversations-page__title-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px 0 10px;
+    padding: 0px 20px 0px 18px;
 }
 
 .new-dm-button {
