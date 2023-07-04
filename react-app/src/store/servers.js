@@ -1,6 +1,7 @@
 const GET_USER_SERVERS = 'servers/GET_USER_SERVERS';
 const GET_SINGLE_SERVER = 'servers/GET_SINGLE_SERVER';
 const CREATE_SERVER = 'servers/CREATE_SERVER';
+const EDIT_SERVER = 'servers/EDIT_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
 const CREATE_CHANNEL = 'servers/CREATE_CHANNEL';
 
@@ -16,6 +17,11 @@ const actionGetSingleServer = server => ({
 
 const actionCreateServer = server => ({
   type: CREATE_SERVER,
+  payload: server,
+});
+
+const actionEditServer = server => ({
+  type: EDIT_SERVER,
   payload: server,
 });
 
@@ -75,9 +81,32 @@ export const thunkCreateServer = server => async dispatch => {
   }
 };
 
+export const thunkEditServer = server => async dispatch => {
+  const res = await fetch(`/api/servers/${server.id}/edit`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(server),
+  });
+  const resBody = await res.json();
+
+  if (res.ok) {
+    const server = resBody;
+    dispatch(actionEditServer(server));
+    return server;
+  } else if (res.status < 500) {
+    if (resBody.errors) {
+      return { errors: resBody.errors };
+    }
+  } else {
+    return { errors: ['An error occurred. Please try again.'] };
+  }
+};
+
 export const thunkDeleteServer = serverId => async dispatch => {
   const res = await fetch(`/api/servers/${serverId}/delete`, {
-    method: 'delete'
+    method: 'delete',
   });
   const resBody = await res.json();
 
@@ -91,7 +120,7 @@ export const thunkDeleteServer = serverId => async dispatch => {
   } else {
     return { errors: ['An error occurred. Please try again.'] };
   }
-}
+};
 
 export const thunkCreateChannel = (channel, serverId) => async dispatch => {
   const res = await fetch(`/api/servers/${serverId}/channels`, {
@@ -118,7 +147,7 @@ export const thunkCreateChannel = (channel, serverId) => async dispatch => {
 };
 
 const initialState = {
-  allServers: {},
+  publicServers: {},
   allUserServers: {},
   singleUserServer: {},
 };
@@ -129,19 +158,37 @@ export default function serversReducer(state = initialState, action) {
       return { ...state, allUserServers: action.payload };
     case GET_SINGLE_SERVER:
       return { ...state, singleUserServer: action.payload };
-    case CREATE_SERVER:
+    case CREATE_SERVER: {
       const allUserServers = {
         ...state.allUserServers,
         [action.payload.id]: action.payload,
       };
       return { ...state, allUserServers, singleUserServer: action.payload };
+    }
+    case EDIT_SERVER:
+      const allUserServers = {
+        ...state.allUserServers,
+        [action.payload.id]: action.payload,
+      };
+      const publicServers = {
+        ...state.publicServers,
+        [action.payload.id]: !action.payload.private
+          ? action.payload
+          : undefined,
+      };
+      return {
+        ...state,
+        allUserServers,
+        singleUserServer: action.payload,
+        publicServers,
+      };
     case DELETE_SERVER:
       const newState = {
-        allServers: { ...state.allServers },
+        publicServers: { ...state.publicServers },
         allUserServers: { ...state.allUserServers },
-        singleUserServer: {}
+        singleUserServer: {},
       };
-      delete newState.allServers[action.payload];
+      delete newState.publicServers[action.payload];
       delete newState.allUserServers[action.payload];
       return newState;
     case CREATE_CHANNEL:

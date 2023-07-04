@@ -20,9 +20,8 @@ def is_image_url(form, field):
         )
 
 
-class CreateServerForm(FlaskForm):
-    owner_id = IntegerField("owner_id", validators=[DataRequired()])
+class EditServerForm(FlaskForm):
     name = StringField("name", validators=[DataRequired(), Length(2, 50)])
     image = StringField("image", validators=[is_image_url])
-    private = BooleanField("private", validators=[DataRequired()])
+    private = BooleanField("private")
     about = StringField("about", validators=[Length(0, 500)])
