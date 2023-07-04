@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { thunkLoadSingleCommunication } from "../../../store/communications";
 import { io } from "socket.io-client";
 import MessageCard from "./MessageCard";
@@ -12,7 +12,8 @@ let socket;
 export default function DirectMessages() {
   const { communicationId } = useParams();
   const dispatch = useDispatch();
-  const [currentRedi, setRedi] = useState(false);
+  const history = useHistory()
+
   const [currentMessage, setCurrentMessage] = useState("");
   const messages = useSelector((state) =>
     Object.values(state.communications.singleCommunication.messages)
@@ -27,13 +28,14 @@ export default function DirectMessages() {
       const res = await dispatch(thunkLoadSingleCommunication(communicationId));
       setChatMessages(Object.values(res.payload.messages));
       if (res.payload.communication.id === undefined) {
-        setRedi(true);
+        history.push("/main/conversations")
       }
       setRefresh(false)
     })();
   }, [dispatch, communicationId, refresh]);
 
   useEffect(() => {
+    console.log("INITIAL CONNECTION")
     socket = io();
 
     socket.on("chat", (chat) => {
@@ -50,14 +52,11 @@ export default function DirectMessages() {
     });
 
     return () => {
+      console.log("DISCONNECT FROM SOCKET")
       socket.disconnect();
     };
   }, [dispatch, communicationId]);
 
-
-  if (currentRedi) {
-    return <Redirect to="/main/conversations" />;
-  }
 
   messages.sort((a, b) => {
     const createdAtA = new Date(a.createdAt);
@@ -67,7 +66,7 @@ export default function DirectMessages() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    console.log("SENDING MESSAGE")
     socket.emit("chat", {
       user,
       content: currentMessage,

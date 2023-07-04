@@ -12,25 +12,23 @@ export default function ConversationsPage() {
   const DMs = useSelector((state) => state.communications.allCommunications);
   const dispatch = useDispatch();
   const { communicationId } = useParams();
+
   useEffect(() => {
-    // (async () => {
-    //   await dispatch(thunkLoadAllCommunications());
-    // })();
     dispatch(thunkLoadAllCommunications());
   }, [dispatch]);
 
   return (
     <>
       <div className="app-nav conversations-nav">
-        <div>
-          Direct Messages <OpenModalButton modalComponent={<NewDmForm/>} buttonText={"+"}/>
+        <div className="conversations-page__title-button">
+          Direct Messages <OpenModalButton modalComponent={<NewDmForm/>} buttonText={"+"} buttonClass={"new-dm-button"}/>
         </div>
         <ul className="conversations-page__list">
           {Object.values(DMs).map((user) => {
             return (
               <li key={user.id} className="app-nav__list">
-                <Link id="app-nav__list" to={`/main/conversations/${user.id}`}>
-                  <img src={user.userPic} /> {user.userName}
+                <Link className="app-nav__link" to={`/main/conversations/${user.id}`}>
+                  <img className="app-nav__img" src={user.userPic} /> {user.userName}
                 </Link>
               </li>
             );

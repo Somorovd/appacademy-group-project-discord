@@ -6,6 +6,7 @@ export default function MessageCard({ message, socket, user, communicationId }) 
     const [editMessage, setEditMessage] = useState(message.content);
 
     const handleDelete = (messageId) => {
+        console.log("DELETING MESSAGE")
         socket.emit("chat", {
           user,
           content: "",
@@ -16,6 +17,7 @@ export default function MessageCard({ message, socket, user, communicationId }) 
       }
 
       const handleEdit = (messageId, newContent) => {
+        console.log("EDITING MESSAGE")
         socket.emit("chat", {
           user,
           content: newContent,
