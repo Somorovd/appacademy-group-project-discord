@@ -1,16 +1,36 @@
 import { useState } from 'react';
 import { useModal } from '../../../../context/Modal';
+import { useDispatch } from 'react-redux';
+import * as serverActions from '../../../../store/servers';
 import './EditServerModal.css';
 
-export default function EditServerModal() {
+export default function EditServerModal({ server }) {
   const { closeModal } = useModal();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
   const [about, setAbout] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    const updatedServer = {
+      id: server.id,
+      name,
+      image,
+      private: isPrivate,
+      about,
+    };
+
+    const data = await dispatch(serverActions.thunkEditServer(updatedServer));
+
+    if (data.errors) {
+      setErrors(data.errors);
+    } else {
+      closeModal();
+    }
   };
 
   return (
@@ -42,6 +62,7 @@ export default function EditServerModal() {
                   id="server-name"
                   onChange={e => setName(e.target.value)}
                   value={name}
+                  required
                 />
               </div>
               <div>
@@ -75,6 +96,7 @@ export default function EditServerModal() {
               />
             </div>
           </section>
+          <button>Submit</button>
         </form>
       </div>
     </div>

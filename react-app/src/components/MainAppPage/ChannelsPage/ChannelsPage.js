@@ -54,7 +54,9 @@ export default function ChannelsPage() {
             <ul>
               <li className="dropdown__item">
                 <OpenModalButton
-                  modalComponent={<EditServerModal />}
+                  modalComponent={
+                    <EditServerModal serverToEdit={singleUserServer} />
+                  }
                   buttonClass="list-button"
                   ButtonComponent={
                     <DropdownListButton
