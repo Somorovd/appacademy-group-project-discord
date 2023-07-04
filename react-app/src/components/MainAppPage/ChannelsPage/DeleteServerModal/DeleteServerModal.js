@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./DeleteServerModal.css";
 import { useModal } from "../../../../context/Modal";
 
@@ -7,20 +8,29 @@ import * as serverActions from "../../../../store/servers";
 
 export default function DeleteServerModal({ serverToDelete }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { closeModal } = useModal();
   const [name, setName] = useState("");
-  const [errors, setErrors] = useState("")
+  const [errors, setErrors] = useState({})
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (name !== serverToDelete.name) {
-      setErrors("You did not enter the server name correctly");
+      setErrors({
+        name: "You did not enter the server name correctly"
+      });
       return;
     }
 
-    await dispatch(serverActions.thunkDeleteServer(serverToDelete.id));
-
+    const data = await dispatch(serverActions.thunkDeleteServer(serverToDelete.id));
+    if (data.errors) {
+      setErrors(data.errors);
+    }
+    else {
+      closeModal()
+      history.push("/main/conversations");
+    }
   }
 
   return (
@@ -38,7 +48,7 @@ export default function DeleteServerModal({ serverToDelete }) {
           onChange={(e) => setName(e.target.value)}
         />
         <p className="error">
-          {errors || ""}
+          {errors.name || ""}
         </p>
         <button onClick={closeModal}>Cancel</button>
         <button>Delete Server</button>
