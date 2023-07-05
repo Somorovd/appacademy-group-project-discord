@@ -22,12 +22,12 @@
   transform: translate(-50%);
   width: calc(100% - 20px);
   padding: 8px;
-  display: flex;
-  flex-direction: column;
   border-radius: 4px;
 }
 
 .server-dropdown:not(.hidden) {
+  display: flex;
+  flex-direction: column;
   animation-name: dropdownShow;
   animation-duration: 0.2s;
 }

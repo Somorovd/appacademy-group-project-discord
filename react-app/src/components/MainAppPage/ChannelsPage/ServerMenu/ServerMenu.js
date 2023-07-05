@@ -34,8 +34,8 @@ export default function ServerMenu({ server }) {
   );
 
   return (
-    <div className="server-menu">
-      <h2 onClick={openMenu}>
+    <div onClick={openMenu} className="server-menu">
+      <h2>
         {server.name}
       </h2>
       <ul className={dropdownClasses} ref={dropdownRef}>
