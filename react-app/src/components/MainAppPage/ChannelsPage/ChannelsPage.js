@@ -5,6 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import CreateChannelFormModal from './CreateChannelFormModal';
 import ServerMenu from './ServerMenu';
 import ChannelLink from './ChannelLink';
+import MessagePage from './MessagePage';
 import OpenModalButton from '../../OpenModalButton';
 import * as serverActions from '../../../store/servers';
 import './ChannelsPage.css';
@@ -14,7 +15,6 @@ export default function ChannelsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { serverId, channelId } = useParams();
-  const [currentChannel, setCurrentChannel] = useState();
 
   const singleUserServer = useSelector(state => state.servers.singleUserServer);
 
@@ -35,12 +35,6 @@ export default function ChannelsPage() {
   if (!serverId || !singleUserServer.channels) return <></>;
 
   const channels = Object.values(singleUserServer.channels);
-  const singleChannel = singleUserServer.channels[channelId];
-
-  const handleChannelClick = channel => {
-    history.push(`/main/channels/${serverId}/${channel.id}`);
-    setCurrentChannel(channel.id);
-  };
 
   return (
     <>
@@ -63,10 +57,8 @@ export default function ChannelsPage() {
           </ul>
         </div>
       </div>
-      <div className="messages channels-messages">
-        {singleChannel
-          ? `Displaying messages for ${singleUserServer.name} -- ${singleChannel.name}`
-          : ''}
+      <div className="messages">
+        <MessagePage />
       </div>
     </>
   );

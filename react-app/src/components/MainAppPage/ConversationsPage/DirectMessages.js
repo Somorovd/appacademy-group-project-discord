@@ -10,16 +10,17 @@ import "./DM.css";
 let socket;
 
 export default function DirectMessages() {
-  const { communicationId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory()
+  const { communicationId } = useParams();
 
-  const [currentMessage, setCurrentMessage] = useState("");
   const messages = useSelector((state) =>
     Object.values(state.communications.singleCommunication.messages)
   );
   const user = useSelector((state) => state.session.user);
+
   const [chatMessages, setChatMessages] = useState(messages);
+  const [currentMessage, setCurrentMessage] = useState("");
   const [refresh, setRefresh] = useState(false);
 
 
@@ -40,7 +41,7 @@ export default function DirectMessages() {
 
     socket.on("chat", (chat) => {
 
-      if(chat === "refresh") {
+      if (chat === "refresh") {
         setRefresh(true)
       } else {
         setChatMessages((chatMessages) => [...chatMessages, chat]);
@@ -73,7 +74,7 @@ export default function DirectMessages() {
       room: communicationId,
       edited: false,
       deleted: false
-     });
+    });
 
     setCurrentMessage("");
   }
