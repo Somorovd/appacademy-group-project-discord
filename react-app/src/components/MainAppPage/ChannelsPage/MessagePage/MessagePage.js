@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
@@ -13,7 +13,6 @@ export default function MessagePage() {
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
-  const [refresh, setRefresh] = useState(false);
 
   const singleChannel = useSelector(state => state.channels.singleChannel);
   const user = useSelector(state => state.session.user);
@@ -23,6 +22,7 @@ export default function MessagePage() {
     dispatch(channelActions.thunkGetChannel(channelId));
 
     socket.on('messages', data => {
+      console.log("Socket return messages", data);
       if (data) {
         dispatch(channelActions.thunkGetChannel(channelId));
       }
@@ -32,7 +32,7 @@ export default function MessagePage() {
       room: `Channel-${channelId}`,
     });
 
-    setRefresh(false);
+    return () => socket.disconnect();
   }, [dispatch, channelId]);
 
   const handleSubmit = async e => {
@@ -42,6 +42,8 @@ export default function MessagePage() {
       content,
       room: `Channel-${channelId}`,
       channel_id: channelId,
+      edited: false,
+      deleted: false
     });
 
     setContent('');
@@ -49,12 +51,11 @@ export default function MessagePage() {
 
   const handleKeyPress = e => {
     if (e.key === 'Enter' && content !== '') {
-      console.log(content);
       handleSubmit(e);
     }
   };
 
-  if (!Object.keys(singleChannel).length) return <h1>Loading...</h1>;
+  if (!Object.keys(singleChannel).length) return null;
 
   return (
     <div className="channels-messages">

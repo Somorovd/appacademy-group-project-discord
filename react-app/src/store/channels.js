@@ -12,7 +12,7 @@ export const thunkGetChannel = channelId => async dispatch => {
   if (res.ok) {
     const channel = resBody;
     dispatch(actionGetChannel(channel));
-  }
+  } 
 }
 
 const initialState = { singleChannel: {} };

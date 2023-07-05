@@ -68,10 +68,6 @@ def handle_DMs(data):
 def handle_messages(data):
     room = data["room"]
 
-    print("----------------------------")
-    print("INNNNN THE MESSAGES")
-    print("----------------------------")
-
     if data["deleted"]:
         message_to_delete = Message.query.get(int(data["deleted"]))
         if current_user.id != message_to_delete.user_id:

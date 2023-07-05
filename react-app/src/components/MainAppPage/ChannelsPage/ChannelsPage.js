@@ -58,7 +58,11 @@ export default function ChannelsPage() {
         </div>
       </div>
       <div className="messages">
-        <MessagePage />
+        {
+          channelId
+            ? <MessagePage />
+            : null
+        }
       </div>
     </>
   );
