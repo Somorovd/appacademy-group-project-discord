@@ -57,7 +57,7 @@ export default function ChannelsPage() {
   return (
     <>
       <div className="app-nav">
-        <ServerMenu singleUserServer={singleUserServer} />
+        <ServerMenu server={singleUserServer} />
 
         <div className="channels-nav">
           <div className="channels-nav__header">

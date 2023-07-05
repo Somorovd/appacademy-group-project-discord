@@ -7,7 +7,7 @@
 }
 
 .server-menu h2 {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
 }
 
 .server-menu:hover {
@@ -60,6 +60,7 @@
   from {
     transform: translate(-50%, -10px) scale(0.7, 0.8)
   }
+
   to {
     transform: translate(-50%) scale(1)
   }

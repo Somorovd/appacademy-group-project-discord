@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   padding: 8px;
   border-radius: 5px;
   color: var(--font-gray);
@@ -34,7 +34,6 @@
   font-size: var(--font-size-sm);
   font-weight: normal;
   color: var(--font-gray);
-  padding: 8px;
 }
 
 .channels-nav__create-channel-btn {
@@ -53,4 +52,8 @@
 
 .channels-nav__create-channel-btn:hover {
   color: var(--font-white);
+}
+
+.channels-messages {
+  color: var(--font-gray);
 }
