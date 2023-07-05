@@ -1,15 +1,13 @@
 .app-wrapper {
   display: grid;
-  grid-template-areas:
-    "servers app-nav messages";
+  grid-template-areas: 'servers app-nav messages';
   grid-template-columns: 70px 250px 1fr;
   height: 100%;
   color: white;
-  background-color: var( --bg-dark-gray);
-  padding-top: 15px;
+  background-color: var(--bg-dark-gray);
 }
 
-.app-wrapper>* {
+.app-wrapper > * {
   height: 100%;
 }
 
@@ -21,7 +19,7 @@
   grid-area: app-nav;
   background-color: var(--bg-medium-gray);
   border-radius: 10px 0px 0px 0px;
-  padding-left: 8px;
+  padding: 1rem;
 }
 
 .messages {
