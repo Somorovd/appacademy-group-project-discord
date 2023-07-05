@@ -27,9 +27,10 @@
 }
 
 .channels-nav__create-channel-btn {
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: var(--icon-light-gray);
 }
 
 .server-menu:hover {
