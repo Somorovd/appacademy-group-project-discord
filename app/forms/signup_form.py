@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, DateField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import User
-from email_validator import validate_email, EmailNotValidError
+
+# from email_validator import validate_email, EmailNotValidError
 import re
 
 
@@ -29,8 +30,8 @@ def is_phone_number(form, field):
         raise ValidationError("Invalid Phone Number Format")
 
 
-def check_email(form, field):
-    validate_email(field.data, check_deliverability=False)
+# def check_email(form, field):
+#     validate_email(field.data, check_deliverability=False)
 
 
 class SignUpForm(FlaskForm):
@@ -40,7 +41,7 @@ class SignUpForm(FlaskForm):
         validators=[
             DataRequired(),
             user_exists,
-            check_email,
+            # check_email,
         ],
     )
     password = StringField("password", validators=[DataRequired()])
