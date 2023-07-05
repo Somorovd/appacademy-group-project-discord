@@ -28,10 +28,10 @@ class Message(db.Model):
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
-            "userId": self.user_id,
+            "user": self.user.to_dict_message(),
             "channelId": self.channel_id,
             "content": self.content,
-            "was_edited": self.was_edited,
+            "wasEdited": self.was_edited,
         }
         if timestamps:
             dct["createdAt"] = self.created_at

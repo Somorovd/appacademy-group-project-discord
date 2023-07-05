@@ -45,7 +45,19 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "phoneNumber": self.phone_number,
             "profilePic": self.profile_pic,
-            "birthday": self.birthday,
+            "birthday": str(self.birthday),
+        }
+        if timestamps:
+            dct["createdAt"] = self.created_at
+            dct["updatedAt"] = self.updated_at
+
+        return dct
+
+    def to_dict_message(self, timestamps=False):
+        dct = {
+            "id": self.id,
+            "username": self.username,
+            "profilePic": self.profile_pic,
         }
         if timestamps:
             dct["createdAt"] = self.created_at

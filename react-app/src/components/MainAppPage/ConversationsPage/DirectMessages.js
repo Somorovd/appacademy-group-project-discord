@@ -14,11 +14,14 @@ export default function DirectMessages({ otherUser }) {
   const dispatch = useDispatch();
   const history = useHistory()
   const [currentMessage, setCurrentMessage] = useState("");
+
   const messages = useSelector((state) =>
     Object.values(state.communications.singleCommunication.messages)
   );
   const user = useSelector((state) => state.session.user);
+
   const [chatMessages, setChatMessages] = useState(messages);
+  const [currentMessage, setCurrentMessage] = useState("");
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
@@ -38,7 +41,7 @@ export default function DirectMessages({ otherUser }) {
 
     socket.on("chat", (chat) => {
 
-      if(chat === "refresh") {
+      if (chat === "refresh") {
         setRefresh(true)
       } else {
         setChatMessages((chatMessages) => [...chatMessages, chat]);
@@ -71,7 +74,7 @@ export default function DirectMessages({ otherUser }) {
       room: communicationId,
       edited: false,
       deleted: false
-     });
+    });
 
     setCurrentMessage("");
   }
