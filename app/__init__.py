@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.communications_routes import communication_routes
 from .api.server_routes import server_routes
+from .api.channel_routes import channel_routes
 from .seeds import seed_commands
 from .config import Config
 from .socket import socketio
@@ -30,10 +31,11 @@ app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
 
-app.register_blueprint(user_routes, url_prefix='/api/users')
-app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(communication_routes, url_prefix='/api/communications')
+app.register_blueprint(user_routes, url_prefix="/api/users")
+app.register_blueprint(auth_routes, url_prefix="/api/auth")
+app.register_blueprint(communication_routes, url_prefix="/api/communications")
 app.register_blueprint(server_routes, url_prefix="/api/servers")
+app.register_blueprint(channel_routes, url_prefix="/api/channels")
 
 socketio.init_app(app)
 
@@ -42,6 +44,7 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
+
 
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
@@ -103,6 +106,7 @@ def react_root(path):
 def not_found(e):
     return app.send_static_file("index.html")
 
+
 # @socketio.on('message')
 # def handle_message(message):
 #     send(message, namespace='/chat')
@@ -112,5 +116,5 @@ def not_found(e):
 #     emit('my response', json, namespace='/chat')
 
 # print(__name__)
-if __name__ == '__main__':
+if __name__ == "__main__":
     socketio.run(app)

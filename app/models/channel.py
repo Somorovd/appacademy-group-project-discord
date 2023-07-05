@@ -45,3 +45,8 @@ class Channel(db.Model):
             dct["updatedAt"] = self.updated_at
 
         return dct
+
+    def to_dict_single(self):
+        dct = self.to_dict()
+        dct["messages"] = [m.to_dict(timestamps=True) for m in self.messages]
+        return dct

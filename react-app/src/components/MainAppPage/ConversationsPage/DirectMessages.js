@@ -9,19 +9,19 @@ import "./DM.css";
 
 let socket;
 
-export default function DirectMessages() {
+export default function DirectMessages({ otherUser }) {
   const { communicationId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory()
 
-  const [currentMessage, setCurrentMessage] = useState("");
   const messages = useSelector((state) =>
     Object.values(state.communications.singleCommunication.messages)
   );
   const user = useSelector((state) => state.session.user);
-  const [chatMessages, setChatMessages] = useState(messages);
-  const [refresh, setRefresh] = useState(false);
 
+  const [chatMessages, setChatMessages] = useState(messages);
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -40,7 +40,7 @@ export default function DirectMessages() {
 
     socket.on("chat", (chat) => {
 
-      if(chat === "refresh") {
+      if (chat === "refresh") {
         setRefresh(true)
       } else {
         setChatMessages((chatMessages) => [...chatMessages, chat]);
@@ -73,15 +73,23 @@ export default function DirectMessages() {
       room: communicationId,
       edited: false,
       deleted: false
-     });
+    });
 
     setCurrentMessage("");
   }
 
+  if (!otherUser) {
+    history.push('/main/conversations')
+  }
+
   return (
     <div className="DM-page">
+      <div className="DM-page__top">
+        <img src={otherUser?.profilePic} /> {otherUser?.userName}
+      </div>
       <ul className="DM-page__list">
         {chatMessages.map((message) => {
+          console.log(message)
           return (
             <li key={message.id} className="DM-page__list-message">
               <MessageCard message={message} socket={socket} user={user} communicationId={communicationId} />
@@ -90,14 +98,15 @@ export default function DirectMessages() {
         })}
       </ul>
       <div className="DM-page__chat-box">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="DM-page__chat-form">
           <input
             type="text"
-            placeholder="Send a message!"
+            placeholder={`Message @${otherUser?.userName}`}
             value={currentMessage}
             onChange={(e) => setCurrentMessage(e.target.value)}
+            className="DM-page__chat-input"
           />
-          <button type="submit">send</button>
+          <button type="submit" className="DM-page__chat-submit" disabled={currentMessage.length === 0}><i class="fa-solid fa-arrow-right"></i></button>
         </form>
       </div>
     </div>
