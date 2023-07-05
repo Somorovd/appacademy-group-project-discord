@@ -13,7 +13,10 @@ export default function DiscoverPage () {
     const [serverSearch, setServerSearch] = useState("")
 
     useEffect(() => {
-        dispatch(thunkGetAllPublicServers());
+        (async () => {
+            const res = await dispatch(thunkGetAllPublicServers());
+            setFilteredServers(Object.values(res.payload))
+        })()
     }, [dispatch])
 
     useEffect(() => {

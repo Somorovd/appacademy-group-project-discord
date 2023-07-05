@@ -1,14 +1,64 @@
 .DM-page {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: grid;
+  grid-template-rows: 5% 88% 7%;
+  height: 100vh;
 }
 
+.DM-page__top {
+  border-bottom: 1px solid var(--bg-dark-gray);
+  color: var(--font-white);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: 15px;
+}
+
+.DM-page__top > img {
+  background-color: blue;
+  border: 2px solid orange;
+  border-radius: 100%;
+  height: 32px;
+  width: 32px;
+}
 .DM-page__list {
-  height: 90%;
+  height: 100%;
   overflow-y: scroll;
   list-style-type: none;
-  border: 1px red solid;
+  /* border: 1px red solid; */
+}
+
+.DM-page__chat-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.DM-page__chat-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.DM-page__chat-input {
+  width: 95%;
+  border: none;
+  border-radius: 5px 0px 0px 5px;
+  background-color: hsl(218, 8%, 25%);
+  padding: 10px;
+  outline: none;
+  height: 40px;
+  color: var(--font-white)
+}
+
+.DM-page__chat-submit {
+  background-color: hsl(218, 8%, 25%);
+  width: 3%;
+  height: 40px;
+  border: none;
+  outline: none;
+  color: var(--icon-light-gray);
+  font-size: 20px;
+  border-radius: 0px 5px 5px 0px;
 }
 
 /* Works for all broswers besides Firefox */
