@@ -40,6 +40,20 @@ button {
   --icon-light-gray: hsl(213, 8%, 73%);
   --icon-white-active: hsl(0, 0%, 100%);
 
+  --black-100: #101214;
+  --black-200: #1e1f22;
+  --black-300: #232428;
+  --black-400: #2b2d31;
+  --black-500: #313338;
+  --black-600: #36373d;
+  --black-700: #383a40;
+  --black-800: #404249;
+
+  --white-500: #9aa1ab;
+  --white-600: #b5bac1;
+  --white-700: #dbdee1;
+  --white-800: #eeeff1;
+
   /* NEED FONT FAMILY */
 
   /* FONT SIZES */

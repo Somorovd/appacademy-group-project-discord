@@ -5,7 +5,7 @@
   height: 100%;
 }
 
-.app-wrapper > * {
+.app-wrapper>* {
   height: 100%;
 }
 
@@ -19,5 +19,5 @@
 
 .messages {
   grid-area: messages;
-  background-color: var(--bg-light-gray);
+  background-color: var(--black-500);
 }
