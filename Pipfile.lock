@@ -62,7 +62,7 @@
                 "sha256:e43b9ae05ba4bb477a10307699c9aff7ff86121b2640f9184d29059f5a687df8"
             ],
             "index": "pypi",
-            "version": "==0.33.3"
+            "version": "==0.31.0"
         },
         "faker": {
             "hashes": [
