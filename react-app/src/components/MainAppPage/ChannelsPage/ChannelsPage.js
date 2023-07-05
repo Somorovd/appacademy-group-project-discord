@@ -58,11 +58,7 @@ export default function ChannelsPage() {
           </div>
           <ul>
             {channels.map(channel => (
-              <ChannelLink
-                channel={channel}
-                handleClick={() => handleChannelClick(channel)}
-                currentChannel={currentChannel}
-              />
+              <ChannelLink channel={channel} key={channel.id} />
             ))}
           </ul>
         </div>

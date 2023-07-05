@@ -1,16 +1,18 @@
+import { useHistory, useParams } from "react-router-dom";
+
 import './ChannelLink.css'
 
-export default function ChannelLink({
-  channel,
-  currentChannel,
-  handleClick
-}) {
+export default function ChannelLink({ channel }) {
+  const history = useHistory();
+  const { serverId, channelId } = useParams();
 
-  console.log(`CurrentChannel ${currentChannel} channel: ${channel.id}`)
+  const handleClick = () => {
+    history.push(`/main/channels/${serverId}/${channel.id}`);
+  };
 
   const className = (
     "channel-item " +
-    (currentChannel === channel.id ? 'channel-item--selected' : '')
+    (channel.id === Number(channelId) ? 'channel-item--selected' : '')
   );
 
   return (
