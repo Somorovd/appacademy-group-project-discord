@@ -51,3 +51,7 @@ button {
   --font-weight-lg: 700;
   --font-weight-md: 500;
 }
+
+.hidden {
+  display: none;
+}

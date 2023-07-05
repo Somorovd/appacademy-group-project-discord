@@ -2,22 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import * as serverActions from '../../../store/servers';
-
 import CreateChannelFormModal from './CreateChannelFormModal';
-import DeleteServerModal from './DeleteServerModal';
+import ServerMenu from './ServerMenu/ServerMenu';
 import OpenModalButton from '../../OpenModalButton';
-import EditServerModal from './EditServerModal/EditServerModal';
-import './ChannelsPage.css';
 
-function DropdownListButton({ text, icon }) {
-  return (
-    <>
-      <p>{text}</p>
-      <i className={icon}></i>
-    </>
-  );
-}
+import * as serverActions from '../../../store/servers';
+import './ChannelsPage.css';
 
 export default function ChannelsPage() {
   const dispatch = useDispatch();
@@ -48,41 +38,8 @@ export default function ChannelsPage() {
   return (
     <>
       <div className="app-nav">
-        <div className="server-menu">
-          <h2>{singleUserServer.name}</h2>
-          <div className="server-dropdown">
-            <ul>
-              <li className="dropdown__item">
-                <OpenModalButton
-                  modalComponent={
-                    <EditServerModal serverToEdit={singleUserServer} />
-                  }
-                  buttonClass="list-button"
-                  ButtonComponent={
-                    <DropdownListButton
-                      text="Edit Server"
-                      icon="fa-solid fa-pencil"
-                    />
-                  }
-                />
-              </li>
-              <li className="dropdown__item">
-                <OpenModalButton
-                  modalComponent={
-                    <DeleteServerModal serverToDelete={singleUserServer} />
-                  }
-                  buttonClass="list-button"
-                  ButtonComponent={
-                    <DropdownListButton
-                      text="Delete Server"
-                      icon="fa-solid fa-trash"
-                    />
-                  }
-                />
-              </li>
-            </ul>
-          </div>
-        </div>
+
+        <ServerMenu server={singleUserServer} />
 
         <div className="channel-nav">
           <div className="channels-nav__header">
