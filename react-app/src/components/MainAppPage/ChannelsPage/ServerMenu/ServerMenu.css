@@ -1,17 +1,66 @@
-.server-dropdown {
-  background-color: var(--bg-dark-gray);
-  padding: 0.5rem;
-  border-radius: 5px;
+.server-menu {
+  position: relative;
+  background-color: hsl(220, 12%, 19%);
+  color: var(--font-white);
+  padding: 10px;
+  border-bottom: 1px solid black;
 }
 
-.list-button {
+.server-menu h2 {
+  font-size: var(--font-size-sm);
+}
+
+.server-menu:hover {
+  background-color: hsl(226, 12%, 28%);
+}
+
+.server-dropdown {
+  position: absolute;
+  background-color: var(--bg-dark-gray);
+  left: 50%;
+  top: calc(100% + 10px);
+  transform: translate(-50%);
+  width: calc(100% - 20px);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+}
+
+.server-dropdown:not(.hidden) {
+  animation-name: dropdownShow;
+  animation-duration: 0.2s;
+}
+
+.server-dropdown__button {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 8px;
   border-radius: 3px;
+  color: var(--font-gray);
+  font-size: 14px;
 }
 
-.list-button:hover {
+.server-dropdown__button:hover {
   background-color: var(--primary-blue);
+  color: var(--font-white);
   cursor: pointer;
+}
+
+.server-dropdown__button.dropdown--warning {
+  color: var(--primary-red);
+}
+
+.server-dropdown__button.dropdown--warning:hover {
+  background-color: var(--primary-red);
+  color: var(--font-white);
+}
+
+@keyframes dropdownShow {
+  from {
+    transform: translate(-50%, -10px) scale(0.7, 0.8)
+  }
+  to {
+    transform: translate(-50%) scale(1)
+  }
 }

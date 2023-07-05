@@ -2,20 +2,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import * as serverActions from '../../../store/servers';
-
 import CreateChannelFormModal from './CreateChannelFormModal';
-import OpenModalButton from '../../OpenModalButton';
-import './ChannelsPage.css';
 import ServerMenu from './ServerMenu/ServerMenu';
+import OpenModalButton from '../../OpenModalButton';
+import * as serverActions from '../../../store/servers';
+import './ChannelsPage.css';
 
 function Channel({ channel, currentChannel, handleClick }) {
   return (
     <li
       key={channel.id}
-      className={`channel-item ${
-        currentChannel === channel.id ? 'channel-item--selected' : ''
-      }`}
+      className={`channel-item ${currentChannel === channel.id ? 'channel-item--selected' : ''
+        }`}
       onClick={handleClick}
     >
       <i class="fa-solid fa-hashtag"></i>
@@ -67,7 +65,7 @@ export default function ChannelsPage() {
             <OpenModalButton
               modalComponent={<CreateChannelFormModal serverId={serverId} />}
               buttonClass="channels-nav__create-channel-btn"
-              buttonText={'+'}
+              buttonText={<i class="fa-solid fa-plus"></i>}
             />
           </div>
           <ul>

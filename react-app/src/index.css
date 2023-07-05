@@ -31,7 +31,7 @@ button {
   --primary-green: hsl(139, 48%, 44%);
   --primary-red: hsl(359, 87%, 60%);
   --bg-profile-dark: hsl(220, 8%, 7%);
-  --bg-dark-gray: hsl(225, 9%, 8%);
+  --bg-dark-gray: hsl(225, 11%, 13%);
   --bg-medium-gray: hsl(214, 8%, 18%);
   --bg-light-gray: hsl(218, 8%, 20%);
   --bg-light-gray-hover: hsl(213, 7%, 24%);
@@ -50,4 +50,8 @@ button {
   /* FONT WEIGHTS */
   --font-weight-lg: 700;
   --font-weight-md: 500;
+}
+
+.hidden {
+  display: none;
 }
