@@ -3,24 +3,12 @@ import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import CreateChannelFormModal from './CreateChannelFormModal';
-import ServerMenu from './ServerMenu/ServerMenu';
+import ServerMenu from './ServerMenu';
+import ChannelLink from './ChannelLink';
 import OpenModalButton from '../../OpenModalButton';
 import * as serverActions from '../../../store/servers';
 import './ChannelsPage.css';
 
-function Channel({ channel, currentChannel, handleClick }) {
-  return (
-    <li
-      key={channel.id}
-      className={`channel-item ${currentChannel === channel.id ? 'channel-item--selected' : ''
-        }`}
-      onClick={handleClick}
-    >
-      <i class="fa-solid fa-hashtag"></i>
-      <span>{channel.name}</span>
-    </li>
-  );
-}
 
 export default function ChannelsPage() {
   const dispatch = useDispatch();
@@ -70,7 +58,7 @@ export default function ChannelsPage() {
           </div>
           <ul>
             {channels.map(channel => (
-              <Channel
+              <ChannelLink
                 channel={channel}
                 handleClick={() => handleChannelClick(channel)}
                 currentChannel={currentChannel}
