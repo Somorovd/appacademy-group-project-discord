@@ -53,7 +53,7 @@ export default function ChannelsPage() {
             <OpenModalButton
               modalComponent={<CreateChannelFormModal serverId={serverId} />}
               buttonClass="channels-nav__create-channel-btn"
-              buttonText={<i class="fa-solid fa-plus"></i>}
+              buttonText={<i className="fa-solid fa-plus"></i>}
             />
           </div>
           <ul>
