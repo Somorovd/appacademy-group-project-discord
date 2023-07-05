@@ -11,6 +11,10 @@
   border-radius: 5px;
 }
 
+.channel-item--selected {
+  background-color: var(--bg-light-gray-hover);
+}
+
 .channel-item:hover {
   background-color: var(--bg-light-gray-hover);
   cursor: pointer;

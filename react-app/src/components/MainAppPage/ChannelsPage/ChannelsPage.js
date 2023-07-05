@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import * as serverActions from '../../../store/servers';
@@ -18,13 +18,14 @@ function DropdownListButton({ text, icon }) {
   );
 }
 
-function Channel({ channel, serverId }) {
-  const history = useHistory();
+function Channel({ channel, currentChannel, handleClick }) {
   return (
     <li
       key={channel.id}
-      className="channel-item"
-      onClick={() => history.push(`/main/channels/${serverId}/${channel.id}`)}
+      className={`channel-item ${
+        currentChannel === channel.id ? 'channel-item--selected' : ''
+      }`}
+      onClick={handleClick}
     >
       <i class="fa-solid fa-hashtag"></i>
       <span>{channel.name}</span>
@@ -36,6 +37,7 @@ export default function ChannelsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { serverId, channelId } = useParams();
+  const [currentChannel, setCurrentChannel] = useState();
 
   const singleUserServer = useSelector(state => state.servers.singleUserServer);
 
@@ -57,6 +59,11 @@ export default function ChannelsPage() {
 
   const channels = Object.values(singleUserServer.channels);
   const singleChannel = singleUserServer.channels[channelId];
+
+  const handleChannelClick = channel => {
+    history.push(`/main/channels/${serverId}/${channel.id}`);
+    setCurrentChannel(channel.id);
+  };
 
   return (
     <>
@@ -110,7 +117,8 @@ export default function ChannelsPage() {
             {channels.map(channel => (
               <Channel
                 channel={channel}
-                serverId={serverId}
+                handleClick={() => handleChannelClick(channel)}
+                currentChannel={currentChannel}
               />
             ))}
           </ul>
