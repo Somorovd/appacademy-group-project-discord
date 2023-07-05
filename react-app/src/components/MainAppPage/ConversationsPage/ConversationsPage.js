@@ -1,6 +1,6 @@
 import "./ConversationsPage.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { thunkLoadAllCommunications } from "../../../store/communications";
 import { Link } from "react-router-dom";
 import DirectMessages from "./DirectMessages";
@@ -13,6 +13,7 @@ export default function ConversationsPage() {
   const DMs = useSelector((state) => state.communications.allCommunications);
   const dispatch = useDispatch();
   const { communicationId } = useParams();
+  const [otherUser, setOtherUser] = useState(null)
 
   useEffect(() => {
     dispatch(thunkLoadAllCommunications());
@@ -27,7 +28,7 @@ export default function ConversationsPage() {
         <ul className="conversations-page__list">
           {Object.values(DMs).map((user) => {
             return (
-              <li key={user.id} className="app-nav__list">
+              <li key={user.id} className="app-nav__list" onClick={() => setOtherUser(user)}>
                 <Link className="app-nav__link" to={`/main/conversations/${user.id}`}>
                   <img className="app-nav__img" src={user.userPic} /> {user.userName}
                 </Link>
@@ -39,7 +40,7 @@ export default function ConversationsPage() {
       </div>
 
       <div className="messages conversations-messages">
-        {communicationId && <DirectMessages />}
+        {communicationId && <DirectMessages otherUser={otherUser}/>}
       </div>
     </>
   );

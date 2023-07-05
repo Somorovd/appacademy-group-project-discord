@@ -1,0 +1,111 @@
+.discover-page__private-server {
+  background-color: var(--bg-medium-gray);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--font-white);
+}
+
+.discover-page__private-div {
+  margin-top: 15px;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.discover-page__private-div > p {
+    width: 70%;
+    align-self: center;
+}
+
+.discover-page__private-div > input {
+    width: 75%;
+    padding-left: 5px;
+    align-self: center;
+    border:none;
+    border-radius: 5px;
+}
+
+.discover-page__private-div > button {
+    background-color: var(--primary-green);
+    color: var(--font-white);
+    border: none;
+    border-radius: 5px;
+    width: 75%;
+    align-self: center;
+    margin-bottom: 10px;
+    height: 30px;
+}
+.discover-page__private-div > button:hover {
+    background-color: hsl(139, 48%, 54%);
+}
+
+.discover-page__private-div > button:disabled {
+    background-color: var(--font-gray);
+}
+
+.discover-page__discover {
+  background-color: var(--bg-light-gray);
+  color: var(--font-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+}
+
+.discover-page__search-bar {
+  width: 97%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('../../../Images/DiscoverServers.svg');
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 9px;
+  margin-top: 20px;
+}
+.discover-page__search-bar > p {
+    padding-bottom: 10px;
+}
+
+.discover-page__search-server {
+  height: 7%;
+  border: none;
+  padding-left: 5px;
+  width: 30%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px var(--bg-light-gray);
+}
+
+.discover-page__main-div {
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+  margin-top: 20px;
+}
+
+.discover-page__private-server {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.discover-page__private-server {
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+.discover-page__list {
+  display: grid;
+  grid-template-columns: 24.3% 24.3% 24.3% 24.3%;
+  gap: 15px;
+  width: 100%;
+  overflow-wrap: normal;
+}
