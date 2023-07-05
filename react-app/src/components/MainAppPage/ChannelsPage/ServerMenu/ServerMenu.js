@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 
-import DeleteServerModal from '../DeleteServerModal';
-import EditServerModal from '../EditServerModal';
+import DeleteServerModal from './DeleteServerModal';
+import EditServerModal from './EditServerModal';
+import LeaveServerModal from './LeaveServerModal';
 import OpenModalButton from '../../../OpenModalButton';
 
 import './ServerMenu.css'
+import { useSelector } from "react-redux";
 
 export default function ServerMenu({ server }) {
-
   const dropdownRef = useRef();
-
   const [showMenu, setShowMenu] = useState(false);
+
+  const user = useSelector(state => state.session.user);
 
   const openMenu = (e) => {
     e.stopPropagation();
@@ -33,6 +35,8 @@ export default function ServerMenu({ server }) {
     (showMenu ? "" : " hidden ")
   );
 
+  console.log("IS OWNER", Number(user.id) === Number(server.owner_id), user.id, server.ownerId);
+
   return (
     <div onClick={openMenu} className="server-menu">
       <h2>
@@ -44,28 +48,44 @@ export default function ServerMenu({ server }) {
           : <i className="fa-solid fa-angle-down"></i>
       }
       <ul className={dropdownClasses} ref={dropdownRef}>
-        <li className="server-dropdown__item">
-          <DropdownListButton
-            text="Edit Server"
-            icon="fa-solid fa-pencil"
-            buttonClass="server-dropdown__button"
-            modalComponent={
-              <EditServerModal serverToEdit={server} />
-            }
-          />
-        </li>
-        <li className="server-dropdown__item">
-          <DropdownListButton
-            text="Delete Server"
-            icon="fa-solid fa-trash"
-            buttonClass="server-dropdown__button dropdown--warning"
-            modalComponent={
-              <DeleteServerModal serverToDelete={server} />
-            }
-          />
-        </li>
+        {user.id === server.ownerId &&
+          (<>
+            <li className="server-dropdown__item">
+              <DropdownListButton
+                text="Edit Server"
+                icon="fa-solid fa-pencil"
+                buttonClass="server-dropdown__button"
+                modalComponent={
+                  <EditServerModal serverToEdit={server} />
+                }
+              />
+            </li>
+            <li className="server-dropdown__item">
+              <DropdownListButton
+                text="Delete Server"
+                icon="fa-solid fa-trash"
+                buttonClass="server-dropdown__button dropdown--warning"
+                modalComponent={
+                  <DeleteServerModal serverToDelete={server} />
+                }
+              />
+            </li>
+          </>)
+        }
+        {user.id !== server.ownerId &&
+          <li>
+            <DropdownListButton
+              text="Leave Server"
+              icon="fa-solid fa-right-from-bracket fa-rotate-180"
+              buttonClass="server-dropdown__button dropdown--warning"
+              modalComponent={
+                <LeaveServerModal serverToLeave={server} />
+              }
+            />
+          </li>
+        }
       </ul>
-    </div>
+    </div >
   )
 }
 
