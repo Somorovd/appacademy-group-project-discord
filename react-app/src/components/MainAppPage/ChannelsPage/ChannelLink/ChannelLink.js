@@ -23,8 +23,8 @@ export default function ChannelLink({ channel }) {
     >
       {
         channel.type === "text"
-          ? <i class="fa-solid fa-hashtag"></i>
-          : <i class="fa-solid fa-headset"></i>
+          ? <i className="fa-solid fa-hashtag"></i>
+          : <i className="fa-solid fa-headset"></i>
       }
       <span>{channel.name}</span>
     </li>

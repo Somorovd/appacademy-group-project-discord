@@ -38,6 +38,11 @@ export default function ServerMenu({ server }) {
       <h2>
         {server.name}
       </h2>
+      {
+        showMenu
+          ? <i className="fa-solid fa-xmark"></i>
+          : <i className="fa-solid fa-angle-down"></i>
+      }
       <ul className={dropdownClasses} ref={dropdownRef}>
         <li className="server-dropdown__item">
           <DropdownListButton
