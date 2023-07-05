@@ -13,7 +13,6 @@ export default function DirectMessages({ otherUser }) {
   const { communicationId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory()
-  const [currentMessage, setCurrentMessage] = useState("");
 
   const messages = useSelector((state) =>
     Object.values(state.communications.singleCommunication.messages)
