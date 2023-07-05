@@ -30,6 +30,7 @@
   padding: 8px;
   border-radius: 3px;
   color: var(--font-gray);
+  font-size: 14px;
 }
 
 .server-dropdown__button:hover {
@@ -38,9 +39,18 @@
   cursor: pointer;
 }
 
+.server-dropdown__button.dropdown--warning {
+  color: var(--primary-red);
+}
+
+.server-dropdown__button.dropdown--warning:hover {
+  background-color: var(--primary-red);
+  color: var(--font-white);
+}
+
 @keyframes dropdownShow {
   from {
-    transform: translate(-50%) scale(0.7, 0.8)
+    transform: translate(-50%, -10px) scale(0.7, 0.8)
   }
 
   to {

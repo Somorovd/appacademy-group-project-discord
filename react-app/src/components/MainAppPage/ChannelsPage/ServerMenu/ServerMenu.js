@@ -53,7 +53,7 @@ export default function ServerMenu({ server }) {
           <DropdownListButton
             text="Delete Server"
             icon="fa-solid fa-trash"
-            buttonClass="server-dropdown__button"
+            buttonClass="server-dropdown__button dropdown--warning"
             modalComponent={
               <DeleteServerModal serverToDelete={server} />
             }
