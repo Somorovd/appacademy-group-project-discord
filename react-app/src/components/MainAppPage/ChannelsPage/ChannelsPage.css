@@ -1,22 +1,19 @@
 .channels-nav {
-  padding: 8px;
-}
-
-.channels-nav ul {
-  padding: 0px;
+  color: var(--font-gray);
 }
 
 .channel-item {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   gap: 15px;
-  font-size: 18px;
+  font-size: var(--font-size-sm);
   padding: 8px;
   border-radius: 5px;
 }
 
 .channel-item:hover {
-  background-color: #444;
+  background-color: var(--bg-light-gray-hover);
+  cursor: pointer;
 }
 
 .channels-nav__header {
@@ -26,11 +23,22 @@
   justify-content: space-between;
 }
 
+.channels-nav__header > h2 {
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
 .channels-nav__create-channel-btn {
   background: none;
   border: none;
   font-size: 1.7rem;
-  color: var(--icon-light-gray);
+  color: var(--font-gray);
+}
+
+.channels-nav__create-channel-btn:hover,
+.channels-nav__header > h2:hover {
+  color: var(--font-white);
 }
 
 .server-menu:hover {
