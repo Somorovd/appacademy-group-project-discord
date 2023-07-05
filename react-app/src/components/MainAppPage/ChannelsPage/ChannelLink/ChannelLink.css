@@ -1,0 +1,20 @@
+.channel-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: var(--font-size-md);
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--font-gray);
+}
+
+.channel-item.channel-item--selected,
+.channel-item.channel-item--selected:hover {
+  background-color: hsl(226, 12%, 28%);
+  color: var(--font-white);
+}
+
+.channel-item:hover {
+  background-color: hsl(231, 11%, 24%);
+  color: var(--font-white);
+}

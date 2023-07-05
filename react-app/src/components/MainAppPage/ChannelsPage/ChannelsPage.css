@@ -8,21 +8,6 @@
   padding: 0px;
 }
 
-.channel-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-size: var(--font-size-md);
-  padding: 8px;
-  border-radius: 5px;
-  color: var(--font-gray);
-}
-
-.channel-item:hover {
-  background-color: hsl(226, 12%, 28%);
-  color: var(--font-white);
-}
-
 .channels-nav__header {
   display: flex;
   gap: 1rem;

@@ -6,8 +6,10 @@ export default function ChannelLink({
   handleClick
 }) {
 
+  console.log(`CurrentChannel ${currentChannel} channel: ${channel.id}`)
+
   const className = (
-    "channel-item" +
+    "channel-item " +
     (currentChannel === channel.id ? 'channel-item--selected' : '')
   );
 
@@ -17,7 +19,11 @@ export default function ChannelLink({
       className={className}
       onClick={handleClick}
     >
-      <i class="fa-solid fa-hashtag"></i>
+      {
+        channel.type === "text"
+          ? <i class="fa-solid fa-hashtag"></i>
+          : <i class="fa-solid fa-headset"></i>
+      }
       <span>{channel.name}</span>
     </li>
   );
