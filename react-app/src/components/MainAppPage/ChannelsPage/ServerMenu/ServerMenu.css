@@ -1,6 +1,6 @@
 .server-menu {
   position: relative;
-  background-color: hsl(220, 12%, 19%);
+  background-color: var(--black-400);
   color: var(--font-white);
   padding: 10px;
   border-bottom: 1px solid black;

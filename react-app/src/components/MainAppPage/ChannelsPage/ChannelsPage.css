@@ -1,6 +1,6 @@
 .channels-nav {
   padding: 8px;
-  background-color: hsl(220, 12%, 19%);
+  background-color: var(--black-400);
   height: 100%;
 }
 
