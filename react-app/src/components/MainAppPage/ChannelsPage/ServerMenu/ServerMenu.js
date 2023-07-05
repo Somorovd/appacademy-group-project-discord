@@ -19,7 +19,7 @@ export default function ServerMenu({ server }) {
   }
 
   const closeMenu = (e) => {
-    if (dropdownRef.current.contains(e.target)) return;
+    if (dropdownRef.current && dropdownRef.current.contains(e.target)) return;
     else setShowMenu(false);
   }
 
