@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO, emit, join_room, send
-from .models import Communication, DirectMessage, User, db
+from .models import Communication, DirectMessage, User, Message, db
 import os
 from sqlalchemy import delete
 from flask_login import current_user
@@ -16,7 +16,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 
 @socketio.on("join")
 def on_join_DMs(data):
-    room = int(data["room"])
+    room = data["room"]
     join_room(room)
     print("----------------------------")
     print("INNNNN THE ROOOM")
@@ -62,3 +62,44 @@ def handle_DMs(data):
     res_dm = new_dm.to_dict(timestamps=True)
 
     emit("chat", res_dm, room=room)
+
+
+@socketio.on("messages")
+def handle_messages(data):
+    room = data["room"]
+
+    print("----------------------------")
+    print("INNNNN THE MESSAGES")
+    print("----------------------------")
+
+    if data["deleted"]:
+        message_to_delete = Message.query.get(int(data["deleted"]))
+        if current_user.id != message_to_delete.user_id:
+            return
+        db.session.delete(message_to_delete)
+        db.session.commit()
+        emit("messages", "refresh", room=room)
+        return
+
+    if data["edited"]:
+        message_to_edit = Message.query.get(int(data["edited"]))
+        if current_user.id != message_to_edit.user_id:
+            return
+        message_to_edit.content = data["content"]
+        message_to_edit.was_edited = True
+        db.session.commit()
+        emit("messages", "refresh", room=room)
+        return
+
+    new_message = Message(
+        user_id=data["user"]["id"],
+        channel_id=data["channel_id"],
+        content=data["content"],
+    )
+
+    db.session.add(new_message)
+    db.session.commit()
+
+    res_message = new_message.to_dict()
+
+    emit("messages", res_message, room=room)
