@@ -1,13 +1,15 @@
-.server-menu:hover {
-  background-color: var(--bg-light-gray-hover);
-}
-
 .list-button {
   display: flex;
   justify-content: space-between;
+  padding: 0.5rem;
 }
 
 .list-button:hover {
-  background-color: #444;
+  background-color: var(--primary-blue);
   cursor: pointer;
+}
+
+.server-dropdown {
+  background-color: var(--bg-dark-gray);
+  padding: 0.3rem;
 }
