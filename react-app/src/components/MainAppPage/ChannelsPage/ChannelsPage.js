@@ -9,13 +9,26 @@ import DeleteServerModal from './DeleteServerModal';
 import OpenModalButton from '../../OpenModalButton';
 import EditServerModal from './EditServerModal/EditServerModal';
 import './ChannelsPage.css';
-
 function DropdownListButton({ text, icon }) {
   return (
     <>
       <p>{text}</p>
       <i className={icon}></i>
     </>
+  );
+}
+
+function Channel({ channel, serverId }) {
+  const history = useHistory();
+  return (
+    <li
+      key={channel.id}
+      className="channel-item"
+      onClick={() => history.push(`/main/channels/${serverId}/${channel.id}`)}
+    >
+      <i class="fa-solid fa-hashtag"></i>
+      <span>{channel.name}</span>
+    </li>
   );
 }
 
@@ -75,7 +88,7 @@ export default function ChannelsPage() {
                   ButtonComponent={
                     <DropdownListButton
                       text="Delete Server"
-                      icon="fa-solid fa-trash"
+                      icon="fa-solid fa-trash-can"
                     />
                   }
                 />
@@ -84,7 +97,7 @@ export default function ChannelsPage() {
           </div>
         </div>
 
-        <div className="channel-nav">
+        <div className="channels-nav">
           <div className="channels-nav__header">
             <h2>Channels</h2>
             <OpenModalButton
@@ -95,16 +108,10 @@ export default function ChannelsPage() {
           </div>
           <ul>
             {channels.map(channel => (
-              <li
-                key={channel.id}
-                className="channel-item"
-                onClick={() =>
-                  history.push(`/main/channels/${serverId}/${channel.id}`)
-                }
-              >
-                <span>📄</span>
-                <span>{channel.name}</span>
-              </li>
+              <Channel
+                channel={channel}
+                serverId={serverId}
+              />
             ))}
           </ul>
         </div>
