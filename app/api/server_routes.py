@@ -4,6 +4,7 @@ from app.models import db, Server, Membership, Channel
 from ..forms.create_server_form import CreateServerForm
 from ..forms.create_channel_form import CreateChannelForm
 from ..forms.edit_server_form import EditServerForm
+from sqlalchemy import or_, and_
 
 server_routes = Blueprint("servers", __name__)
 
@@ -31,6 +32,23 @@ def user_servers():
         .order_by(Membership.created_at)
     )
     return {"servers": [server.to_dict() for server in servers]}
+
+@server_routes.route('/join/<int:serverId>')
+@login_required
+def join_server(serverId):
+    exists = Membership.query.filter(and_(Membership.user_id == current_user.id, Membership.server_id == serverId)).one_or_none()
+
+    if exists is None:
+        new_membership = Membership(
+            user_id = current_user.id,
+            server_id = serverId,
+            role = "member"
+        )
+        db.session.add(new_membership)
+        db.session.commit()
+
+    return { "serverId": serverId }
+
 
 
 @server_routes.route("/<int:server_id>")
