@@ -5,6 +5,7 @@ import ChannelsPage from './ChannelsPage';
 import './MainAppPage.css';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import DiscoverPage from './DiscoverPage/DiscoverPage';
 
 export default function MainAppPage() {
   const user = useSelector(state => state.session.user)
@@ -35,6 +36,10 @@ export default function MainAppPage() {
           >
             <ServerSidebar />
             <ChannelsPage />
+          </Route>
+          <Route path="/main/discover">
+            <ServerSidebar />
+            <DiscoverPage />
           </Route>
         </Switch>
       </div>

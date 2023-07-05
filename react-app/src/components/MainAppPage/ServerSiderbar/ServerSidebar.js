@@ -39,7 +39,7 @@ export default function ServerSidebar() {
         </div>
         <div
           className="server-icon server-icon--browse-servers"
-          onClick={() => history.push('/main/conversations')}
+          onClick={() => history.push('/main/discover')}
         >
           <span className="server-icon__tooltip">
             Explore Discoverable Servers

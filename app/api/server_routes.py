@@ -139,3 +139,12 @@ def create_channel(server_id):
         return channel.to_dict()
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+
+@server_routes.route("/discover")
+@login_required
+def get_all_public_servers():
+    servers_query = Server.query.filter(Server.private == False).all()
+    servers = [ server.to_dict() for server in servers_query ]
+
+    return { "servers": servers }

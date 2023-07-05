@@ -4,6 +4,7 @@ const CREATE_SERVER = 'servers/CREATE_SERVER';
 const EDIT_SERVER = 'servers/EDIT_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
 const CREATE_CHANNEL = 'servers/CREATE_CHANNEL';
+const GET_ALL_PUBLIC_SERVERS = 'servers/GET_ALL_PUBLIC_SERVERS';
 
 const actionGetAllUserServers = servers => ({
   type: GET_USER_SERVERS,
@@ -34,6 +35,11 @@ const actionCreateChannel = channel => ({
   type: CREATE_CHANNEL,
   payload: channel,
 });
+
+const actionGetAllPublicServers = servers => ({
+  type: GET_ALL_PUBLIC_SERVERS,
+  payload: servers
+})
 
 export const thunkGetAllUserServers = () => async dispatch => {
   const res = await fetch('/api/servers/current');
@@ -146,10 +152,27 @@ export const thunkCreateChannel = (channel, serverId) => async dispatch => {
   }
 };
 
+export const thunkGetAllPublicServers = () => async dispatch => {
+  const res = await fetch('/api/servers/discover');
+
+  if(res.ok) {
+    const data = await res.json();
+    const normalized = {};
+    data.servers.forEach(server => {
+      normalized[server.id] = server;
+    });
+
+    return dispatch(actionGetAllPublicServers(normalized));
+  } else {
+    console.log("Error in getting public servers");
+  }
+}
+
 const initialState = {
   publicServers: {},
   allUserServers: {},
   singleUserServer: {},
+  discoverServers: {}
 };
 
 export default function serversReducer(state = initialState, action) {
@@ -202,6 +225,8 @@ export default function serversReducer(state = initialState, action) {
           },
         },
       };
+    case GET_ALL_PUBLIC_SERVERS:
+      return { ...state, discoverServers: action.payload }
     default:
       return state;
   }

@@ -1,0 +1,45 @@
+.server-card__div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    background-color: var(--bg-medium-gray);
+    border-radius: 8px;
+}
+
+.server-card__top {
+    width: 100%;
+    height: 120px;
+    background-color: blue;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.server-card__image {
+    object-fit: fill;
+}
+
+.server-card__description {
+    padding: 15px;
+    height: 150px;
+    overflow-y: hidden;
+}
+
+.server-card__name {
+
+}
+
+.server-card__about {
+    font-size: var(--font-size-sm);
+    color: var(--font-gray);
+}
+
+.server-card__join {
+    background-color: var(--primary-green);
+    color: var(--font-white);
+    border: none;
+    border-radius: 5px;
+    width: 75%;
+    align-self: center;
+    margin-bottom: 10px;
+    height: 30px;
+}
