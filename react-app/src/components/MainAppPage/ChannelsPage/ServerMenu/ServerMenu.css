@@ -4,6 +4,9 @@
   color: var(--font-white);
   padding: 10px;
   border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .server-menu h2 {
