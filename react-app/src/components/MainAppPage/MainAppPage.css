@@ -4,9 +4,6 @@
     "servers app-nav messages";
   grid-template-columns: 70px 250px 1fr;
   height: 100%;
-  color: white;
-  background-color: var( --bg-dark-gray);
-  padding-top: 15px;
 }
 
 .app-wrapper>* {
@@ -19,16 +16,9 @@
 
 .app-nav {
   grid-area: app-nav;
-  background-color: var(--bg-medium-gray);
-  border-radius: 10px 0px 0px 0px;
 }
 
 .messages {
   grid-area: messages;
   background-color: var(--bg-light-gray);
-}
-
-.app-nav,
-.messages {
-  padding-top: 15px;
 }

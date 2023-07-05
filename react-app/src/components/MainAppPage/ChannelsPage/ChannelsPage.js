@@ -38,16 +38,14 @@ export default function ChannelsPage() {
   return (
     <>
       <div className="app-nav">
-
         <ServerMenu server={singleUserServer} />
-
-        <div className="channel-nav">
+        <div className="channels-nav">
           <div className="channels-nav__header">
             <h2>Channels</h2>
             <OpenModalButton
               modalComponent={<CreateChannelFormModal serverId={serverId} />}
               buttonClass="channels-nav__create-channel-btn"
-              buttonText={'+'}
+              buttonText={<i class="fa-solid fa-plus"></i>}
             />
           </div>
           <ul>
@@ -59,7 +57,11 @@ export default function ChannelsPage() {
                   history.push(`/main/channels/${serverId}/${channel.id}`)
                 }
               >
-                <span>📄</span>
+                {
+                  channel.type === "text"
+                    ? <i class="fa-solid fa-hashtag"></i>
+                    : <i class="fa-solid fa-headset"></i>
+                }
                 <span>{channel.name}</span>
               </li>
             ))}
