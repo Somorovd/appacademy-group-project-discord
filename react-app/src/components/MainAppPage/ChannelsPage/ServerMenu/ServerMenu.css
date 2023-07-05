@@ -1,15 +1,17 @@
+.server-dropdown {
+  background-color: var(--bg-dark-gray);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
 .list-button {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
+  border-radius: 3px;
 }
 
 .list-button:hover {
   background-color: var(--primary-blue);
   cursor: pointer;
-}
-
-.server-dropdown {
-  background-color: var(--bg-dark-gray);
-  padding: 0.3rem;
 }
