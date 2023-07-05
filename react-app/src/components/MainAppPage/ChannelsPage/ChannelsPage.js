@@ -5,18 +5,9 @@ import { useParams, useHistory } from 'react-router-dom';
 import * as serverActions from '../../../store/servers';
 
 import CreateChannelFormModal from './CreateChannelFormModal';
-import DeleteServerModal from './DeleteServerModal';
 import OpenModalButton from '../../OpenModalButton';
-import EditServerModal from './EditServerModal/EditServerModal';
 import './ChannelsPage.css';
-function DropdownListButton({ text, icon }) {
-  return (
-    <>
-      <p>{text}</p>
-      <i className={icon}></i>
-    </>
-  );
-}
+import ServerMenu from './ServerMenu/ServerMenu';
 
 function Channel({ channel, currentChannel, handleClick }) {
   return (
@@ -68,41 +59,7 @@ export default function ChannelsPage() {
   return (
     <>
       <div className="app-nav">
-        <div className="server-menu">
-          <h2>{singleUserServer.name}</h2>
-          <div className="server-dropdown">
-            <ul>
-              <li className="dropdown__item">
-                <OpenModalButton
-                  modalComponent={
-                    <EditServerModal serverToEdit={singleUserServer} />
-                  }
-                  buttonClass="list-button"
-                  ButtonComponent={
-                    <DropdownListButton
-                      text="Edit Server"
-                      icon="fa-solid fa-pencil"
-                    />
-                  }
-                />
-              </li>
-              <li className="dropdown__item">
-                <OpenModalButton
-                  modalComponent={
-                    <DeleteServerModal serverToDelete={singleUserServer} />
-                  }
-                  buttonClass="list-button"
-                  ButtonComponent={
-                    <DropdownListButton
-                      text="Delete Server"
-                      icon="fa-solid fa-trash-can"
-                    />
-                  }
-                />
-              </li>
-            </ul>
-          </div>
-        </div>
+        <ServerMenu singleUserServer={singleUserServer} />
 
         <div className="channels-nav">
           <div className="channels-nav__header">

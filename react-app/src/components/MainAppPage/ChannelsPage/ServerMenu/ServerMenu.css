@@ -1,0 +1,13 @@
+.server-menu:hover {
+  background-color: var(--bg-light-gray-hover);
+}
+
+.list-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-button:hover {
+  background-color: #444;
+  cursor: pointer;
+}
