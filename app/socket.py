@@ -26,7 +26,7 @@ def on_join_DMs(data):
 # handle chat messages
 @socketio.on("chat")
 def handle_DMs(data):
-    room = int(data["room"])
+    room = data["room"]
 
     print("----------------------------")
     print("INNNNN THE CHATTT")
