@@ -1,4 +1,6 @@
-.server-sidebar {}
+.server-sidebar {
+  background-color: var(--bg-dark-gray);
+}
 
 .server-list {
   list-style: none;
