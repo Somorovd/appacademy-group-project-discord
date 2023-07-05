@@ -7,24 +7,24 @@ export default function ChannelMessageCard({ message, user, socket }) {
   const [editing, setEditing] = useState(false);
   const [editMessage, setEditMessage] = useState(message.content);
 
-  const handleDelete = messageId => {
+  const handleDelete = () => {
     console.log('DELETING MESSAGE');
     socket.emit('messages', {
       user,
       content: '',
       room: `Channel-${channelId}`,
       edited: false,
-      deleted: messageId,
+      deleted: message.id,
     });
   };
 
-  const handleEdit = (messageId, newContent) => {
+  const handleEdit = () => {
     console.log('EDITING MESSAGE');
     socket.emit('messages', {
       user,
-      content: newContent,
+      content: editMessage,
       room: `Channel-${channelId}`,
-      edited: messageId,
+      edited: message.id,
       deleted: false,
     });
 
@@ -58,7 +58,7 @@ export default function ChannelMessageCard({ message, user, socket }) {
         {user.id === message.user.id && (
           <>
             <button onClick={() => setEditing(!editing)}>Edit</button>
-            <button onClick={() => handleDelete(message.id)}>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
           </>
         )}
       </div>
@@ -68,9 +68,7 @@ export default function ChannelMessageCard({ message, user, socket }) {
           value={editMessage}
           onChange={e => setEditMessage(e.target.value)}
         />
-        <button onClick={() => handleEdit(message.id, editMessage)}>
-          Save
-        </button>
+        <button onClick={handleEdit}>Save</button>
         <button
           onClick={() => {
             setEditMessage(message.content);

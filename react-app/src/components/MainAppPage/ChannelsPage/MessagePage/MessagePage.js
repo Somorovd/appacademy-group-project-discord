@@ -13,6 +13,7 @@ export default function MessagePage() {
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
+  const [refresh, setRefresh] = useState(false);
 
   const singleChannel = useSelector(state => state.channels.singleChannel);
   const user = useSelector(state => state.session.user);
@@ -22,12 +23,16 @@ export default function MessagePage() {
     dispatch(channelActions.thunkGetChannel(channelId));
 
     socket.on('messages', data => {
-      dispatch(channelActions.thunkGetChannel(channelId));
+      if (data) {
+        dispatch(channelActions.thunkGetChannel(channelId));
+      }
     });
 
     socket.emit('join', {
       room: `Channel-${channelId}`,
     });
+
+    setRefresh(false);
   }, [dispatch, channelId]);
 
   const handleSubmit = async e => {
