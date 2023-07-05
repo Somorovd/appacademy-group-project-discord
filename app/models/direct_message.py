@@ -21,7 +21,7 @@ class DirectMessage(db.Model):
     content = db.Column(db.String(500), nullable=False)
     was_edited = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    uptaded_at = db.Column(
+    updated_at = db.Column(
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
@@ -38,7 +38,7 @@ class DirectMessage(db.Model):
         }
         if timestamps:
             dct["createdAt"] = f"{self.created_at}"
-            dct["updatedAt"] = f"{self.uptaded_at}"
+            dct["updatedAt"] = f"{self.updated_at}"
         sender = User.query.get(self.sender_id)
         dct["sender"] = sender.username
         dct["senderPic"] = sender.profile_pic

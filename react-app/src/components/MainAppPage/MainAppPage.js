@@ -3,8 +3,16 @@ import ServerSidebar from './ServerSiderbar';
 import ConversationsPage from './ConversationsPage';
 import ChannelsPage from './ChannelsPage';
 import './MainAppPage.css';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function MainAppPage() {
+  const user = useSelector(state => state.session.user)
+
+  if (!user) {
+    return <Redirect to="/" />
+  }
+
   return (
     <>
       <div className="app-wrapper">

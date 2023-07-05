@@ -8,7 +8,6 @@
   transition-duration: 0.3s;
   transition-delay: 0s;
   aspect-ratio: 1;
-  /* overflow: hidden; */
 }
 
 .server-icon:hover {
@@ -42,12 +41,18 @@
   object-fit: cover;
 }
 
-.server-icon__image[src=""] {
+.server-icon__image[src=''] {
   display: none;
 }
 
 .server-icon--messages {
-  background-color: aquamarine;
+  background: url('../../../../Images/discord-mark-white.svg') no-repeat center
+    var(--bg-light-gray);
+  background-size: 60%;
+}
+
+.server-icon--messages:hover {
+  background-color: var(--primary-blue);
 }
 
 .server-icon--add-server {
@@ -55,11 +60,15 @@
 }
 
 .server-icon--add-server:hover {
-  background-color: green;
+  background-color: var(--primary-green);
 }
 
 .server-icon--browse-servers {
-  background-color: purple;
+  background-color: var(--primary-blue);
+}
+
+.server-icon--browse-servers:hover {
+  background-color: var(--primary-green);
 }
 
 .server-icon button {

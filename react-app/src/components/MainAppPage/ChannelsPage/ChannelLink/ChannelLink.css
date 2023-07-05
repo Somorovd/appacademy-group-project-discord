@@ -1,0 +1,21 @@
+.channel-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: var(--font-size-md);
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--font-gray);
+  margin-bottom: 2px;
+}
+
+.channel-item.channel-item--selected,
+.channel-item.channel-item--selected:hover {
+  background-color: var(--black-800);
+  color: var(--font-white);
+}
+
+.channel-item:hover {
+  background-color: var(--black-700);
+  color: var(--font-white);
+}

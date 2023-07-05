@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import * as serverActions from '../../../store/servers';
-
+import CreateChannelFormModal from './CreateChannelFormModal';
+import ServerMenu from './ServerMenu';
+import ChannelLink from './ChannelLink';
 import OpenModalButton from '../../OpenModalButton';
-
+import * as serverActions from '../../../store/servers';
 import './ChannelsPage.css';
-import CreateChannelFormModal from './CreateChannelFormModal/CreateChannelFormModal';
+
 
 export default function ChannelsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { serverId, channelId } = useParams();
+  const [currentChannel, setCurrentChannel] = useState();
 
   const singleUserServer = useSelector(state => state.servers.singleUserServer);
 
@@ -35,31 +37,31 @@ export default function ChannelsPage() {
   const channels = Object.values(singleUserServer.channels);
   const singleChannel = singleUserServer.channels[channelId];
 
+  const handleChannelClick = channel => {
+    history.push(`/main/channels/${serverId}/${channel.id}`);
+    setCurrentChannel(channel.id);
+  };
+
   return (
     <>
-      <div className="app-nav channels-nav">
-        <div className="channels-nav__header">
-          <h2>Channels</h2>
-          <OpenModalButton
-            modalComponent={<CreateChannelFormModal serverId={serverId} />}
-            buttonClass="channels-nav__create-channel-btn"
-            buttonText={'+'}
-          />
+      <div className="app-nav">
+        <ServerMenu server={singleUserServer} />
+
+        <div className="channels-nav">
+          <div className="channels-nav__header">
+            <h2>Channels</h2>
+            <OpenModalButton
+              modalComponent={<CreateChannelFormModal serverId={serverId} />}
+              buttonClass="channels-nav__create-channel-btn"
+              buttonText={<i className="fa-solid fa-plus"></i>}
+            />
+          </div>
+          <ul>
+            {channels.map(channel => (
+              <ChannelLink channel={channel} key={channel.id} />
+            ))}
+          </ul>
         </div>
-        <ul>
-          {channels.map(channel => (
-            <li
-              key={channel.id}
-              className="channel-item"
-              onClick={() =>
-                history.push(`/main/channels/${serverId}/${channel.id}`)
-              }
-            >
-              <span>📄</span>
-              <span>{channel.name}</span>
-            </li>
-          ))}
-        </ul>
       </div>
       <div className="messages channels-messages">
         {singleChannel

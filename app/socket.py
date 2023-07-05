@@ -18,13 +18,19 @@ socketio = SocketIO(cors_allowed_origins=origins)
 def on_join_DMs(data):
     room = int(data["room"])
     join_room(room)
-    print("INNNNN")
+    print("----------------------------")
+    print("INNNNN THE ROOOM")
+    print("----------------------------")
 
 
 # handle chat messages
 @socketio.on("chat")
 def handle_DMs(data):
     room = int(data["room"])
+
+    print("----------------------------")
+    print("INNNNN THE CHATTT")
+    print("----------------------------")
 
     if data["deleted"]:
         deleted_dm = DirectMessage.query.get(int(data["deleted"]))

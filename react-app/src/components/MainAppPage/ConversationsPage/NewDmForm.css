@@ -1,3 +1,67 @@
-.new-dm-form__selected {
-    background-color: lightslategray;
+.new-dm-form__selected::after {
+    content: '✔ ';
+}
+
+.new-dm-form__div {
+    width: 450px;
+    background-color: var(--bg-light-gray);
+    color: var(--font-white);
+    padding: 15px;
+    border-radius: 5px;
+    margin: -5px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-dm-form__button {
+    width: 100%;
+    height: 40px;
+    background-color: var(--primary-blue);
+    border: none;
+    border-radius: 5px;
+    color: var(--font-white);
+    font-size: var(--font-size-sm);
+}
+
+.new-dm-form__button:disabled {
+    background-color: var(--font-gray);
+    cursor: default;
+}
+
+.new-dm-form__input {
+    width: 100%;
+    background-color: var(--bg-dark-gray);
+    border: none;
+    height: 30px;
+    padding-left: 7px;
+    font-size: var(--font-size-md);
+    border-radius: 5px;
+    color: var(--font-white);
+}
+
+.new-dm-form__input:focus {
+    outline: none;
+}
+
+.new-dm-form__user-list {
+    height: 150px;
+    overflow-y: scroll;
+    scrollbar-color: orange blue;
+    scrollbar-width: thin;
+    cursor: pointer;
+}
+
+.new-dm-form__user-list::-webkit-scrollbar {
+    width: 7px;
+    background-color: var(--bg-medium-gray);
+}
+
+.new-dm-form__user-list::-webkit-scrollbar-track {
+    background-color: var(--bg-medium-gray);
+}
+
+.new-dm-form__user-list::-webkit-scrollbar-thumb {
+    background-color: var(--bg-dark-gray);
+    border-radius: 10px;
 }

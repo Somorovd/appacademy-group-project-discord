@@ -1,22 +1,11 @@
 .channels-nav {
   padding: 8px;
+  background-color: var(--black-400);
+  height: 100%;
 }
 
 .channels-nav ul {
   padding: 0px;
-}
-
-.channel-item {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  font-size: 18px;
-  padding: 8px;
-  border-radius: 5px;
-}
-
-.channel-item:hover {
-  background-color: #444;
 }
 
 .channels-nav__header {
@@ -26,8 +15,30 @@
   justify-content: space-between;
 }
 
+.channels-nav__header h2 {
+  font-size: var(--font-size-sm);
+  font-weight: normal;
+  color: var(--font-gray);
+}
+
 .channels-nav__create-channel-btn {
-  padding: 0.5rem;
-  font-size: 1.2rem;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--font-gray);
+  padding: 3px;
+}
+
+.channels-nav__create-channel-btn {
+  background: none;
+  border: none;
+  color: var(--font-gray);
+}
+
+.channels-nav__create-channel-btn:hover {
+  color: var(--font-white);
+}
+
+.channels-messages {
+  color: var(--font-gray);
 }
