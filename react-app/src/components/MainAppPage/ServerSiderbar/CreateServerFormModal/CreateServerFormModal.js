@@ -74,6 +74,9 @@ export default function CreateServerFormModal() {
             onBlurCapture={e => setPreview(e.target.value)}
           />
         </label>
+        <p className='warning'>
+          {errors.image}
+        </p>
         <button type="submit">Create Server</button>
       </form>
     </div>
