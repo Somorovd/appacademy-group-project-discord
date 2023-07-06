@@ -114,3 +114,8 @@ input#channel-name {
   color: var(--icon-light-gray);
   cursor: pointer;
 }
+
+.create-channel__errors {
+  color: var(--primary-red);
+  font-weight: bold;
+}

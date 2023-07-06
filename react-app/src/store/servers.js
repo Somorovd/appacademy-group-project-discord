@@ -58,10 +58,10 @@ export const thunkGetSingleServer = serverId => async dispatch => {
   const res = await fetch(`/api/servers/${serverId}`);
   const resBody = await res.json();
 
-
   if (res.ok) {
     const server = resBody;
     dispatch(actionGetSingleServer(server));
+    return server;
   }
 };
 
