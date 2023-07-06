@@ -44,7 +44,7 @@ export default function DirectMessages() {
       if (chat === "refresh") {
         setRefresh(true)
       } else {
-        setChatMessages((chatMessages) => [...chatMessages, chat]);
+        setChatMessages((chatMessages) => [chat, ...chatMessages]);
       }
     });
 
@@ -58,9 +58,9 @@ export default function DirectMessages() {
   }, [dispatch, communicationId]);
 
   chatMessages.sort((a, b) => {
-    const createdAtA = new Date(a.createdAt);
-    const createdAtB = new Date(b.createdAt);
-    return createdAtA < createdAtB;
+    const createdAtA = new Date(a.createdAt).getTime();
+    const createdAtB = new Date(b.createdAt).getTime();
+    return createdAtB - createdAtA;
   });
 
   function handleSubmit(e) {
