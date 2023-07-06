@@ -61,11 +61,11 @@ def single_server(server_id):
 
     server = Server.query.get(server_id)
 
-    print("_______________________")
-    print(server)
-    print("_______________________")
+    membership = Membership.query.filter(
+        and_(Membership.server_id == server_id, Membership.user_id == current_user.id)
+    ).one_or_none()
 
-    if server == None:
+    if server == None or membership == None:
         return {}
 
     channels = Channel.query.filter(Channel.server_id == server_id).all()
