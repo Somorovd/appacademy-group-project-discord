@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import ChannelMessageCard from './ChannelMessageCard/ChannelMessageCard';
 import MessageCard from '../../MessageCard';
 import * as channelActions from '../../../../store/channels';
 

@@ -23,20 +23,27 @@ export default function MessageCard({
       }
     );
 
+  message = {
+    ...message,
+    username: (message.user?.username) || message.sender,
+    profilePic: (message.user?.profilePic) || message.senderPic,
+    userId: (message.user?.id) || message.senderId,
+  };
+
   return (
     <div className="message-card__div">
 
 
       <div className="message-card__image">
-        <img src={message.senderPic || (message.user && message.user.profilePic)} alt="" />
+        <img src={message.profilePic} alt="" />
       </div>
 
 
       <div className="message-card__message">
         <div className="message-card__title">
-          {message.sender || (message.user && message.user.username)}
+          {message.username}&nbsp;
           <span className="message-card__list-message-date">
-            {formattedDate}{" "}
+            {formattedDate}
           </span>
           {
             message.wasEdited &&
@@ -62,7 +69,10 @@ export default function MessageCard({
             <div >
               <button
                 className="message-card__hidden-save"
-                onClick={() => handleEdit(message.id, editMessage)}
+                onClick={() => {
+                  handleEdit(message.id, editMessage);
+                  setEditing(false);
+                }}
               >
                 Save
               </button>
@@ -81,10 +91,9 @@ export default function MessageCard({
       </div>
 
       <div className="message-card__buttons">
-        {(
-          user.id === message.senderId ||
-          (message.user && user.id === message.user.id)
-        ) && <>
+        {
+          user.id === message.userId &&
+          <>
             <button
               className="message-card__option-buttons"
               onClick={() => setEditing(!editing)}>
