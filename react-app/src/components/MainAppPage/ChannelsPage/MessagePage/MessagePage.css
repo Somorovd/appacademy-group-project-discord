@@ -12,6 +12,12 @@
   padding-left: 15px;
 }
 
+.message-container {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .message-input {
   height: 100%;
   width: 100%;
