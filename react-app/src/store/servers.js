@@ -206,7 +206,8 @@ export default function serversReducer(state = initialState, action) {
       };
     case DELETE_SERVER:
       const newState = {
-        publicServers: { ...state.publicServers },
+        ...state,
+        discoverServers: { ...state.discoverServers },
         allUserServers: { ...state.allUserServers },
         singleUserServer: {},
       };
