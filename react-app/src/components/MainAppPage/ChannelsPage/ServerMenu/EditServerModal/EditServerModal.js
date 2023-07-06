@@ -15,11 +15,17 @@ const Toggle = ({ isChecked, setIsChecked }) => {
           id="visibility-box"
           type="checkbox"
           checked={isChecked}
-          onChange={e => setIsChecked(!isChecked)}
+          onChange={() => setIsChecked(!isChecked)}
         />
       </label>
       <div className={toggleClass}>
-        <div className={sliderClass}></div>
+        <div className={sliderClass}>
+          {isChecked ? (
+            <i className="fa-solid fa-check"></i>
+          ) : (
+            <i className="fa-solid fa-xmark"></i>
+          )}
+        </div>
       </div>
     </div>
   );
