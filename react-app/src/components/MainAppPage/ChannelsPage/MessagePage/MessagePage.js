@@ -78,6 +78,9 @@ export default function MessagePage() {
 
   return (
     <div className="channels-messages">
+      <div className='channel-header'>
+        {singleChannel.name}
+      </div>
       <div className="message-container">
         {singleChannel.messages.map(message => (
           <MessageCard
@@ -88,16 +91,17 @@ export default function MessagePage() {
           />
         ))}
       </div>
-      <div>
+      <div className='message-input'>
         <form onSubmit={handleSubmit}>
           <input
-            id="message-input"
             value={content}
             onChange={e => setContent(e.target.value)}
             placeholder={`Message ${singleChannel.name}`}
             onKeyDown={handleKeyPress}
           />
-          <button>Send</button>
+          <button>
+            <i className='fa-solid fa-arrow-right'></i>
+          </button>
         </form>
       </div>
     </div>
