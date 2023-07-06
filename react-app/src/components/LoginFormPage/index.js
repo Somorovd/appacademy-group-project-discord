@@ -78,6 +78,8 @@ function LoginFormPage() {
                   id="login-email"
                   type="email"
                   value={email}
+                  minLength={4}
+                  maxLength={255}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
@@ -96,6 +98,8 @@ function LoginFormPage() {
                 <input
                   type="password"
                   value={password}
+                  minLength={2}
+                  maxLength={50}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
