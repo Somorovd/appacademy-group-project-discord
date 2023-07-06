@@ -56,6 +56,16 @@ export default function EditServerModal({ serverToEdit }) {
               />
             </div>
             <div className="edit-server-modal__input-container">
+              <div className="edit-server-modal__img-input-container">
+                <label htmlFor="server-image">Server Image</label>
+                <input
+                  id="server-image"
+                  onChange={e => setImage(e.target.value)}
+                  value={image}
+                  autoComplete="off"
+                />
+                {errors.image && <p className="warning">{errors.image}</p>}
+              </div>
               <div>
                 <label htmlFor="server-name">Server Name</label>
                 <input
@@ -63,36 +73,38 @@ export default function EditServerModal({ serverToEdit }) {
                   onChange={e => setName(e.target.value)}
                   value={name}
                   required
-                />
-              </div>
-              <div>
-                <label htmlFor="server-image">Server Image</label>
-                <input
-                  id="server-image"
-                  onChange={e => setImage(e.target.value)}
-                  value={image}
+                  minLength={2}
+                  maxLength={50}
                 />
               </div>
             </div>
           </section>
-          <section className="edit-server-modal__community-section">
+          <div className="divider"></div>
+          <section className="edit-server-modal__visibility-section">
             <div>
-              <label htmlFor="visibility-box">
-                Would you like this server to be publicly visible?
-              </label>
-              <input
-                id="visibility-box"
-                type="checkbox"
-                checked={!isPrivate}
-                onChange={e => setIsPrivate(!isPrivate)}
-              />
+              <p>Would you like this server to be publicly visible?</p>
+              <div className="checkbox-container">
+                <label htmlFor="visibility-box">
+                  <input
+                    id="visibility-box"
+                    type="checkbox"
+                    checked={!isPrivate}
+                    onChange={e => setIsPrivate(!isPrivate)}
+                  />
+                </label>
+                {/* <div className="toggle"></div> */}
+              </div>
             </div>
+          </section>
+          <div className="divider"></div>
+          <section className="edit-server-modal__about-section">
             <div>
               <label htmlFor="server-about">What is your server about?</label>
               <textarea
                 id="server-about"
                 onChange={e => setAbout(e.target.value)}
                 value={about}
+                maxLength={500}
               />
             </div>
           </section>
