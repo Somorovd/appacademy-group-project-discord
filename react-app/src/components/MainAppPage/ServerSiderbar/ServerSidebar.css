@@ -2,9 +2,33 @@
   background-color: var(--bg-dark-gray);
 }
 
+.server-sidebar i {
+  font-size: 20px;
+  color: var(--primary-green);
+}
+
 .server-list {
   list-style: none;
   margin: 0px;
   padding: 10px;
   cursor: pointer;
+}
+
+.server-icon--browse-servers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-light-gray);
+}
+
+.server-icon--add-server {
+  background-color: var(--bg-light-gray);
+}
+
+.server-icon--add-server:hover i {
+  color: var(--icon-white-active)
+}
+
+.server-icon--browse-servers:hover i {
+  color: var(--icon-white-active)
 }
