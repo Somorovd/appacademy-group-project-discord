@@ -55,7 +55,6 @@ export default function DirectMessages({ otherUser }) {
     };
   }, [dispatch, communicationId]);
 
-
   messages.sort((a, b) => {
     const createdAtA = new Date(a.createdAt);
     const createdAtB = new Date(b.createdAt);
