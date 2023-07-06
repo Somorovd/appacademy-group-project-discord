@@ -4,13 +4,34 @@ import { useDispatch } from 'react-redux';
 import * as serverActions from '../../../../../store/servers';
 import './EditServerModal.css';
 
+const Toggle = ({ isChecked, setIsChecked }) => {
+  const toggleClass = 'toggle ' + (isChecked ? 'toggle-green' : 'toggle-gray');
+  const sliderClass = 'slider ' + (isChecked ? 'checked' : 'unchecked');
+
+  return (
+    <div className="checkbox-container">
+      <label htmlFor="visibility-box">
+        <input
+          id="visibility-box"
+          type="checkbox"
+          checked={isChecked}
+          onChange={e => setIsChecked(!isChecked)}
+        />
+      </label>
+      <div className={toggleClass}>
+        <div className={sliderClass}></div>
+      </div>
+    </div>
+  );
+};
+
 export default function EditServerModal({ serverToEdit }) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const [name, setName] = useState(serverToEdit.name || '');
   const [image, setImage] = useState(serverToEdit.image || '');
-  const [isPrivate, setIsPrivate] = useState(serverToEdit.private || true);
   const [about, setAbout] = useState(serverToEdit.about || '');
+  const [isChecked, setIsChecked] = useState(!serverToEdit.private);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async e => {
@@ -20,7 +41,7 @@ export default function EditServerModal({ serverToEdit }) {
       id: serverToEdit.id,
       name,
       image,
-      private: isPrivate,
+      private: !isChecked,
       about,
     };
 
@@ -83,17 +104,10 @@ export default function EditServerModal({ serverToEdit }) {
           <section className="edit-server-modal__visibility-section">
             <div>
               <p>Would you like this server to be publicly visible?</p>
-              <div className="checkbox-container">
-                <label htmlFor="visibility-box">
-                  <input
-                    id="visibility-box"
-                    type="checkbox"
-                    checked={!isPrivate}
-                    onChange={e => setIsPrivate(!isPrivate)}
-                  />
-                </label>
-                {/* <div className="toggle"></div> */}
-              </div>
+              <Toggle
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
             </div>
           </section>
           <div className="divider"></div>
