@@ -7,6 +7,7 @@ import ServerMenu from './ServerMenu';
 import ChannelLink from './ChannelLink';
 import MessagePage from './MessagePage';
 import OpenModalButton from '../../OpenModalButton';
+import UserProfile from '../UserProfile';
 import * as serverActions from '../../../store/servers';
 import './ChannelsPage.css';
 
@@ -61,6 +62,7 @@ export default function ChannelsPage() {
             ))}
           </ul>
         </div>
+        <UserProfile />
       </div>
       <div className="messages">{channelId ? <MessagePage /> : null}</div>
     </>
