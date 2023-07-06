@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   thunkCreateNewDm,
+  thunkLoadAllCommunications,
   thunkLoadAllUsers,
 } from "../../../store/communications";
 import { useSelector } from "react-redux";
@@ -42,6 +43,7 @@ export default function NewDmForm() {
 
   const handleNewDm = async () => {
       const communicationId = await dispatch(thunkCreateNewDm(selected));
+      await dispatch(thunkLoadAllCommunications())
       closeModal()
       history.push(`/main/conversations/${communicationId}`)
   };
