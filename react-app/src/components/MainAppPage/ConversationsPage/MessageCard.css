@@ -10,8 +10,7 @@
 }
 
 .message-card__image {
-  background-color: blue;
-  border: 2px solid orange;
+  background-color: var(--primary-blue);
   border-radius: 100%;
   height: 40px;
   width: 40px;

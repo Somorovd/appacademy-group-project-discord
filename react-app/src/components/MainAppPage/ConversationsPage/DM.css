@@ -14,8 +14,7 @@
 }
 
 .DM-page__top > img {
-  background-color: blue;
-  border: 2px solid orange;
+  background-color: var(--primary-blue);
   border-radius: 100%;
   height: 32px;
   width: 32px;
