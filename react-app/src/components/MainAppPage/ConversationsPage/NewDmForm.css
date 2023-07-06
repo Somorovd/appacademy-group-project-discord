@@ -47,7 +47,6 @@
 .new-dm-form__user-list {
     height: 150px;
     overflow-y: scroll;
-    scrollbar-color: orange blue;
     scrollbar-width: thin;
     cursor: pointer;
 }
