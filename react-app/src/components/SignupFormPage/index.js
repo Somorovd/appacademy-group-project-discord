@@ -69,6 +69,7 @@ function SignupFormPage() {
               required
             />
           </label>
+            {email.length >= 255 && <span className="signup-page__errors">Max email length of 255 has been reached</span>}
           <label>
             Username
             <input
@@ -80,6 +81,7 @@ function SignupFormPage() {
               required
             />
           </label>
+            {username.length >= 40 && <span className="signup-page__errors">Max username length of 40 has been reached</span>}
           <label>
             Phone Number
             <input
@@ -154,6 +156,7 @@ function SignupFormPage() {
               required
             />
           </label>
+          {password.length >= 40 && <span className="signup-page__errors">Max password length of 40 has been reached</span>}
           <label>
             Confirm Password
             <input
@@ -165,7 +168,8 @@ function SignupFormPage() {
               required
             />
           </label>
-          <button type="submit">Sign Up</button>
+          {confirmPassword.length >= 40 && <span className="signup-page__errors">Max password length of 40 has been reached</span>}
+          <button type="submit" className="signup-page__sign-up-button" >Sign Up</button>
         </form >
       </div>
     </>

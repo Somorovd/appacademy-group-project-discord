@@ -65,7 +65,9 @@ export default function MessageCard({
               className="message-card__edit-input"
               value={editMessage}
               onChange={(e) => setEditMessage(e.target.value)}
+              maxLength={500}
             />
+            {editMessage.length >= 500 && <span className="DM-page__error">Max message length of 500 has been reached</span>}
             <div >
               <button
                 className="message-card__hidden-save"
