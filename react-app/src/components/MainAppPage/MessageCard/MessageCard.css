@@ -62,13 +62,14 @@
 .message-card__option-buttons {
   background-color: transparent;
   border: none;
-  color: var(--icon-light-gray);
+  color: var(--icon-light-gray);  
 }
 
 .message-card__buttons {
   display: flex;
   gap: 10px;
 }
+
 .message-card__option-buttons:hover {
   color: var(--icon-white-active);
 }
