@@ -5,7 +5,6 @@ import { authenticate } from "./store/session";
 
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
-import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import MainAppPage from "./components/MainAppPage"
 

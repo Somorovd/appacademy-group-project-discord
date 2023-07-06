@@ -26,7 +26,7 @@ const actionLoadAllUsers = (allUsers) => {
 export const thunkLoadAllCommunications = () => async (dispatch) => {
     const res = await fetch("/api/communications/current");
 
-    if(res.ok) {
+    if (res.ok) {
         const body = await res.json()
         const normalized_DMs = {};
         for (let user of body.dms) {
@@ -34,15 +34,13 @@ export const thunkLoadAllCommunications = () => async (dispatch) => {
         }
 
         return dispatch(actionLoadAllCommunications(normalized_DMs))
-    } else {
-        console.log("Failed res")
     }
 }
 
 export const thunkLoadSingleCommunication = (communicationId) => async (dispatch) => {
     const res = await fetch(`/api/communications/${communicationId}`)
 
-    if(res.ok) {
+    if (res.ok) {
         const body = await res.json()
         const normalizedMessages = {}
         body.messages.forEach(message => {
@@ -54,13 +52,11 @@ export const thunkLoadSingleCommunication = (communicationId) => async (dispatch
             messages: normalizedMessages
         }))
 
-    } else {
-        console.log("Failed Load Single Comm")
     }
 }
 
 export const thunkLoadAllUsers = () => async (dispatch) => {
-    const res = await fetch ('/api/communications/users')
+    const res = await fetch('/api/communications/users')
 
     if (res.ok) {
         const data = await res.json()
@@ -69,37 +65,32 @@ export const thunkLoadAllUsers = () => async (dispatch) => {
             normalized[user.id] = user
         })
         return dispatch(actionLoadAllUsers(normalized))
-    } else {
-        console.log("Failed Load All Users")
     }
 }
 
 export const thunkCreateNewDm = (otherUserId) => async (dispatch) => {
     const res = await fetch(`/api/communications/new/${otherUserId}`, {
-        method:"POST"
+        method: "POST"
     })
 
     if (res.ok) {
         await dispatch(thunkLoadAllCommunications())
         const commId = await res.json()
-        console.log(commId)
         return commId.id
-    } else {
-        console.log("ERROR in thunkCreateDM")
     }
 }
 
 const initialState = {
     allCommunications: {},
     singleCommunication: {
-      messages: {},
-      communication: {}
+        messages: {},
+        communication: {}
     },
     allUsers: {}
 }
 
 export default function communicationsReducer(state = initialState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case LOAD_ALL_COMMUNICATIONS:
             // make sure to normalize
             return { ...state, allCommunications: action.payload }

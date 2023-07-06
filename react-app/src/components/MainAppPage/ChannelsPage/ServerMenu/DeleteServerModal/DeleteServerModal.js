@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './DeleteServerModal.css';
-import { useModal } from '../../../../context/Modal';
+import { useModal } from '../../../../../context/Modal';
 
-import * as serverActions from '../../../../store/servers';
+import * as serverActions from '../../../../../store/servers';
 
 export default function DeleteServerModal({ serverToDelete }) {
   const dispatch = useDispatch();

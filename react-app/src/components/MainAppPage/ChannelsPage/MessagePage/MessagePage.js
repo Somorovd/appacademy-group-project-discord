@@ -22,7 +22,6 @@ export default function MessagePage() {
     dispatch(channelActions.thunkGetChannel(channelId));
 
     socket.on('messages', data => {
-      console.log("Socket return messages", data);
       if (data) {
         dispatch(channelActions.thunkGetChannel(channelId));
       }
