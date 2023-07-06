@@ -9,10 +9,10 @@ import "./DM.css";
 
 let socket;
 
-export default function DirectMessages({ otherUser }) {
+export default function DirectMessages() {
   const { communicationId } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
   const messages = useSelector((state) =>
     Object.values(state.communications.singleCommunication.messages)
@@ -22,6 +22,8 @@ export default function DirectMessages({ otherUser }) {
   const [chatMessages, setChatMessages] = useState(messages);
   const [currentMessage, setCurrentMessage] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const otherUser = useSelector(state => state.communications.allCommunications
+    [communicationId])
 
   useEffect(() => {
     (async () => {
@@ -91,10 +93,6 @@ export default function DirectMessages({ otherUser }) {
       edited: messageId,
       deleted: false
     });
-  }
-
-  if (!otherUser) {
-    history.push('/main/conversations')
   }
 
   return (
