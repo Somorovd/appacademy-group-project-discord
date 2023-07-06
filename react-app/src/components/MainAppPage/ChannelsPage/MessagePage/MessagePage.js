@@ -10,7 +10,7 @@ import './MessagePage.css';
 let socket;
 
 export default function MessagePage() {
-  const { channelId } = useParams();
+  const { serverId, channelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
 
@@ -74,22 +74,24 @@ export default function MessagePage() {
     }
   };
 
-  if (!Object.keys(singleChannel).length) return null;
-
   return (
     <div className="channels-messages">
       <div className='channel-header'>
         {singleChannel.name}
       </div>
       <div className="message-container">
-        {singleChannel.messages.map(message => (
-          <MessageCard
-            message={message}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            key={message.id}
-          />
-        ))}
+        {
+          Object.keys(singleChannel).length &&
+          (singleChannel.serverId === Number(serverId)) &&
+          singleChannel.messages.map(message => (
+            <MessageCard
+              message={message}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              key={message.id}
+            />
+          ))
+        }
       </div>
       <div className='message-input'>
         <form onSubmit={handleSubmit}>

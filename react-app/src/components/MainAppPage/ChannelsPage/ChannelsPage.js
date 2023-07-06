@@ -45,7 +45,9 @@ export default function ChannelsPage() {
           <div className="channels-nav"></div>
         </div>
         <div className="messages">
-          <div className="channels-messages"></div>
+          <div className="channels-messages">
+
+          </div>
         </div>
       </>
     );
@@ -85,7 +87,7 @@ export default function ChannelsPage() {
         </div>
         <UserProfile />
       </div>
-      <div className="messages">{channelId ? <MessagePage /> : null}</div>
+      <div className="messages"> <MessagePage /> </div>
     </>
   );
 }
