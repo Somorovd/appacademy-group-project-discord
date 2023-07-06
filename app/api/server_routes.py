@@ -20,6 +20,10 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+def validation_errors_to_dict(validation_errors):
+    return {k: v for k in validation_errors for v in validation_errors[k]}
+
+
 @server_routes.route("/current")
 @login_required
 def user_servers():
@@ -33,22 +37,22 @@ def user_servers():
     )
     return {"servers": [server.to_dict() for server in servers]}
 
-@server_routes.route('/join/<int:serverId>')
+
+@server_routes.route("/join/<int:serverId>")
 @login_required
 def join_server(serverId):
-    exists = Membership.query.filter(and_(Membership.user_id == current_user.id, Membership.server_id == serverId)).one_or_none()
+    exists = Membership.query.filter(
+        and_(Membership.user_id == current_user.id, Membership.server_id == serverId)
+    ).one_or_none()
 
     if exists is None:
         new_membership = Membership(
-            user_id = current_user.id,
-            server_id = serverId,
-            role = "member"
+            user_id=current_user.id, server_id=serverId, role="member"
         )
         db.session.add(new_membership)
         db.session.commit()
 
-    return { "serverId": serverId }
-
+    return {"serverId": serverId}
 
 
 @server_routes.route("/<int:server_id>")
@@ -57,12 +61,15 @@ def single_server(server_id):
     """
     Query for a single server details by id
     """
-    # server = Server.query.join(Channel).filter(Server.id == server_id).all()
 
     server = Server.query.get(server_id)
 
-    if server == None:
-        return
+    membership = Membership.query.filter(
+        and_(Membership.server_id == server_id, Membership.user_id == current_user.id)
+    ).one_or_none()
+
+    if server == None or membership == None:
+        return {}
 
     channels = Channel.query.filter(Channel.server_id == server_id).all()
     server.channels = channels
@@ -101,7 +108,7 @@ def create_server():
         created_server = Server.query.get(server.id)
         return created_server.to_dict()
 
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+    return {"errors": validation_errors_to_dict(form.errors)}, 400
 
 
 @server_routes.route("/<int:server_id>/edit", methods=["PUT"])
@@ -176,6 +183,6 @@ def create_channel(server_id):
 @login_required
 def get_all_public_servers():
     servers_query = Server.query.filter(Server.private == False).all()
-    servers = [ server.to_dict() for server in servers_query ]
+    servers = [server.to_dict() for server in servers_query]
 
-    return { "servers": servers }
+    return {"servers": servers}

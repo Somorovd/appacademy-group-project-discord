@@ -7,10 +7,10 @@ import './EditServerModal.css';
 export default function EditServerModal({ serverToEdit }) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [image, setImage] = useState('');
-  const [isPrivate, setIsPrivate] = useState(false);
-  const [about, setAbout] = useState('');
+  const [name, setName] = useState(serverToEdit.name || '');
+  const [image, setImage] = useState(serverToEdit.image || '');
+  const [isPrivate, setIsPrivate] = useState(serverToEdit.private || true);
+  const [about, setAbout] = useState(serverToEdit.about || '');
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async e => {
@@ -51,7 +51,7 @@ export default function EditServerModal({ serverToEdit }) {
           <section className="edit-server-modal__edit-section">
             <div className="edit-server-modal__image-container">
               <img
-                src={''}
+                src={image}
                 alt=""
               />
             </div>

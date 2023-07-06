@@ -20,7 +20,10 @@ export default function ChannelsPage() {
   const user = useSelector(state => state.session.user);
 
   useEffect(() => {
-    dispatch(serverActions.thunkGetSingleServer(serverId));
+    (async () => {
+      const server = await dispatch(serverActions.thunkGetSingleServer(serverId));
+      if (!server.id) history.push("/main/conversations")
+    })();
   }, [dispatch, serverId]);
 
   useEffect(() => {
@@ -33,7 +36,19 @@ export default function ChannelsPage() {
     }
   }, [singleUserServer]);
 
-  if (!serverId || !singleUserServer.channels) return <></>;
+  if (!serverId) history.push("/main/conversations")
+
+  if (!singleUserServer.channels) // prevent page flashing
+    return (
+      <>
+        <div className="app-nav">
+          <div className="channels-nav"></div>
+        </div>
+        <div className="messages">
+          <div className="channels-messages"></div>
+        </div>
+      </>
+    );
 
   const channels = Object.values(singleUserServer.channels);
 
