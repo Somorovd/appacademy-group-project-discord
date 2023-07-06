@@ -33,22 +33,22 @@ def user_servers():
     )
     return {"servers": [server.to_dict() for server in servers]}
 
-@server_routes.route('/join/<int:serverId>')
+
+@server_routes.route("/join/<int:serverId>")
 @login_required
 def join_server(serverId):
-    exists = Membership.query.filter(and_(Membership.user_id == current_user.id, Membership.server_id == serverId)).one_or_none()
+    exists = Membership.query.filter(
+        and_(Membership.user_id == current_user.id, Membership.server_id == serverId)
+    ).one_or_none()
 
     if exists is None:
         new_membership = Membership(
-            user_id = current_user.id,
-            server_id = serverId,
-            role = "member"
+            user_id=current_user.id, server_id=serverId, role="member"
         )
         db.session.add(new_membership)
         db.session.commit()
 
-    return { "serverId": serverId }
-
+    return {"serverId": serverId}
 
 
 @server_routes.route("/<int:server_id>")
@@ -61,8 +61,12 @@ def single_server(server_id):
 
     server = Server.query.get(server_id)
 
+    print("_______________________")
+    print(server)
+    print("_______________________")
+
     if server == None:
-        return
+        return {}
 
     channels = Channel.query.filter(Channel.server_id == server_id).all()
     server.channels = channels
@@ -176,6 +180,6 @@ def create_channel(server_id):
 @login_required
 def get_all_public_servers():
     servers_query = Server.query.filter(Server.private == False).all()
-    servers = [ server.to_dict() for server in servers_query ]
+    servers = [server.to_dict() for server in servers_query]
 
-    return { "servers": servers }
+    return {"servers": servers}
