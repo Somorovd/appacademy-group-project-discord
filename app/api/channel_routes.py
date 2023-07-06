@@ -21,7 +21,7 @@ def single_channel(channel_id):
     messages = (
         Message.query.filter(Message.channel_id == channel_id)
         .join(User)
-        .order_by(Message.created_at)
+        .order_by(Message.created_at.desc())
         .all()
     )
 

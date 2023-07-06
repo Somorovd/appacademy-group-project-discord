@@ -24,7 +24,8 @@
   height: 100%;
   overflow-y: scroll;
   list-style-type: none;
-  /* border: 1px red solid; */
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .DM-page__chat-box {

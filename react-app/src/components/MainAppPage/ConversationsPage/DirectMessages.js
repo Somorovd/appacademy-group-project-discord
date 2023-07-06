@@ -23,7 +23,7 @@ export default function DirectMessages() {
   const [currentMessage, setCurrentMessage] = useState("");
   const [refresh, setRefresh] = useState(false);
   const otherUser = useSelector(state => state.communications.allCommunications
-    [communicationId])
+  [communicationId])
 
   useEffect(() => {
     (async () => {
@@ -57,10 +57,10 @@ export default function DirectMessages() {
     };
   }, [dispatch, communicationId]);
 
-  messages.sort((a, b) => {
+  chatMessages.sort((a, b) => {
     const createdAtA = new Date(a.createdAt);
     const createdAtB = new Date(b.createdAt);
-    return createdAtA > createdAtB;
+    return createdAtA < createdAtB;
   });
 
   function handleSubmit(e) {
