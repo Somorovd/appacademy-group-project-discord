@@ -69,7 +69,13 @@ export default function ChannelsPage() {
             )}
           </div>
           <ul>
-            {channels.map(channel => (
+            {channels.filter(channel => channel.type === "text").map(channel => (
+              <ChannelLink
+                channel={channel}
+                key={channel.id}
+              />
+            ))}
+            {channels.filter(channel => channel.type === "voice").map(channel => (
               <ChannelLink
                 channel={channel}
                 key={channel.id}

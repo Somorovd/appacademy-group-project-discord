@@ -7,7 +7,10 @@ export default function ChannelLink({ channel }) {
   const { serverId, channelId } = useParams();
 
   const handleClick = () => {
-    history.push(`/main/channels/${serverId}/${channel.id}`);
+    if (channel.type === "text")
+      history.push(`/main/channels/${serverId}/${channel.id}`);
+    else if (channel.type === "voice")
+      alert("Feature coming soon!");
   };
 
   const className = (
