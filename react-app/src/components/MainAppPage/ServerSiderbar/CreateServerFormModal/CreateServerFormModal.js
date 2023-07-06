@@ -29,7 +29,7 @@ export default function CreateServerFormModal() {
 
     const data = await dispatch(serverActions.thunkCreateServer(serverObject));
     if (data.errors) {
-      setErrors(data);
+      setErrors(data.errors);
     } else {
       closeModal();
       history.push(`/main/channels/${data.id}`);
@@ -51,20 +51,20 @@ export default function CreateServerFormModal() {
           src={preview}
           alt=""
         />
-        <ul>
-          {errors.map(e => (
-            <li>{e}</li>
-          ))}
-        </ul>
         <label>
           Server Name
           <input
             type="text"
             value={name}
             onChange={e => setName(e.target.value)}
+            minLength={2}
+            maxLength={50}
             required
           />
         </label>
+        <p className='warning'>
+          {errors.name}
+        </p>
         <label>
           Profile URL
           <input

@@ -20,6 +20,10 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+def validation_errors_to_dict(validation_errors):
+    return {k: v for k in validation_errors for v in validation_errors[k]}
+
+
 @server_routes.route("/current")
 @login_required
 def user_servers():
@@ -57,7 +61,6 @@ def single_server(server_id):
     """
     Query for a single server details by id
     """
-    # server = Server.query.join(Channel).filter(Server.id == server_id).all()
 
     server = Server.query.get(server_id)
 
@@ -105,7 +108,7 @@ def create_server():
         created_server = Server.query.get(server.id)
         return created_server.to_dict()
 
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+    return {"errors": validation_errors_to_dict(form.errors)}, 400
 
 
 @server_routes.route("/<int:server_id>/edit", methods=["PUT"])
