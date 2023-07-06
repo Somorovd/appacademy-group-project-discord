@@ -33,7 +33,7 @@ export default function CreateChannelFormModal({ serverId }) {
   };
 
   return (
-    <div className="form-wrapper">
+    <div className="create-channel-modal">
       <form
         className="create-channel-form"
         onSubmit={handleSubmit}
@@ -42,53 +42,77 @@ export default function CreateChannelFormModal({ serverId }) {
           <div>
             <h2>Create Channel</h2>
           </div>
+
           <div>
-            <span onClick={closeModal}>X</span>
+            <i
+              onClick={closeModal}
+              className="fa-solid fa-xmark create-channel-form__close-x"
+            ></i>
           </div>
         </header>
-        <section className="create-channel-form__type-section">
-          <h3>Channel Type</h3>
-          <div className="create-channel-form__type-container">
-            <div>
-              <label htmlFor="text-type">Text</label>
+        <div className="create-channel-form__main-section">
+          <section className="create-channel-form__type-section">
+            <h3>Channel Type</h3>
+            <div className="create-channel-form__type-container">
+              <div>
+                <label htmlFor="text-type">Text</label>
+                <input
+                  id="text-type"
+                  name="channel-type"
+                  type="radio"
+                  value="text"
+                  checked={type === 'text'}
+                  onChange={e => setType(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="voice-type">Voice</label>
+                <input
+                  id="voice-type"
+                  name="channel-type"
+                  type="radio"
+                  value="voice"
+                  checked={type === 'voice'}
+                  onChange={e => setType(e.target.value)}
+                />
+              </div>
+            </div>
+          </section>
+          <section className="create-channel-form__input-section">
+            <label
+              htmlFor="channel-name"
+              className="create-channel-form__input-label"
+            >
+              Channel Name
+            </label>
+            <div className="create-channel-form__input-container">
+              <i className="fa-solid fa-hashtag"></i>
               <input
-                id="text-type"
-                name="channel-type"
-                type="radio"
-                value="text"
-                checked={type === 'text'}
-                onChange={e => setType(e.target.value)}
+                id="channel-name"
+                placeholder="new-channel"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                autoComplete="off"
               />
             </div>
-            <div>
-              <label htmlFor="voice-type">Voice</label>
-              <input
-                id="voice-type"
-                name="channel-type"
-                type="radio"
-                value="voice"
-                checked={type === 'voice'}
-                onChange={e => setType(e.target.value)}
-              />
-            </div>
+          </section>
+        </div>
+        <footer className="create-channel-form__footer">
+          <div className="create-channel-form__btn-container">
+            <button
+              onClick={closeModal}
+              className="create-channel-form__cancel-btn"
+            >
+              Cancel
+            </button>
+            <button
+              className="create-channel-form__create-btn"
+              disabled={name === ''}
+            >
+              Create Channel
+            </button>
           </div>
-        </section>
-        <section className="create-channel-form__channel-input">
-          <label htmlFor="channel-name">Channel Name</label>
-          <div>
-            <span>#</span>
-            <input
-              id="channel-name"
-              placeholder="new channel"
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-          </div>
-        </section>
-        <section>
-          <button onClick={closeModal}>Cancel</button>
-          <button>Create Channel</button>
-        </section>
+        </footer>
       </form>
     </div>
   );

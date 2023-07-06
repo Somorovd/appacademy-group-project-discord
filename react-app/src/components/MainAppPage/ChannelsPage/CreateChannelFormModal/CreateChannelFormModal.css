@@ -1,5 +1,116 @@
+.create-channel-modal {
+  border-radius: 4px;
+  width: 460px;
+  background-color: var(--bg-light-gray);
+  color: var(--font-white);
+}
+
+.create-channel-form {
+  height: 100%;
+}
+
+.create-channel-form__main-section {
+  padding: 0 1rem;
+}
+
+.create-channel-form__main-section > section {
+  margin-bottom: 1rem;
+}
+
 .create-channel-form__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.8rem;
+}
+
+.create-channel-form__header h2 {
+  font-size: var(--font-size-md);
+  margin-left: 3px;
+}
+
+.create-channel-form__type-section > h3 {
+  margin-bottom: 0.3rem;
+}
+
+.create-channel-form__type-section > h3,
+.create-channel-form__input-label {
+  text-transform: uppercase;
+  font-size: var(--font-size-xtsm);
+  color: var(--icon-light-gray);
+  margin-left: 1px;
+}
+
+.create-channel-form__input-container {
+  display: flex;
+  position: relative;
+  margin-top: 0.3rem;
+}
+
+.create-channel-form__input-container > i {
+  font-size: 14px;
+  font-weight: 200;
+  position: absolute;
+  top: 9px;
+  left: 7px;
+  color: var(--icon-light-gray);
+}
+
+input#channel-name {
+  background-color: var(--bg-dark-gray);
+  border: none;
+  border-radius: 3px;
+  padding-left: 1.5rem;
+  height: 2rem;
+  width: 100%;
+  color: var(--font-white);
+  outline: none;
+}
+
+.create-channel-form__footer {
+  background-color: var(--bg-medium-gray);
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.8rem;
+  border-radius: 0 0 4px 4px;
+}
+
+.create-channel-form__btn-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.create-channel-form__cancel-btn {
+  background: none;
+  border: none;
+  color: var(--font-white);
+}
+
+.create-channel-form__cancel-btn:hover {
+  text-decoration: underline;
+}
+
+.create-channel-form__create-btn {
+  background-color: var(--primary-blue);
+  border: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 2px;
+  color: var(--font-white);
+  transition: background-color 100ms ease-in-out;
+}
+
+.create-channel-form__create-btn:hover {
+  background-color: hsl(235, 44%, 51%);
+}
+
+.create-channel-form__create-btn[disabled] {
+  cursor: not-allowed;
+  background-color: hsla(235, 44%, 51%, 0.737);
+  color: var(--font-gray);
+}
+
+.create-channel-form__close-x {
+  font-size: var(--font-size-md);
+  color: var(--icon-light-gray);
+  cursor: pointer;
 }
