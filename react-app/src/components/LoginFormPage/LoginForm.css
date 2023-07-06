@@ -3,7 +3,8 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: var(--primary-blue);
+  background-image: url("../../Images/LoginBackground.png");
+  background-size: cover;
 }
 
 .login-form-wrapper {
