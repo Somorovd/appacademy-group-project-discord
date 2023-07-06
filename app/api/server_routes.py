@@ -136,7 +136,7 @@ def edit_server(server_id):
 
         return server.to_dict_single()
 
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+    return {"errors": validation_errors_to_dict(form.errors)}, 400
 
 
 @server_routes.route("/<int:server_id>/delete", methods=["DELETE"])

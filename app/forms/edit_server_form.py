@@ -13,10 +13,7 @@ def is_image_url(form, field):
     valid_extensions = ["jpg", "jpeg", "png"]
     if (not len(split) == 2) or (split[1] not in valid_extensions):
         raise ValidationError(
-            "Image url must be of type "
-            + ", ".join(valid_extensions)
-            + "Got type"
-            + split[1]
+            "Image url must be of type " + ", ".join(valid_extensions)
         )
 
 
