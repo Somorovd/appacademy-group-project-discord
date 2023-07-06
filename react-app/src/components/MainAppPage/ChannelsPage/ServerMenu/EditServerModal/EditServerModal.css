@@ -14,6 +14,7 @@
 .edit-server-modal__form-container {
   width: 720px;
   padding: 2rem;
+  margin-top: 5rem;
 }
 
 .edit-server-modal__form > section,
@@ -143,6 +144,23 @@
 .edit-server-modal textarea {
   border: none;
   outline: none;
+}
+
+.edit-server-modal__btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-server-modal__submit-btn {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-blue);
+  color: var(--font-white);
+}
+
+.edit-server-modal__submit-btn:hover {
+  background-color: hsl(235, 44%, 51%);
 }
 
 .divider {

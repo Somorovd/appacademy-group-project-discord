@@ -100,6 +100,7 @@ export default function EditServerModal({ serverToEdit }) {
                   onChange={e => setName(e.target.value)}
                   value={name}
                   required
+                  autoComplete="off"
                   minLength={2}
                   maxLength={50}
                 />
@@ -128,7 +129,9 @@ export default function EditServerModal({ serverToEdit }) {
               />
             </div>
           </section>
-          <button>Submit</button>
+          <section className="edit-server-modal__btn-container">
+            <button className="edit-server-modal__submit-btn">Submit</button>
+          </section>
         </form>
       </div>
     </div>
