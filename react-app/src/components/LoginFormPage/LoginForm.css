@@ -21,12 +21,12 @@
   margin-bottom: 20px;
 }
 
-h2 {
+.login-page h2 {
   font-size: 23px;
   color: var(--white-800);
 }
 
-p {
+.login-page p {
   font-size: 16px;
   color: var(--white-500);
 }
@@ -81,7 +81,8 @@ p {
   margin-bottom: 8px;
 }
 
-.login-link {
+.login-link,
+p.login-link {
   color: #00a9ce;
   font-size: 14px;
   margin: 5px 0px;
