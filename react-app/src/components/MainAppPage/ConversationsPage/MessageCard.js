@@ -23,7 +23,6 @@ export default function MessageCard({ message, socket, user, communicationId }) 
       edited: messageId,
       deleted: false
     });
-
     setEditing(false)
   }
 

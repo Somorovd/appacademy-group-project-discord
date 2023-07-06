@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { thunkLoadSingleCommunication } from "../../../store/communications";
 import { io } from "socket.io-client";
-import MessageCard from "./MessageCard";
+import MessageCard from "../MessageCard";
 import "./DM.css";
 
 
@@ -71,8 +71,27 @@ export default function DirectMessages({ otherUser }) {
       edited: false,
       deleted: false
     });
-
     setCurrentMessage("");
+  }
+
+  const handleDelete = (messageId) => {
+    socket.emit("chat", {
+      user,
+      content: "",
+      room: communicationId,
+      edited: false,
+      deleted: messageId
+    });
+  }
+
+  const handleEdit = (messageId, newContent) => {
+    socket.emit("chat", {
+      user,
+      content: newContent,
+      room: communicationId,
+      edited: messageId,
+      deleted: false
+    });
   }
 
   if (!otherUser) {
@@ -88,7 +107,12 @@ export default function DirectMessages({ otherUser }) {
         {chatMessages.map((message) => {
           return (
             <li key={message.id} className="DM-page__list-message">
-              <MessageCard message={message} socket={socket} user={user} communicationId={communicationId} />
+              <MessageCard
+                message={message}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                key={message.id}
+              />
             </li>
           )
         })}

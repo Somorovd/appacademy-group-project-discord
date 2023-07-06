@@ -28,13 +28,13 @@ export default function MessageCard({
 
 
       <div className="message-card__image">
-        <img src={message.senderPic || message.user.profilePic} alt="" />
+        <img src={message.senderPic || (message.user && message.user.profilePic)} alt="" />
       </div>
 
 
       <div className="message-card__message">
         <div className="message-card__title">
-          {message.sender || message.user.username}
+          {message.sender || (message.user && message.user.username)}
           <span className="message-card__list-message-date">
             {formattedDate}{" "}
           </span>
@@ -83,7 +83,7 @@ export default function MessageCard({
       <div className="message-card__buttons">
         {(
           user.id === message.senderId ||
-          user.id === message.user.id
+          (message.user && user.id === message.user.id)
         ) && <>
             <button
               className="message-card__option-buttons"
