@@ -1,6 +1,14 @@
+import { useModal } from "../../../../../context/Modal";
+
 import './LeaveServerModal.css';
 
 export default function LeaveServerModal({ serverToLeave }) {
+  const { closeModal } = useModal();
+
+  const handleLeaveServer = () => {
+    alert("Feature coming soon!")
+  }
+
   return (
     <div className="leave-server-modal">
       <header className="leave-server-modal__header">
@@ -12,8 +20,16 @@ export default function LeaveServerModal({ serverToLeave }) {
       </p>
       <footer className="leave-server-modal__footer">
         <div className="leave-server-modal__btn-container">
-          <button className="leave-server-modal__cancel-btn">Cancel</button>
-          <button className="leave-server-modal__leave-btn">
+          <button
+            className="leave-server-modal__cancel-btn"
+            onClick={closeModal}
+          >
+            Cancel
+          </button>
+          <button
+            className="leave-server-modal__leave-btn"
+            onClick={handleLeaveServer}
+          >
             Leave Server
           </button>
         </div>
