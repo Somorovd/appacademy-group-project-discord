@@ -1,0 +1,57 @@
+.leave-server-modal {
+  border-radius: 4px;
+  width: 444px;
+  background-color: var(--bg-light-gray);
+  color: var(--font-white);
+}
+
+.leave-server-modal__leave-btn {
+  background-color: var(--primary-red);
+}
+
+.leave-server-modal__header {
+  padding: 0.8rem;
+  margin-left: 3px;
+}
+
+.leave-server-modal__warning {
+  font-size: var(--font-size-sm);
+  padding: 0 1rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.leave-server-modal__footer {
+  background-color: var(--bg-medium-gray);
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.8rem;
+  border-radius: 0 0 4px 4px;
+}
+
+.leave-server-modal__btn-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.leave-server-modal__cancel-btn {
+  background: none;
+  border: none;
+  color: var(--font-white);
+}
+
+.leave-server-modal__cancel-btn:hover {
+  text-decoration: underline;
+}
+
+.leave-server-modal__leave-btn {
+  background-color: var(--primary-red);
+  border: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 2px;
+  color: var(--font-white);
+  transition: background-color 100ms ease-in-out;
+}
+
+.leave-server-modal__leave-btn:hover {
+  background-color: hsl(359, 67%, 44%);
+}

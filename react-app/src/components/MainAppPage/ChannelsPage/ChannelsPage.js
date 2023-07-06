@@ -7,9 +7,9 @@ import ServerMenu from './ServerMenu';
 import ChannelLink from './ChannelLink';
 import MessagePage from './MessagePage';
 import OpenModalButton from '../../OpenModalButton';
+import UserProfile from '../UserProfile';
 import * as serverActions from '../../../store/servers';
 import './ChannelsPage.css';
-
 
 export default function ChannelsPage() {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ export default function ChannelsPage() {
   const { serverId, channelId } = useParams();
 
   const singleUserServer = useSelector(state => state.servers.singleUserServer);
+  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
     dispatch(serverActions.thunkGetSingleServer(serverId));
@@ -44,26 +45,26 @@ export default function ChannelsPage() {
         <div className="channels-nav">
           <div className="channels-nav__header">
             <h2>Channels</h2>
-            <OpenModalButton
-              modalComponent={<CreateChannelFormModal serverId={serverId} />}
-              buttonClass="channels-nav__create-channel-btn"
-              buttonText={<i className="fa-solid fa-plus"></i>}
-            />
+            {user.id === singleUserServer.ownerId && (
+              <OpenModalButton
+                modalComponent={<CreateChannelFormModal serverId={serverId} />}
+                buttonClass="channels-nav__create-channel-btn"
+                buttonText={<i className="fa-solid fa-plus"></i>}
+              />
+            )}
           </div>
           <ul>
             {channels.map(channel => (
-              <ChannelLink channel={channel} key={channel.id} />
+              <ChannelLink
+                channel={channel}
+                key={channel.id}
+              />
             ))}
           </ul>
         </div>
+        <UserProfile />
       </div>
-      <div className="messages">
-        {
-          channelId
-            ? <MessagePage />
-            : null
-        }
-      </div>
+      <div className="messages">{channelId ? <MessagePage /> : null}</div>
     </>
   );
 }

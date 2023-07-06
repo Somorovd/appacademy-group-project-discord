@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useModal } from '../../../../context/Modal';
+import { useModal } from '../../../../../context/Modal';
 import { useDispatch } from 'react-redux';
-import * as serverActions from '../../../../store/servers';
+import * as serverActions from '../../../../../store/servers';
 import './EditServerModal.css';
 
 export default function EditServerModal({ serverToEdit }) {
