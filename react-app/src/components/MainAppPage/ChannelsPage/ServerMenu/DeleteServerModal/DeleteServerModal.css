@@ -5,7 +5,7 @@
   color: var(--font-white);
 }
 
-.delete-server-modal > form {
+.delete-server-modal>form {
   border-radius: 4px;
 }
 
@@ -17,7 +17,7 @@
   padding: 0 0.8rem;
 }
 
-.delete-server-modal__main-content > * {
+.delete-server-modal__main-content>* {
   margin-bottom: 1rem;
 }
 
@@ -28,7 +28,7 @@
   font-size: var(--font-size-sm);
 }
 
-.delete-server-modal__warning > span {
+.delete-server-modal__warning>span {
   font-weight: 900;
 }
 
@@ -46,6 +46,7 @@
 
 input#server-name {
   background-color: var(--bg-dark-gray);
+  color: var(--font-white);
   border: none;
   border-radius: 3px;
   height: 2rem;
