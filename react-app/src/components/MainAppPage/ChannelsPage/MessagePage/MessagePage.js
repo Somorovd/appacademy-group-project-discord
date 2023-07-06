@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import ChannelMessageCard from './ChannelMessageCard/ChannelMessageCard';
+import MessageCard from '../../MessageCard';
 import * as channelActions from '../../../../store/channels';
 
 import './MessagePage.css';
@@ -48,6 +49,26 @@ export default function MessagePage() {
     setContent('');
   };
 
+  const handleDelete = (messageId) => {
+    socket.emit('messages', {
+      user,
+      content: '',
+      room: `Channel-${channelId}`,
+      edited: false,
+      deleted: messageId,
+    });
+  };
+
+  const handleEdit = (messageId, content) => {
+    socket.emit('messages', {
+      user,
+      content,
+      room: `Channel-${channelId}`,
+      edited: messageId,
+      deleted: false,
+    });
+  }
+
   const handleKeyPress = e => {
     if (e.key === 'Enter' && content !== '') {
       handleSubmit(e);
@@ -60,11 +81,11 @@ export default function MessagePage() {
     <div className="channels-messages">
       <div className="message-container">
         {singleChannel.messages.map(message => (
-          <ChannelMessageCard
-            key={message.id}
+          <MessageCard
             message={message}
-            user={user}
-            socket={socket}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            key={message.id}
           />
         ))}
       </div>
@@ -83,3 +104,4 @@ export default function MessagePage() {
     </div>
   );
 }
+
