@@ -8,7 +8,6 @@ export default function ChannelMessageCard({ message, user, socket }) {
   const [editMessage, setEditMessage] = useState(message.content);
 
   const handleDelete = () => {
-    console.log('DELETING MESSAGE');
     socket.emit('messages', {
       user,
       content: '',
@@ -19,7 +18,6 @@ export default function ChannelMessageCard({ message, user, socket }) {
   };
 
   const handleEdit = () => {
-    console.log('EDITING MESSAGE');
     socket.emit('messages', {
       user,
       content: editMessage,

@@ -35,7 +35,6 @@ export default function DirectMessages({ otherUser }) {
   }, [dispatch, communicationId, refresh]);
 
   useEffect(() => {
-    console.log("INITIAL CONNECTION")
     socket = io();
 
     socket.on("chat", (chat) => {
@@ -52,7 +51,6 @@ export default function DirectMessages({ otherUser }) {
     });
 
     return () => {
-      console.log("DISCONNECT FROM SOCKET")
       socket.disconnect();
     };
   }, [dispatch, communicationId]);
@@ -66,7 +64,6 @@ export default function DirectMessages({ otherUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("SENDING MESSAGE")
     socket.emit("chat", {
       user,
       content: currentMessage,
@@ -89,7 +86,6 @@ export default function DirectMessages({ otherUser }) {
       </div>
       <ul className="DM-page__list">
         {chatMessages.map((message) => {
-          console.log(message)
           return (
             <li key={message.id} className="DM-page__list-message">
               <MessageCard message={message} socket={socket} user={user} communicationId={communicationId} />

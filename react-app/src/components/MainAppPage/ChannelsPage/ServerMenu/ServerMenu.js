@@ -35,8 +35,6 @@ export default function ServerMenu({ server }) {
     (showMenu ? "" : " hidden ")
   );
 
-  console.log("IS OWNER", Number(user.id) === Number(server.owner_id), user.id, server.ownerId);
-
   return (
     <div onClick={openMenu} className="server-menu">
       <h2>

@@ -41,7 +41,6 @@ function SignupFormPage() {
       const data = await dispatch(signUp(user_obj));
       if (data) {
         setErrors(data)
-        console.log(data);
       }
     } else {
       setErrors(['Confirm Password field must be the same as the Password field']);

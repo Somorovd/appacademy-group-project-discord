@@ -156,7 +156,7 @@ export const thunkCreateChannel = (channel, serverId) => async dispatch => {
 export const thunkGetAllPublicServers = () => async dispatch => {
   const res = await fetch('/api/servers/discover');
 
-  if(res.ok) {
+  if (res.ok) {
     const data = await res.json();
     const normalized = {};
     data.servers.forEach(server => {
@@ -164,8 +164,6 @@ export const thunkGetAllPublicServers = () => async dispatch => {
     });
 
     return dispatch(actionGetAllPublicServers(normalized));
-  } else {
-    console.log("Error in getting public servers");
   }
 }
 
