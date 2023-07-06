@@ -14,12 +14,16 @@ function LoginFormPage() {
 
   if (sessionUser) history.push("/main/conversations");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, user) => {
     if (e) e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
+    let data;
+
+    if (user)
+      data = await dispatch(login(user.email, user.password));
+    else
+      data = await dispatch(login(email, password));
+
+    if (data) setErrors(data);
   };
 
   const handleClickDemo = (id) => {
@@ -35,9 +39,7 @@ function LoginFormPage() {
     }
 
     const user = demoUsers[id];
-    setEmail(user.email);
-    setPassword(user.password);
-    handleSubmit();
+    handleSubmit(null, user);
   }
 
   const handleForgotPassword = () => {
