@@ -61,10 +61,10 @@ export default function CreateServerFormModal() {
             maxLength={50}
             required
           />
+          <p className='warning'>
+            {errors.name}
+          </p>
         </label>
-        <p className='warning'>
-          {errors.name}
-        </p>
         <label>
           Profile URL
           <input
@@ -73,10 +73,10 @@ export default function CreateServerFormModal() {
             onChange={e => setImage(e.target.value)}
             onBlurCapture={e => setPreview(e.target.value)}
           />
+          <p className='warning'>
+            {errors.image}
+          </p>
         </label>
-        <p className='warning'>
-          {errors.image}
-        </p>
         <button type="submit">Create Server</button>
       </form>
     </div>
