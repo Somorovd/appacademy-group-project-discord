@@ -55,4 +55,11 @@
 .invisible {
   opacity: 0;
   position: absolute;
+  width: 1px;
+  cursor: default;
+}
+
+.channel-item input:not(.invisible) {
+  position: relative;
+  width: 100%;
 }
