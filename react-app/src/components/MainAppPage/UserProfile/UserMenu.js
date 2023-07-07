@@ -1,30 +1,36 @@
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../../../store/session";
 import { useHistory } from 'react-router-dom'
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useModal } from "../../../context/Modal";
 
-export default function UserMenu () {
+import * as serverActions from "../../../store/servers";
+import * as channelActions from "../../../store/channels";
+import * as communicationActions from "../../../store/communications";
+
+export default function UserMenu() {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal()
 
-    let userSince = new Date(user.createdAt).toLocaleDateString("en-US",{
+    let userSince = new Date(user.createdAt).toLocaleDateString("en-US", {
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
-      }
+    }
     );
 
-    let userBirthday = new Date(user.birthday).toLocaleDateString("en-US",{
+    let userBirthday = new Date(user.birthday).toLocaleDateString("en-US", {
         month: "2-digit",
         day: "2-digit",
         year: "numeric",
-      }
+    }
     );
 
     const handleLogout = () => {
+        dispatch(serverActions.thunkClearState())
+        dispatch(channelActions.thunkClearState())
+        dispatch(communicationActions.thunkClearState())
         dispatch(logout())
         closeModal()
     }
@@ -35,7 +41,7 @@ export default function UserMenu () {
 
             <div className="user-menu__top-menu">
                 <div className="user-menu__top-title">
-                <img className="user-menu__image" src={user.profilePic}/> {user.username}
+                    <img className="user-menu__image" src={user.profilePic} /> {user.username}
                 </div>
                 <button onClick={(e) => alert("Feature Coming Soon!")} className="user-menu__edit-user-button">Edit User Profile</button>
             </div>

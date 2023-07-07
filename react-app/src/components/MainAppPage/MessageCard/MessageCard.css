@@ -29,7 +29,8 @@
 }
 
 .message-card__list-message-content {
-  font-size: var(--font-size-sm)
+  font-size: var(--font-size-sm);
+  word-wrap: break-word;
 }
 
 .message-card__edit-input {

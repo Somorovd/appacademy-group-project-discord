@@ -10,7 +10,7 @@ import './MessagePage.css';
 let socket;
 
 export default function MessagePage() {
-  const { channelId } = useParams();
+  const { serverId, channelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
 
@@ -42,13 +42,13 @@ export default function MessagePage() {
       room: `Channel-${channelId}`,
       channel_id: channelId,
       edited: false,
-      deleted: false
+      deleted: false,
     });
 
     setContent('');
   };
 
-  const handleDelete = (messageId) => {
+  const handleDelete = messageId => {
     socket.emit('messages', {
       user,
       content: '',
@@ -66,7 +66,7 @@ export default function MessagePage() {
       edited: messageId,
       deleted: false,
     });
-  }
+  };
 
   const handleKeyPress = e => {
     if (e.key === 'Enter' && content !== '') {
@@ -74,37 +74,40 @@ export default function MessagePage() {
     }
   };
 
-  if (!Object.keys(singleChannel).length) return null;
-
   return (
     <div className="channels-messages">
-      <div className='channel-header'>
-        {singleChannel.name}
-      </div>
+      <div className="channel-header">{singleChannel.name}</div>
       <div className="message-container">
-        {singleChannel.messages.map(message => (
-          <MessageCard
-            message={message}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            key={message.id}
-          />
-        ))}
+        {Object.keys(singleChannel).length &&
+          singleChannel.serverId === Number(serverId) &&
+          singleChannel.messages.map(message => (
+            <MessageCard
+              message={message}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              key={message.id}
+            />
+          ))}
       </div>
-      <div className='message-input'>
+      <div className="message-input">
         <form onSubmit={handleSubmit}>
           <input
             value={content}
             onChange={e => setContent(e.target.value)}
             placeholder={`Message ${singleChannel.name}`}
             onKeyDown={handleKeyPress}
+            maxLength={500}
           />
           <button>
-            <i className='fa-solid fa-arrow-right'></i>
+            <i className="fa-solid fa-arrow-right"></i>
           </button>
         </form>
+        {content.length >= 500 && (
+          <span className="DM-page__error">
+            Max message length of 500 has been reached
+          </span>
+        )}
       </div>
     </div>
   );
 }
-

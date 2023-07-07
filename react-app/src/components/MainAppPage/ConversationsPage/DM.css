@@ -29,10 +29,12 @@
 }
 
 .DM-page__chat-box {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
+  padding-bottom: 18px;
 }
 
 .DM-page__chat-form {
@@ -50,7 +52,7 @@
   padding: 10px;
   outline: none;
   height: 40px;
-  color: var(--font-white)
+  color: var(--font-white);
 }
 
 .DM-page__chat-submit {
@@ -66,7 +68,7 @@
 
 /* Works for all broswers besides Firefox */
 .DM-page__list::-webkit-scrollbar {
-  width: 7px;
+  width: 10px;
   background-color: var(--bg-medium-gray);
 }
 
@@ -75,12 +77,25 @@
 }
 
 .DM-page__list::-webkit-scrollbar-thumb {
-  background-color: var(--bg-dark-gray);
+  background-color: var(--scrollthumb-dark);
   border-radius: 10px;
 }
 
 /* For Firefox compatibility */
 .DM-page__list {
   scrollbar-color: var(--bg-dark-gray);
-  scrollbar-width: 7px;
+  scrollbar-width: 10px;
+  overflow-x: hidden;
+}
+
+.DM-page__error {
+  color: var(--primary-red);
+  position: absolute;
+  bottom: 3px;
+  left: 1.4rem;
+  font-size: 14px;
+}
+
+.DM-page__edit-error {
+  color: var(--primary-red);
 }

@@ -33,6 +33,14 @@ export default function CreateChannelFormModal({ serverId }) {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (name.trim() && name.length <= 20)
+        handleSubmit(e);
+    }
+  }
+
   return (
     <div className="create-channel-modal">
       <form
@@ -86,7 +94,7 @@ export default function CreateChannelFormModal({ serverId }) {
             >
               Channel Name
               {attempted && name.length < 2 && <span className="create-channel__errors">-- Please input a name of 2 or greater</span>}
-              {name.length > 50 && <span className="create-channel__errors">-- Please input a name of 50 or smaller</span>}
+              {name.length >= 20 && <span className="create-channel__errors">-- Max length of 20 reached</span>}
             </label>
             <div className="create-channel-form__input-container">
               <i className="fa-solid fa-hashtag"></i>
@@ -96,6 +104,8 @@ export default function CreateChannelFormModal({ serverId }) {
                 value={name}
                 onChange={e => setName(e.target.value)}
                 autoComplete="off"
+                maxLength={20}
+                onKeyDown={handleKeyPress}
               />
             </div>
           </section>
@@ -110,7 +120,7 @@ export default function CreateChannelFormModal({ serverId }) {
             </button>
             <button
               className="create-channel-form__create-btn"
-              disabled={name === '' || name.length > 50}
+              disabled={name.trim() === '' || name.length > 20}
               onClick={() => setAttempted(true)}
             >
               Create Channel

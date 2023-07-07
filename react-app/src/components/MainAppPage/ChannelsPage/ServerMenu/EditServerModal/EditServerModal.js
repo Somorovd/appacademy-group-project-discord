@@ -1,17 +1,65 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useModal } from '../../../../../context/Modal';
 import { useDispatch } from 'react-redux';
 import * as serverActions from '../../../../../store/servers';
 import './EditServerModal.css';
+
+const Toggle = ({ isChecked, setIsChecked }) => {
+  const toggleClass = 'toggle ' + (isChecked ? 'toggle-green' : 'toggle-gray');
+  const sliderClass = 'slider ' + (isChecked ? 'checked' : 'unchecked');
+
+  return (
+    <div className="checkbox-container">
+      <label htmlFor="visibility-box">
+        <input
+          id="visibility-box"
+          type="checkbox"
+          checked={isChecked}
+          onChange={() => setIsChecked(!isChecked)}
+        />
+      </label>
+      <div className={toggleClass}>
+        <div className={sliderClass}>
+          {isChecked ? (
+            <i className="fa-solid fa-check"></i>
+          ) : (
+            <i className="fa-solid fa-xmark"></i>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function EditServerModal({ serverToEdit }) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const [name, setName] = useState(serverToEdit.name || '');
   const [image, setImage] = useState(serverToEdit.image || '');
-  const [isPrivate, setIsPrivate] = useState(serverToEdit.private || true);
   const [about, setAbout] = useState(serverToEdit.about || '');
+  const [isChecked, setIsChecked] = useState(!serverToEdit.private);
+  const [hasChanged, setHasChanged] = useState(false);
+  const originalState = useRef({
+    name,
+    image,
+    about,
+    isPrivate: !isChecked,
+  });
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [isResetEvent, setIsResetEvent] = useState(false);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (isFirstRender) {
+      return setIsFirstRender(false);
+    }
+
+    if (!isResetEvent) {
+      return setHasChanged(true);
+    }
+
+    setIsResetEvent(false);
+  }, [name, image, about, isChecked]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -20,7 +68,7 @@ export default function EditServerModal({ serverToEdit }) {
       id: serverToEdit.id,
       name,
       image,
-      private: isPrivate,
+      private: !isChecked,
       about,
     };
 
@@ -31,6 +79,21 @@ export default function EditServerModal({ serverToEdit }) {
     } else {
       closeModal();
     }
+  };
+
+  const handleReset = e => {
+    e.preventDefault();
+    const { name, image, about, isPrivate } = originalState.current;
+
+    setIsResetEvent(true);
+
+    setName(name);
+    setImage(image);
+    setAbout(about);
+    setIsChecked(!isPrivate);
+
+    setHasChanged(false);
+    setErrors({});
   };
 
   return (
@@ -73,9 +136,15 @@ export default function EditServerModal({ serverToEdit }) {
                   onChange={e => setName(e.target.value)}
                   value={name}
                   required
+                  autoComplete="off"
                   minLength={2}
                   maxLength={50}
                 />
+                {name.length === 50 && (
+                  <p className="warning">
+                    You have reached the 50 character limit
+                  </p>
+                )}
               </div>
             </div>
           </section>
@@ -83,17 +152,10 @@ export default function EditServerModal({ serverToEdit }) {
           <section className="edit-server-modal__visibility-section">
             <div>
               <p>Would you like this server to be publicly visible?</p>
-              <div className="checkbox-container">
-                <label htmlFor="visibility-box">
-                  <input
-                    id="visibility-box"
-                    type="checkbox"
-                    checked={!isPrivate}
-                    onChange={e => setIsPrivate(!isPrivate)}
-                  />
-                </label>
-                {/* <div className="toggle"></div> */}
-              </div>
+              <Toggle
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
             </div>
           </section>
           <div className="divider"></div>
@@ -106,9 +168,29 @@ export default function EditServerModal({ serverToEdit }) {
                 value={about}
                 maxLength={500}
               />
+              {about.length === 500 && (
+                <p className="warning">
+                  You have reached the 500 character limit
+                </p>
+              )}
             </div>
           </section>
-          <button>Submit</button>
+          {hasChanged && (
+            <div className="edit-server-modal__changes-pop-up">
+              <p>Careful - you have unsaved changes!!</p>
+              <div className="edit-server-modal__btn-container">
+                <button
+                  onClick={handleReset}
+                  className="edit-server-modal__reset-btn"
+                >
+                  Reset
+                </button>
+                <button className="edit-server-modal__submit-btn">
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          )}
         </form>
       </div>
     </div>
