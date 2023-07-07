@@ -9,12 +9,6 @@
   background-color: var(--bg-medium-gray);
 }
 
-.message-card__image {
-  background-color: var(--primary-blue);
-  border-radius: 100%;
-  height: 40px;
-  width: 40px;
-}
 
 .message-card__message {
   display: flex;
@@ -72,4 +66,18 @@
 
 .message-card__option-buttons:hover {
   color: var(--icon-white-active);
+}
+
+.message-card__image {
+  background-color: var(--primary-blue);
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+}
+
+.message-card__img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
 }
