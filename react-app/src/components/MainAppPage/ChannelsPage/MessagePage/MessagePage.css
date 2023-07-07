@@ -18,6 +18,27 @@
   flex-direction: column-reverse;
 }
 
+/* Works for all broswers besides Firefox */
+.message-container::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--bg-medium-gray);
+}
+
+.message-container::-webkit-scrollbar-track {
+  background-color: var(--bg-medium-gray);
+}
+
+.message-container::-webkit-scrollbar-thumb {
+  background-color: var(--scrollthumb-dark);
+  border-radius: 10px;
+}
+
+/* For Firefox compatibility */
+.message-container {
+  scrollbar-color: var(--scrollthumb-dark);
+  scrollbar-width: 10px;
+}
+
 .message-input {
   height: 100%;
   width: 100%;
@@ -40,7 +61,7 @@
   padding: 10px;
   outline: none;
   height: 40px;
-  color: var(--font-white)
+  color: var(--font-white);
 }
 
 .message-input button {

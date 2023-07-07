@@ -53,12 +53,19 @@
   color: var(--font-gray);
 }
 
-.edit-server-modal__image-container > img {
+.edit-server-modal__image-container {
+  border: 1px solid white;
+  border-radius: 50%;
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  background-color: var(--primary-blue);
+}
+
+.edit-server-modal__image-container > img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 1px solid white;
+  border-radius: 50%;
 }
 
 .edit-server-modal__image-container > img[src=''] {
@@ -77,10 +84,16 @@
   display: flex;
   gap: 2rem;
   flex-grow: 2;
+  position: relative;
 }
 
 .edit-server-modal__input-container input {
   padding: 0.3rem;
+}
+
+.edit-server-modal__input-container p.warning {
+  position: absolute;
+  bottom: -5px;
 }
 
 .edit-server-modal__img-input-container > input {
@@ -130,6 +143,14 @@
   cursor: pointer;
 }
 
+.edit-server-modal__about-section {
+  position: relative;
+}
+
+.edit-server-modal__about-section p.warning {
+  position: absolute;
+}
+
 #server-about {
   width: 100%;
   background-color: var(--bg-dark-gray);
@@ -140,27 +161,91 @@
   resize: none;
 }
 
+/* Works for all broswers besides Firefox */
+#server-about::-webkit-scrollbar {
+  width: 6px;
+  background-color: var(--bg-medium-gray);
+}
+
+#server-about::-webkit-scrollbar-track {
+  background-color: var(--bg-medium-gray);
+}
+
+#server-about::-webkit-scrollbar-thumb {
+  background-color: var(--scrollthumb-dark);
+  border-radius: 10px;
+}
+
+/* For Firefox compatibility */
+#server-about {
+  scrollbar-color: var(--scrollthumb-dark);
+  scrollbar-width: 6px;
+}
+
 .edit-server-modal input,
 .edit-server-modal textarea {
   border: none;
   outline: none;
 }
 
-.edit-server-modal__btn-container {
+.edit-server-modal__changes-pop-up {
+  position: relative;
+  top: 20px;
+  padding: 0.7rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-dark-gray);
+  border-radius: 5px;
+  animation: changes-pop-up 200ms ease-in-out;
 }
 
-.edit-server-modal__submit-btn {
-  padding: 0.3rem 0.6rem;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--primary-blue);
+@keyframes changes-pop-up {
+  0% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(-16px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+.edit-server-modal__changes-pop-up > p {
   color: var(--font-white);
 }
 
+.edit-server-modal__btn-container {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.edit-server-modal__reset-btn {
+  background: none;
+  border: none;
+  color: var(--font-white);
+}
+
+.edit-server-modal__reset-btn:hover {
+  text-decoration: underline;
+}
+
+.edit-server-modal__submit-btn {
+  padding: 0.3rem 0.8rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-green);
+  color: var(--font-white);
+  transition: background-color 150ms ease-in-out;
+}
+
 .edit-server-modal__submit-btn:hover {
-  background-color: hsl(235, 44%, 51%);
+  background-color: hsl(139, 48%, 32%);
 }
 
 .divider {
@@ -206,7 +291,7 @@
 }
 
 .checked {
-  transform: translatex(20px);
+  transform: translateX(20px);
   transition: transform 200ms ease-in-out;
 }
 
