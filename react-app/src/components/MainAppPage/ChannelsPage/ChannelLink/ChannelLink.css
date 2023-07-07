@@ -24,6 +24,12 @@
   color: var(--font-white);
 }
 
+.channel-item__name {
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
 .channel-item__actions {
   margin-left: auto;
   justify-self: flex-end;
