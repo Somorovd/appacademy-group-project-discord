@@ -1,27 +1,35 @@
 .server-form {
   margin: auto;
-  background-color: white;
-  color: #777;
+  background-color: var(--bg-light-gray);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   max-width: 400px;
   overflow: hidden;
+  border-radius: inherit;
 }
 
-.server-form>* {
+.form-wrapper {
+  border-radius: 5px;
+}
+
+.server-form > * {
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 10px;
 }
 
 .server-form h2 {
-  color: black;
+  color: var(--font-white);
 }
 
 .server-form h2,
 .server-form p {
   align-self: center;
+}
+
+.server-form p {
+  color: var(--font-gray);
 }
 
 .server-form input {
@@ -30,9 +38,11 @@
   font-size: 1rem;
   padding: 0.7rem;
   margin-top: 5px;
-  background-color: #ddd;
+  background-color: var(--bg-dark-gray);
   border: none;
   border-radius: 3px;
+  outline: none;
+  color: var(--font-white);
 }
 
 .server-form label {
@@ -41,12 +51,33 @@
   text-transform: uppercase;
   font-size: 0.7rem;
   font-weight: bold;
+  color: var(--font-gray);
 }
 
 .server-form img {
   margin: auto;
-  border: 2px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 50%;
   width: 100px;
   aspect-ratio: 1;
+  object-fit: cover;
+  background-color: var(--primary-blue);
+}
+
+.server-form__btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.server-form button[type='submit'] {
+  background-color: var(--primary-blue);
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  color: var(--font-white);
+  transition: background-color 100ms ease-in-out;
+}
+
+.server-form button[type='submit']:hover {
+  background-color: hsl(235, 44%, 51%);
 }

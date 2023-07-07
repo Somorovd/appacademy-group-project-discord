@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../../Images/LoginBackground.png");
+  background-image: url('../../Images/LoginBackground.png');
   background-size: cover;
 }
 
@@ -32,12 +32,12 @@
   color: var(--white-500);
 }
 
-.main-login__header>h2 {
+.main-login__header > h2 {
   margin-bottom: 8px;
 }
 
 .main-login__input-fields,
-.main-login__input-fields>div {
+.main-login__input-fields > div {
   display: flex;
   flex-direction: column;
 }
@@ -80,6 +80,10 @@
   color: var(--white-800);
   width: 100%;
   margin-bottom: 8px;
+}
+
+.login-submit:hover {
+  background-color: hsl(235, 44%, 51%);
 }
 
 .login-link,

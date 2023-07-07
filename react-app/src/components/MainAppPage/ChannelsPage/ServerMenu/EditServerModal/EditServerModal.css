@@ -6,9 +6,16 @@
 }
 
 .edit-server-modal__nav {
-  width: 35.9%;
+  width: 33%;
   height: 100vh;
-  background-color: var(--bg-medium-gray);
+  border-right: 1px solid var(--primary-blue);
+  background: linear-gradient(
+    45deg,
+    var(--primary-green),
+    40%,
+    var(--primary-blue) 60%
+  );
+  border-right: 1px solid var(--font-gray);
 }
 
 .edit-server-modal__form-container {
@@ -30,7 +37,7 @@
 }
 
 .edit-server-modal__heading > h2 {
-  color: white;
+  color: var(--font-white);
 }
 
 .edit-server-modal__heading > i {
@@ -50,7 +57,7 @@
 }
 
 .edit-server-modal__form input {
-  color: var(--font-gray);
+  color: var(--font-white);
 }
 
 .edit-server-modal__image-container {
@@ -154,11 +161,12 @@
 #server-about {
   width: 100%;
   background-color: var(--bg-dark-gray);
-  color: var(--font-gray);
-  height: 4rem;
+  color: var(--font-white);
+  height: 6rem;
   padding: 5px;
   margin-top: 0.3rem;
   resize: none;
+  border-radius: 5px;
 }
 
 /* Works for all broswers besides Firefox */
