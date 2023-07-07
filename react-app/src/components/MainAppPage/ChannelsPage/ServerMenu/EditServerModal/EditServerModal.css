@@ -163,7 +163,7 @@
 
 /* Works for all broswers besides Firefox */
 #server-about::-webkit-scrollbar {
-  width: 7px;
+  width: 6px;
   background-color: var(--bg-medium-gray);
 }
 
@@ -172,14 +172,14 @@
 }
 
 #server-about::-webkit-scrollbar-thumb {
-  background-color: var(--bg-dark-gray);
+  background-color: var(--scrollthumb-dark);
   border-radius: 10px;
 }
 
 /* For Firefox compatibility */
 #server-about {
-  scrollbar-color: var(--bg-dark-gray);
-  scrollbar-width: 7px;
+  scrollbar-color: var(--scrollthumb-dark);
+  scrollbar-width: 6px;
 }
 
 .edit-server-modal input,
