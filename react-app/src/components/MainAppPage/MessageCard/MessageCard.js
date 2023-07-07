@@ -29,6 +29,7 @@ export default function MessageCard({ message, handleEdit, handleDelete }) {
         <img
           src={message.profilePic}
           alt=""
+          className='message-card__img'
         />
       </div>
 

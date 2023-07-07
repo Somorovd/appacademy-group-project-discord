@@ -10,7 +10,7 @@ def seed_users():
         password="password",
         email="demo@aa.io",
         phone_number="111-292-2982",
-        profile_pic="demo-profile.png",
+        profile_pic="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg",
         birthday=date(1978, 10, 10),
     )
     bobbie = User(
@@ -18,7 +18,7 @@ def seed_users():
         password="password",
         email="bobbie@aa.io",
         phone_number="684-168-8772",
-        profile_pic="bobbie-profile.png",
+        profile_pic="https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg",
         birthday=date(1987, 5, 8),
     )
     marnie = User(
@@ -26,7 +26,7 @@ def seed_users():
         password="password",
         email="marnie@aa.io",
         phone_number="215-354-4861",
-        profile_pic="marnie-profile.png",
+        profile_pic="https://images.pexels.com/photos/1197132/pexels-photo-1197132.jpeg",
         birthday=date(1990, 12, 15),
     )
     katie = User(
@@ -34,15 +34,15 @@ def seed_users():
         password="password",
         email="katie@aa.io",
         phone_number="654-231-8741",
-        profile_pic="katie-profile.png",
+        profile_pic="https://images.pexels.com/photos/1181424/pexels-photo-1181424.jpeg",
         birthday=date(2002, 3, 22),
     )
     clyde = User(
-        username="Clude",
+        username="Clyde",
         password="password",
         email="clyde@aa.io",
         phone_number="153-357-7864",
-        profile_pic="clyde-profile.png",
+        profile_pic="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
         birthday=date(1999, 4, 8),
     )
 

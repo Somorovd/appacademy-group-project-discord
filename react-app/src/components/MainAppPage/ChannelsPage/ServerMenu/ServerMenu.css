@@ -7,6 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 
 .server-menu h2 {
@@ -61,10 +62,10 @@
 
 @keyframes dropdownShow {
   from {
-    transform: translate(-50%, -10px) scale(0.7, 0.8)
+    transform: translate(-50%, -10px) scale(0.7, 0.8);
   }
 
   to {
-    transform: translate(-50%) scale(1)
+    transform: translate(-50%) scale(1);
   }
 }

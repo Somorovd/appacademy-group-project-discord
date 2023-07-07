@@ -99,3 +99,7 @@
 .DM-page__edit-error {
   color: var(--primary-red);
 }
+
+.DM-page__profile {
+  object-fit: cover;
+}
