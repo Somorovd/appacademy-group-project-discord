@@ -13,7 +13,7 @@
   padding-left: 15px;
 }
 
-.DM-page__top > img {
+.DM-page__top>img {
   background-color: var(--primary-blue);
   border-radius: 100%;
   height: 32px;
@@ -34,6 +34,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  padding-bottom: 18px;
 }
 
 .DM-page__chat-form {
@@ -92,6 +93,7 @@
   position: absolute;
   bottom: 3px;
   left: 1.4rem;
+  font-size: 14px;
 }
 
 .DM-page__edit-error {
