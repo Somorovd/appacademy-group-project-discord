@@ -4,6 +4,7 @@ const CREATE_SERVER = 'servers/CREATE_SERVER';
 const EDIT_SERVER = 'servers/EDIT_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
 const CREATE_CHANNEL = 'servers/CREATE_CHANNEL';
+const EDIT_CHANNEL = 'servers/EDIT_CHANNEL';
 const DELETE_CHANNEL = 'servers/DELETE_CHANNEL';
 const GET_ALL_PUBLIC_SERVERS = 'servers/GET_ALL_PUBLIC_SERVERS';
 const CLEAR_STATE = "servers/CLEAR_STATE"
@@ -38,6 +39,12 @@ const actionCreateChannel = channel => ({
   type: CREATE_CHANNEL,
   payload: channel,
 });
+
+const actionEditChannel = channel => ({
+  type: EDIT_CHANNEL,
+  payload: channel,
+});
+
 const actionDeleteChannel = channelId => ({
   type: DELETE_CHANNEL,
   payload: channelId,
@@ -160,6 +167,10 @@ export const thunkCreateChannel = (channel, serverId) => async dispatch => {
   }
 };
 
+export const thunkEditChannel = channel => async dispatch => {
+  dispatch(actionEditChannel(channel));
+};
+
 export const thunkDeleteChannel = channelId => async dispatch => {
   dispatch(actionDeleteChannel(channelId));
 };
@@ -254,6 +265,12 @@ export default function serversReducer(state = initialState, action) {
           channels
         }
       }
+    case EDIT_CHANNEL:
+      state.singleUserServer.channels[action.payload.id] = {
+        ...state.singleUserServer.channels[action.payload.id],
+        name: action.payload.name
+      }
+      return state
     case GET_ALL_PUBLIC_SERVERS:
       return { ...state, discoverServers: action.payload }
     case CLEAR_STATE:

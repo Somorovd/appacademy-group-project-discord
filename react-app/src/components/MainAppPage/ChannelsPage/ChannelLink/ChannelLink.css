@@ -9,6 +9,15 @@
   margin-bottom: 2px;
 }
 
+.channel-item input,
+.channel-item input:focus {
+  color: var(--font-white);
+  font-size: var(--font-size-md);
+  background-color: var(--black-100);
+  border: none;
+  outline: none;
+}
+
 .channel-item.channel-item--selected,
 .channel-item.channel-item--selected:hover {
   background-color: var(--black-800);
@@ -41,4 +50,9 @@
 
 .channel-item:hover .channel-item__actions {
   visibility: visible;
+}
+
+.invisible {
+  opacity: 0;
+  position: absolute;
 }
