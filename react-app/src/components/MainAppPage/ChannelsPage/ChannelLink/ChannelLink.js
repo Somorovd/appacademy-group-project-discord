@@ -67,8 +67,6 @@ export default function ChannelLink({ channel }) {
 
     if (name.length < 2)
       errors.name = "Name must be at least 2 characters";
-    if (name.length === 20)
-      errors.name = "Max length of 20 reached";
 
     setErrors(errors);
   }
@@ -103,7 +101,8 @@ export default function ChannelLink({ channel }) {
   return (
     <>
       <span className="warning">
-        {errors.name}
+        {isEditting && name.length === 20 && "Max length of 20 reached"}
+        {isEditting && errors.name}
       </span>
       <li
         key={channel.id}
@@ -128,7 +127,7 @@ export default function ChannelLink({ channel }) {
           required
         />
         <span
-          className={isEditting ? "hidden" : ""}
+          className={isEditting ? "hidden" : "channel-item__name"}
         >
           {name}
         </span>
