@@ -1,0 +1,55 @@
+.delete-channel {
+  border-radius: 5px;
+  background-color: var(--black-600);
+  color: var(--font-white);
+  width: 400px;
+}
+
+.delete-channel__header,
+.delete-channel__buttons {
+  padding: 16px;
+}
+
+.delete-channel h2 {
+  margin-bottom: 18px;
+  font-size: 20px;
+}
+
+.delete-channel__name {
+  font-weight: bold;
+}
+
+.delete-channel__buttons {
+  background-color: var(--black-500);
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.delete-channel__buttons button {
+  font-size: 14px;
+}
+
+.delete-channel__delete-button {
+  background-color: var(--primary-red);
+  border: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 2px;
+  color: var(--font-white);
+  transition: background-color 100ms ease-in-out;
+}
+
+.delete-channel__delete-button:hover {
+  background-color: hsl(359, 67%, 44%);
+}
+
+.delete-channel__cancel-button {
+  padding: 0.5rem 0.7rem;
+  color: var(--font-white);
+  background-color: transparent;
+  border: none;
+}
+
+.delete-channel__cancel-button:hover {
+  text-decoration: 1px underline;
+}

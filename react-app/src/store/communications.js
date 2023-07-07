@@ -1,6 +1,7 @@
 const LOAD_ALL_COMMUNICATIONS = "communications/LOAD_ALL_COMMUNICATIONS"
 const LOAD_SINGLE_COMMUNICATION = 'communications/LOAD_SINGLE_COMMUNICATION'
 const LOAD_ALL_USERS = 'communications/LOAD_ALL_USERS'
+const CLEAR_STATE = "communications/CLEAR_STATE"
 
 const actionLoadAllCommunications = (allCommunications) => {
     return {
@@ -80,6 +81,14 @@ export const thunkCreateNewDm = (otherUserId) => async (dispatch) => {
     }
 }
 
+const actionClearState = () => ({
+    type: CLEAR_STATE
+})
+
+export const thunkClearState = () => async dispatch => {
+    dispatch(actionClearState())
+}
+
 const initialState = {
     allCommunications: {},
     singleCommunication: {
@@ -98,6 +107,8 @@ export default function communicationsReducer(state = initialState, action) {
             return { ...state, singleCommunication: action.payload }
         case LOAD_ALL_USERS:
             return { ...state, allUsers: action.payload }
+        case CLEAR_STATE:
+            return { ...initialState }
         default:
             return state
     }
