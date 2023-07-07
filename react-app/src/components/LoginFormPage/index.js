@@ -83,6 +83,7 @@ function LoginFormPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
+                {email.length >= 255 && <span className="login-page__errors">Max username length of 255 has been reached</span>}
               </div>
               <div>
                 <label htmlFor="login-password">
@@ -103,6 +104,7 @@ function LoginFormPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                {password.length >= 50 && <span className="login-page__errors">Max username length of 50 has been reached</span>}
                 <p
                   className="login-link"
                   onClick={handleForgotPassword}

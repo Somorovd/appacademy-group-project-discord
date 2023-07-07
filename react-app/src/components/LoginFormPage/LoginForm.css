@@ -114,3 +114,8 @@ p.login-link {
   font-size: 14px;
   font-weight: normal;
 }
+
+.login-page__errors {
+  color: var(--primary-red);
+  padding-top: 10px;
+}

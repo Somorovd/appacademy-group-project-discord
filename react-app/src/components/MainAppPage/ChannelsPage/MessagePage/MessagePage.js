@@ -100,13 +100,14 @@ export default function MessagePage() {
             onChange={e => setContent(e.target.value)}
             placeholder={`Message ${singleChannel.name}`}
             onKeyDown={handleKeyPress}
+            maxLength={500}
           />
           <button>
             <i className='fa-solid fa-arrow-right'></i>
           </button>
         </form>
       </div>
+        {content.length >= 500 && <span className="DM-page__error">Max message length of 500 has been reached</span>}
     </div>
   );
 }
-

@@ -81,6 +81,12 @@
 
 /* For Firefox compatibility */
 .DM-page__list {
-  scrollbar-color: var(--scrollthumb-dark);
+  scrollbar-color: var(--bg-dark-gray);
   scrollbar-width: 10px;
+  overflow-x: hidden;
+}
+
+.DM-page__error {
+  color: var(--primary-red);
+  padding-left: 16px;
 }
