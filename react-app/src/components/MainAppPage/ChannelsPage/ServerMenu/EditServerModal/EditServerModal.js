@@ -104,6 +104,11 @@ export default function EditServerModal({ serverToEdit }) {
                   minLength={2}
                   maxLength={50}
                 />
+                {name.length === 50 && (
+                  <p className="warning">
+                    You have reached the 50 character limit
+                  </p>
+                )}
               </div>
             </div>
           </section>
@@ -127,6 +132,11 @@ export default function EditServerModal({ serverToEdit }) {
                 value={about}
                 maxLength={500}
               />
+              {about.length === 500 && (
+                <p className="warning">
+                  You have reached the 500 character limit
+                </p>
+              )}
             </div>
           </section>
           <section className="edit-server-modal__btn-container">
