@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import ChannelMessageCard from './ChannelMessageCard/ChannelMessageCard';
+import MessageCard from '../../MessageCard';
 import * as channelActions from '../../../../store/channels';
 
 import './MessagePage.css';
@@ -48,6 +48,26 @@ export default function MessagePage() {
     setContent('');
   };
 
+  const handleDelete = (messageId) => {
+    socket.emit('messages', {
+      user,
+      content: '',
+      room: `Channel-${channelId}`,
+      edited: false,
+      deleted: messageId,
+    });
+  };
+
+  const handleEdit = (messageId, content) => {
+    socket.emit('messages', {
+      user,
+      content,
+      room: `Channel-${channelId}`,
+      edited: messageId,
+      deleted: false,
+    });
+  }
+
   const handleKeyPress = e => {
     if (e.key === 'Enter' && content !== '') {
       handleSubmit(e);
@@ -58,28 +78,33 @@ export default function MessagePage() {
 
   return (
     <div className="channels-messages">
+      <div className='channel-header'>
+        {singleChannel.name}
+      </div>
       <div className="message-container">
         {singleChannel.messages.map(message => (
-          <ChannelMessageCard
-            key={message.id}
+          <MessageCard
             message={message}
-            user={user}
-            socket={socket}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            key={message.id}
           />
         ))}
       </div>
-      <div>
+      <div className='message-input'>
         <form onSubmit={handleSubmit}>
           <input
-            id="message-input"
             value={content}
             onChange={e => setContent(e.target.value)}
             placeholder={`Message ${singleChannel.name}`}
             onKeyDown={handleKeyPress}
           />
-          <button>Send</button>
+          <button>
+            <i className='fa-solid fa-arrow-right'></i>
+          </button>
         </form>
       </div>
     </div>
   );
 }
+

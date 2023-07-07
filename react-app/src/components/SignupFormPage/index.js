@@ -63,6 +63,8 @@ function SignupFormPage() {
             <input
               type="email"
               value={email}
+              minLength={4}
+              maxLength={255}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -72,6 +74,8 @@ function SignupFormPage() {
             <input
               type="text"
               value={username}
+              minLength={2}
+              maxLength={40}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
@@ -81,6 +85,8 @@ function SignupFormPage() {
             <input
               type="text"
               value={phoneNumber}
+              minLength={12}
+              maxLength={12}
               onChange={(e) => setPhoneNumber(e.target.value)}
               pattern="\d{3}-\d{3}-\d{4}"
               placeholder="123-456-7890"
@@ -142,6 +148,8 @@ function SignupFormPage() {
             <input
               type="password"
               value={password}
+              minLength={2}
+              maxLength={40}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -151,6 +159,8 @@ function SignupFormPage() {
             <input
               type="password"
               value={confirmPassword}
+              minLength={2}
+              maxLength={40}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />

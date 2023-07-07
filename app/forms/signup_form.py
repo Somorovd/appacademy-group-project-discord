@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField
-from wtforms.validators import DataRequired, ValidationError
+from wtforms.validators import DataRequired, ValidationError, Length
 from app.models import User
 
 # from email_validator import validate_email, EmailNotValidError
@@ -35,16 +35,16 @@ def is_phone_number(form, field):
 
 
 class SignUpForm(FlaskForm):
-    username = StringField("username", validators=[DataRequired(), username_exists])
+    username = StringField("username", validators=[DataRequired(), username_exists, Length(min=2, max=40)])
     email = StringField(
         "email",
         validators=[
             DataRequired(),
             user_exists,
-            # check_email,
+            Length(min=4, max=255)
         ],
     )
-    password = StringField("password", validators=[DataRequired()])
+    password = StringField("password", validators=[DataRequired(), Length(min=2, max=40)])
     phone_number = StringField(
         "phone number", validators=[DataRequired(), is_phone_number]
     )

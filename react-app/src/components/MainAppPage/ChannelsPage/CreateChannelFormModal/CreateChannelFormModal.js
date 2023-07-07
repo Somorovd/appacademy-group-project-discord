@@ -12,6 +12,7 @@ export default function CreateChannelFormModal({ serverId }) {
   const [type, setType] = useState('text');
   const [name, setName] = useState('');
   const [errors, setErrors] = useState([]);
+  const [attempted, setAttempted] = useState(false)
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -84,6 +85,8 @@ export default function CreateChannelFormModal({ serverId }) {
               className="create-channel-form__input-label"
             >
               Channel Name
+              {attempted && name.length < 2 && <span className="create-channel__errors">-- Please input a name of 2 or greater</span>}
+              {name.length > 50 && <span className="create-channel__errors">-- Please input a name of 50 or smaller</span>}
             </label>
             <div className="create-channel-form__input-container">
               <i className="fa-solid fa-hashtag"></i>
@@ -107,7 +110,8 @@ export default function CreateChannelFormModal({ serverId }) {
             </button>
             <button
               className="create-channel-form__create-btn"
-              disabled={name === ''}
+              disabled={name === '' || name.length > 50}
+              onClick={() => setAttempted(true)}
             >
               Create Channel
             </button>
