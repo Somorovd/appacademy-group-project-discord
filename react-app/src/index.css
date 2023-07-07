@@ -35,7 +35,7 @@ button {
   --bg-medium-gray: hsl(214, 8%, 18%);
   --bg-light-gray: hsl(218, 8%, 20%);
   --bg-light-gray-hover: hsl(213, 7%, 24%);
-  --font-white: hsl(220, 13%, 95%);
+  --font-white: hsl(0, 0%, 87%);
   --font-gray: hsl(212, 9%, 61%);
   --icon-light-gray: hsl(213, 8%, 73%);
   --icon-white-active: hsl(0, 0%, 100%);
