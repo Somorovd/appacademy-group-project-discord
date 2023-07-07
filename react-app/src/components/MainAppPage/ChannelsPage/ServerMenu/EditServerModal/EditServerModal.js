@@ -93,6 +93,7 @@ export default function EditServerModal({ serverToEdit }) {
     setIsChecked(!isPrivate);
 
     setHasChanged(false);
+    setErrors({});
   };
 
   return (
