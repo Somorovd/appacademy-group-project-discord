@@ -53,6 +53,17 @@ export default function EditServerModal({ serverToEdit }) {
     if (isFirstRender) {
       return setIsFirstRender(false);
     }
+    const ogState = originalState.current;
+
+    const matchesOriginalState =
+      name === ogState.name &&
+      image === ogState.image &&
+      about === ogState.about &&
+      isChecked === !ogState.isPrivate;
+
+    if (matchesOriginalState && !isResetEvent) {
+      return setHasChanged(false);
+    }
 
     if (!isResetEvent) {
       return setHasChanged(true);
@@ -83,7 +94,7 @@ export default function EditServerModal({ serverToEdit }) {
 
   const handleReset = e => {
     e.preventDefault();
-    const { name, image, about, isPrivate } = originalState.current;
+    const { name, about, image, isPrivate } = originalState.current;
 
     setIsResetEvent(true);
 

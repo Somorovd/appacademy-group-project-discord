@@ -50,7 +50,7 @@
 }
 
 .edit-server-modal__form input {
-  color: var(--font-gray);
+  color: var(--font-white);
 }
 
 .edit-server-modal__image-container {
@@ -154,11 +154,12 @@
 #server-about {
   width: 100%;
   background-color: var(--bg-dark-gray);
-  color: var(--font-gray);
+  color: var(--font-white);
   height: 4rem;
   padding: 5px;
   margin-top: 0.3rem;
   resize: none;
+  border-radius: 5px;
 }
 
 /* Works for all broswers besides Firefox */
