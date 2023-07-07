@@ -31,7 +31,7 @@ export default function ChannelsPage() {
       const keys = Object.keys(singleUserServer.channels);
       if (!keys.length) return;
 
-      const channelId = Math.min(...keys);
+      const channelId = Math.min(...keys.filter(k => singleUserServer.channels[k].type !== "voice"));
       history.push(`/main/channels/${serverId}/${channelId}`);
     }
   }, [singleUserServer]);
