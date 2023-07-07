@@ -19,21 +19,23 @@ export default function DeleteChannelModal({ channel }) {
 
   return (
     <div className='delete-channel'>
-      <h2>
-        Delete Channel
-      </h2>
-      <p>
-        Are you sure you want to delete&nbsp;
-        <span>
-          {
-            channel.type === "text"
-              ? <i className="fa-solid fa-hashtag"></i>
-              : <i className="fa-solid fa-headset"></i>
-          }
-          {`${channel.name}`}
-        </span>
-        ? This cannot be undone.
-      </p>
+      <div className="delete-channel__header">
+        <h2>
+          Delete Channel
+        </h2>
+        <p>
+          Are you sure you want to delete&nbsp;
+          <span className="delete-channel__name">
+            {
+              channel.type === "text"
+                ? <i className="fa-solid fa-hashtag"></i>
+                : <i className="fa-solid fa-headset"></i>
+            }
+            {`${channel.name}`}
+          </span>
+          ? This cannot be undone.
+        </p>
+      </div>
       <div className='delete-channel__buttons'>
         <button className='delete-channel__cancel-button'>Cancel</button>
         <button

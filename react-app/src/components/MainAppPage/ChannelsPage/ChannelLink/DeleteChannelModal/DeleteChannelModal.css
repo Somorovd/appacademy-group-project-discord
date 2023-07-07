@@ -1,25 +1,42 @@
 .delete-channel {
   border-radius: 5px;
   background-color: var(--black-600);
-  padding: 16px;
   color: var(--font-white);
+  width: 400px;
+}
+
+.delete-channel__header,
+.delete-channel__buttons {
+  padding: 16px;
 }
 
 .delete-channel h2 {
-  margin: 0px;
+  margin-bottom: 18px;
   font-size: 20px;
+}
+
+.delete-channel__name {
+  font-weight: bold;
 }
 
 .delete-channel__buttons {
   background-color: var(--black-500);
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.delete-channel__buttons button {
+  font-size: 14px;
 }
 
 .delete-channel__delete-button {
   background-color: var(--primary-red);
   border: none;
   padding: 0.5rem 0.7rem;
-  border-radius: 5px;
+  border-radius: 2px;
   color: var(--font-white);
+  transition: background-color 100ms ease-in-out;
 }
 
 .delete-channel__delete-button:hover {
