@@ -27,7 +27,8 @@ export default function ChannelLink({ channel }) {
     setIsEditting(true);
   }
 
-  const handleDelete = () => {
+  const handleDelete = (e) => {
+    e.stopPropagation();
     setModalContent(<DeleteChannelModal channel={channel} />);
   }
 
