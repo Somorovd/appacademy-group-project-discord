@@ -29,6 +29,7 @@
 }
 
 .DM-page__chat-box {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
@@ -88,5 +89,11 @@
 
 .DM-page__error {
   color: var(--primary-red);
-  padding-left: 16px;
+  position: absolute;
+  bottom: 3px;
+  left: 1.4rem;
+}
+
+.DM-page__edit-error {
+  color: var(--primary-red);
 }
