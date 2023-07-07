@@ -1,15 +1,17 @@
 .landing-page__top {
     display: flex;
     flex-direction: column;
-    background-color: rgb(0, 187, 255);
+    background-color: rgb(64,78,237);
     background-image: url('../../Images/clouds.svg');
-    padding-top: 50px;
+    padding-top: 5px;
+    color: var(--font-white)
 }
 .landing-page__nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 150px;
 }
 .landing-page__nav-icon {
     display: flex;
@@ -19,17 +21,21 @@
 .landing-page__nav-options {
     display: flex;
     flex-direction: row;
-    gap: 55px
+    gap: 40px;
 }
-.landing-page__nav-options > div {
+.landing-page__nav-options > a {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 5px;
     /* justify-content: center; */
+    color: var(--font-white);
+    text-decoration: none;
 }
 .landing-page__nav-options-button {
     display: flex;
     align-items: center;
+    margin-left: 40px;
 }
 .landing-page__nav-options-button > Link {
     height: 40px;
@@ -42,7 +48,20 @@
     border-radius: 3rem;
     font-size: 1rem;
     border: none;
-    padding: 15px
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.landing-page__nav-options-button > * {
+    background-color: white;
+    text-align: center;
+    width: 80px;
+    font-size: 14px;
+    color: black;
 }
 
 .landing-page__top-mid {
@@ -50,19 +69,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 15px;
+    position: relative;
+    top: 100px;
 }
 
 .landing-page__top-mid > p {
     display: flex;
     justify-content: center;
     text-align: center;
+    font-size: 18px;
+    line-height: 30px;
 }
+
 
 .landing-page__top-mid > div {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px
+}
+
+.landing-page__top-mid > h1 {
+    font-size: 60px;
+    font-weight: 900;
 }
 
 .landing-page__top-mid > div > Link {
@@ -85,14 +115,16 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    align-items: flex-end;
+    height: 300px;
 }
 
-.landing-page__top-pic2 {
-
+.landing-page__top-pic-left {
+    height: 375px;
 }
 
-.landing-page__top-pic2 {
-
+.landing-page__top-pic-right {
+    height: 375px;
 }
 /* Landing Page Top Images */
 /* .landing__top__pic1 {
@@ -212,4 +244,19 @@
 
 #landing-page__footer-column-top {
     color: rgb(0, 140, 227)
+}
+
+
+.landing-page__paragraph {
+    max-width: 700px;
+}
+
+#landing-page__bottom-button {
+    background-color: white;
+    color: black;
+}
+
+.landing-page__personal {
+    color: var(--font-white);
+    text-decoration: none;
 }
