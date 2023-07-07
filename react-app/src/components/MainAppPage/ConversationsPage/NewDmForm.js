@@ -48,10 +48,6 @@ export default function NewDmForm() {
       history.push(`/main/conversations/${communicationId}`)
   };
 
-  if (users.length < 1) {
-    return <h1>Loading</h1>;
-  }
-
   return (
     <div className="new-dm-form__div">
       <h3>Select a user to direct message</h3>

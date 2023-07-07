@@ -39,7 +39,7 @@ export default function ConversationsPage() {
       </div>
 
       <div className="messages conversations-messages">
-        {communicationId && <DirectMessages/>}
+        {communicationId ? <DirectMessages/> :  <div className="conversations__border-div"></div>}
       </div>
     </>
   );
