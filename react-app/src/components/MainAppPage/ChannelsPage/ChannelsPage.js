@@ -31,7 +31,7 @@ export default function ChannelsPage() {
       const keys = Object.keys(singleUserServer.channels);
       if (!keys.length) return;
 
-      const channelId = Math.min(...keys);
+      const channelId = Math.min(...keys.filter(k => singleUserServer.channels[k].type !== "voice"));
       history.push(`/main/channels/${serverId}/${channelId}`);
     }
   }, [singleUserServer]);
@@ -45,7 +45,9 @@ export default function ChannelsPage() {
           <div className="channels-nav"></div>
         </div>
         <div className="messages">
-          <div className="channels-messages"></div>
+          <div className="channels-messages">
+
+          </div>
         </div>
       </>
     );
@@ -85,7 +87,7 @@ export default function ChannelsPage() {
         </div>
         <UserProfile />
       </div>
-      <div className="messages">{channelId ? <MessagePage /> : null}</div>
+      <div className="messages"> <MessagePage /> </div>
     </>
   );
 }

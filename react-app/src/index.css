@@ -39,6 +39,7 @@ button {
   --font-gray: hsl(212, 9%, 61%);
   --icon-light-gray: hsl(213, 8%, 73%);
   --icon-white-active: hsl(0, 0%, 100%);
+  --scrollthumb-dark: hsl(225, 7%, 11%);
 
   --black-100: #101214;
   --black-200: #1e1f22;

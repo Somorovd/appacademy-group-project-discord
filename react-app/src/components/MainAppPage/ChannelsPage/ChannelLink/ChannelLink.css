@@ -9,13 +9,57 @@
   margin-bottom: 2px;
 }
 
+.channel-item input,
+.channel-item input:focus {
+  color: var(--font-white);
+  font-size: var(--font-size-md);
+  background-color: var(--black-100);
+  border: none;
+  outline: none;
+}
+
 .channel-item.channel-item--selected,
 .channel-item.channel-item--selected:hover {
   background-color: var(--black-800);
   color: var(--font-white);
 }
 
+.channel-item__actions {
+  margin-left: auto;
+  justify-self: flex-end;
+  visibility: hidden;
+  display: flex;
+  gap: 8px;
+  color: var(--font-gray);
+}
+
+.channel-item__actions i {
+  font-size: 12px;
+  padding: 3px;
+}
+
+.channel-item__actions i:hover {
+  color: var(--font-white);
+  font-size: 12px;
+}
+
 .channel-item:hover {
   background-color: var(--black-700);
   color: var(--font-white);
+}
+
+.channel-item:hover .channel-item__actions {
+  visibility: visible;
+}
+
+.invisible {
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+  cursor: default;
+}
+
+.channel-item input:not(.invisible) {
+  position: relative;
+  width: 100%;
 }

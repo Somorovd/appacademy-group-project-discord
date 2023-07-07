@@ -124,7 +124,7 @@ export default function DirectMessages() {
             className="DM-page__chat-input"
             maxLength={500}
           />
-          <button type="submit" className="DM-page__chat-submit" disabled={currentMessage.length === 0}><i class="fa-solid fa-arrow-right"></i></button>
+          <button type="submit" className="DM-page__chat-submit" disabled={currentMessage.length === 0}><i className="fa-solid fa-arrow-right"></i></button>
         </form>
       </div>
           {currentMessage.length >= 500 && <span className="DM-page__error">Max message length of 500 has been reached</span>}
