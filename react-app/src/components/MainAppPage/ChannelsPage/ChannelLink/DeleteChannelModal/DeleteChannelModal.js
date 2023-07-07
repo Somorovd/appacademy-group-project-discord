@@ -37,7 +37,12 @@ export default function DeleteChannelModal({ channel }) {
         </p>
       </div>
       <div className='delete-channel__buttons'>
-        <button className='delete-channel__cancel-button'>Cancel</button>
+        <button
+          className='delete-channel__cancel-button'
+          onClick={closeModal}
+        >
+          Cancel
+        </button>
         <button
           className='delete-channel__delete-button'
           onClick={handleDelete}
