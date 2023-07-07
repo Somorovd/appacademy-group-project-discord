@@ -123,7 +123,7 @@ export default function DirectMessages() {
             onChange={(e) => setCurrentMessage(e.target.value)}
             className="DM-page__chat-input"
           />
-          <button type="submit" className="DM-page__chat-submit" disabled={currentMessage.length === 0}><i class="fa-solid fa-arrow-right"></i></button>
+          <button type="submit" className="DM-page__chat-submit" disabled={currentMessage.length === 0}><i className="fa-solid fa-arrow-right"></i></button>
         </form>
       </div>
     </div>

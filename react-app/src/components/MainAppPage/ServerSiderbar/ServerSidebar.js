@@ -34,14 +34,14 @@ export default function ServerSidebar() {
           />
         ))}
         <div className="server-icon server-icon--add-server">
-          <OpenModalButton modalComponent={<CreateServerFormModal />} buttonText={<i class="fa-solid fa-plus"></i>}/>
+          <OpenModalButton modalComponent={<CreateServerFormModal />} buttonText={<i className="fa-solid fa-plus"></i>}/>
           <span className="server-icon__tooltip">Add Server</span>
         </div>
         <div
           className="server-icon server-icon--browse-servers"
           onClick={() => history.push('/main/discover')}
         >
-          <i class="fa-solid fa-compass"></i>
+          <i className="fa-solid fa-compass"></i>
           <span className="server-icon__tooltip">
             Explore Discoverable Servers
           </span>
