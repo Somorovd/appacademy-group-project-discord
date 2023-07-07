@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../../../context/Modal";
@@ -48,16 +48,40 @@ export default function ChannelLink({ channel }) {
       handleSubmit();
     }
     if (e.key === 'Escape') {
-      cancelEdit()
+      cancelEdit();
     }
   };
 
   const cancelEdit = () => {
-    setIsEditting(false)
-    setName(channel.name)
+    setIsEditting(false);
+    setName(channel.name);
+    setErrors({});
+  }
+
+  useEffect(() => {
+    checkErrors();
+  }, [name])
+
+  const checkErrors = () => {
+    const errors = {};
+
+    if (name.length < 2)
+      errors.name = "Name must be at least 2 characters";
+    if (name.length === 20)
+      errors.name = "Max length of 20 reached";
+
+    setErrors(errors);
+  }
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+    checkErrors(e);
   }
 
   const handleSubmit = async (e) => {
+    checkErrors();
+    if (Object.keys(errors).length) return;
+
     const editedChannel = {
       id: Number(channel.id),
       name
@@ -77,48 +101,53 @@ export default function ChannelLink({ channel }) {
   );
 
   return (
-    <li
-      key={channel.id}
-      className={className}
-      onClick={handleClick}
-    >
-      {
-        channel.type === "text"
-          ? <i className="fa-solid fa-hashtag"></i>
-          : <i className="fa-solid fa-headset"></i>
-      }
-
-      <input
-        className={isEditting ? "" : "invisible"}
-        ref={editInput}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        onBlur={cancelEdit}
-        onKeyDown={handleKeyPress}
-        minLength={2}
-        maxLength={20}
-        required
-      />
-      <span
-        className={isEditting ? "hidden" : ""}
-      >
-        {name}
+    <>
+      <span className="warning">
+        {errors.name}
       </span>
+      <li
+        key={channel.id}
+        className={className}
+        onClick={handleClick}
+      >
+        {
+          channel.type === "text"
+            ? <i className="fa-solid fa-hashtag"></i>
+            : <i className="fa-solid fa-headset"></i>
+        }
 
-      {
-        singleUserServer.ownerId === user.id &&
-        !isEditting &&
-        <span className="channel-item__actions">
-          <i
-            className="fa-solid fa-pencil"
-            onClick={handleEdit}
-          ></i>
-          <i
-            className="fa-solid fa-trash"
-            onClick={handleDelete}
-          ></i>
+        <input
+          className={isEditting ? "" : "invisible"}
+          ref={editInput}
+          value={name}
+          onChange={handleChange}
+          onBlur={cancelEdit}
+          onKeyDown={handleKeyPress}
+          minLength={2}
+          maxLength={20}
+          required
+        />
+        <span
+          className={isEditting ? "hidden" : ""}
+        >
+          {name}
         </span>
-      }
-    </li>
+
+        {
+          singleUserServer.ownerId === user.id &&
+          !isEditting &&
+          <span className="channel-item__actions">
+            <i
+              className="fa-solid fa-pencil"
+              onClick={handleEdit}
+            ></i>
+            <i
+              className="fa-solid fa-trash"
+              onClick={handleDelete}
+            ></i>
+          </span>
+        }
+      </li>
+    </>
   );
 }
