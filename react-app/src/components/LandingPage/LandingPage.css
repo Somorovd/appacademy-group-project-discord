@@ -35,7 +35,7 @@
 .landing-page__nav-options-button {
     display: flex;
     align-items: center;
-    margin-left: 40px;
+    margin-left: 20px
 }
 .landing-page__nav-options-button > Link {
     height: 40px;
@@ -228,7 +228,8 @@
     align-items: center;
     justify-content: space-between;
     border-top: 1px rgb(0, 151, 227) solid;
-    padding-top: 15px;
+    padding-top: 40px;
+    margin-top: 15px;
 }
 
 .landing-page__footer-bottom-left {
@@ -243,9 +244,17 @@
 }
 
 #landing-page__footer-column-top {
-    color: rgb(0, 140, 227)
+    color: rgb(0, 140, 227);
+    font-size: 18px;
 }
 
+.landing-page__footer-column a:hover {
+    text-decoration: underline;
+}
+
+.landing-page__nav-options a:hover {
+    text-decoration: underline;
+}
 
 .landing-page__paragraph {
     max-width: 700px;
@@ -259,4 +268,17 @@
 .landing-page__personal {
     color: var(--font-white);
     text-decoration: none;
+}
+
+.landing-page__logo {
+    height: 25px;
+    margin-right: 10px;
+}
+
+.landing-page__logo-bottom {
+    height: 45px;
+}
+
+#landing-page__bottom-button {
+    font-size: 14px;
 }

@@ -8,6 +8,7 @@ import Coach from "../../Images/Coach.svg";
 import LandingBigChillin from "../../Images/LandingBigChillin.svg";
 import "./LandingPage.css";
 import { Link } from "react-router-dom";
+import discord from "../../Images/discord-mark-white.svg"
 
 export default function LandingPage() {
   return (
@@ -15,7 +16,7 @@ export default function LandingPage() {
       <div className="landing-page__top">
         <div className="landing-page__nav">
           <div className="landing-page__nav-icon">
-            <img src={LandingIcon} alt="Discord Logo" /> Concord
+            <img src={discord} alt="Discord Logo" className="landing-page__logo" /> Concord
           </div>
 
           <div className="landing-page__nav-options">
@@ -70,7 +71,7 @@ export default function LandingPage() {
         <div className="landing-page__sections-descriptions">
           <h1>Create an invite-only place where you belong</h1>
           <p>
-            Discord servers are organized into topic-based channels where you
+            Concord servers are organized into topic-based channels where you
             can collaborate, share, and just talk about your day without
             clogging up a group chat.
           </p>
@@ -145,8 +146,7 @@ export default function LandingPage() {
 
         <div className="landing-page__footer-bottom">
           <div className="landing__footer__bottom__left">
-            <img src={LandingIcon} />
-            Concord
+            <img src={discord} alt="Discord Logo" className="landing-page__logo-bottom"/>
           </div>
 
           <div className="landing-page__footer-bottom-right">
