@@ -1,13 +1,20 @@
 import { useDispatch } from "react-redux";
+import { useModal } from "../../../../../context/Modal";
 import * as channelActions from "../../../../../store/channels";
+import * as serverActions from "../../../../../store/servers";
 
 import './DeleteChannelModal.css'
 
 export default function DeleteChannelModal({ channel }) {
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
 
   const handleDelete = () => {
-    dispatch(channel.thunkDeleteChannel(channel.id));
+    const data = dispatch(channelActions.thunkDeleteChannel(channel.id));
+    if (!data.errors) {
+      dispatch(serverActions.thunkDeleteChannel(channel.id));
+      closeModal();
+    }
   }
 
   return (

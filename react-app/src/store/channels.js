@@ -26,10 +26,18 @@ export const thunkDeleteChannel = channelId => async dispatch => {
   const res = await fetch(`/api/channels/${channelId}/delete`, {
     method: "delete"
   });
+
   const resBody = await res.json();
 
   if (res.ok) {
     dispatch(actionDeleteChannel(channelId));
+    return resBody;
+  } else if (res.status < 500) {
+    if (resBody.errors) {
+      return { errors: resBody.errors };
+    }
+  } else {
+    return { errors: ['An error occurred. Please try again.'] };
   }
 }
 
@@ -48,9 +56,9 @@ export default function reducer(state = initialState, action) {
     case GET_CHANNEL:
       return { ...state, singleChannel: action.payload };
     case DELETE_CHANNEL:
-      const newState = { ...state };
-      delete newState[action.payload];
-      return newState;
+      if (state.singleChannel.id === action.payload)
+        return { ...initialState };
+      else return state;
     case CLEAR_STATE:
       return { ...initialState }
     default:
