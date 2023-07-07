@@ -14,7 +14,7 @@
 .edit-server-modal__form-container {
   width: 720px;
   padding: 2rem;
-  margin-top: 5rem;
+  margin-top: 15rem;
 }
 
 .edit-server-modal__form > section,
@@ -188,21 +188,64 @@
   outline: none;
 }
 
-.edit-server-modal__btn-container {
+.edit-server-modal__changes-pop-up {
+  position: relative;
+  top: 20px;
+  padding: 0.7rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-dark-gray);
+  border-radius: 5px;
+  animation: changes-pop-up 200ms ease-in-out;
 }
 
-.edit-server-modal__submit-btn {
-  padding: 0.3rem 0.6rem;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--primary-blue);
+@keyframes changes-pop-up {
+  0% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(-16px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+.edit-server-modal__changes-pop-up > p {
   color: var(--font-white);
 }
 
+.edit-server-modal__btn-container {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.edit-server-modal__reset-btn {
+  background: none;
+  border: none;
+  color: var(--font-white);
+}
+
+.edit-server-modal__reset-btn:hover {
+  text-decoration: underline;
+}
+
+.edit-server-modal__submit-btn {
+  padding: 0.3rem 0.8rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-green);
+  color: var(--font-white);
+  transition: background-color 150ms ease-in-out;
+}
+
 .edit-server-modal__submit-btn:hover {
-  background-color: hsl(235, 44%, 51%);
+  background-color: hsl(139, 48%, 32%);
 }
 
 .divider {
@@ -248,7 +291,7 @@
 }
 
 .checked {
-  transform: translatex(20px);
+  transform: translateX(20px);
   transition: transform 200ms ease-in-out;
 }
 

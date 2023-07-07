@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useModal } from '../../../../../context/Modal';
 import { useDispatch } from 'react-redux';
 import * as serverActions from '../../../../../store/servers';
@@ -38,7 +38,28 @@ export default function EditServerModal({ serverToEdit }) {
   const [image, setImage] = useState(serverToEdit.image || '');
   const [about, setAbout] = useState(serverToEdit.about || '');
   const [isChecked, setIsChecked] = useState(!serverToEdit.private);
+  const [hasChanged, setHasChanged] = useState(false);
+  const originalState = useRef({
+    name,
+    image,
+    about,
+    isPrivate: !isChecked,
+  });
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [isResetEvent, setIsResetEvent] = useState(false);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (isFirstRender) {
+      return setIsFirstRender(false);
+    }
+
+    if (!isResetEvent) {
+      return setHasChanged(true);
+    }
+
+    setIsResetEvent(false);
+  }, [name, image, about, isChecked]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -58,6 +79,20 @@ export default function EditServerModal({ serverToEdit }) {
     } else {
       closeModal();
     }
+  };
+
+  const handleReset = e => {
+    e.preventDefault();
+    const { name, image, about, isPrivate } = originalState.current;
+
+    setIsResetEvent(true);
+
+    setName(name);
+    setImage(image);
+    setAbout(about);
+    setIsChecked(!isPrivate);
+
+    setHasChanged(false);
   };
 
   return (
@@ -139,9 +174,22 @@ export default function EditServerModal({ serverToEdit }) {
               )}
             </div>
           </section>
-          <section className="edit-server-modal__btn-container">
-            <button className="edit-server-modal__submit-btn">Submit</button>
-          </section>
+          {hasChanged && (
+            <div className="edit-server-modal__changes-pop-up">
+              <p>Careful - you have unsaved changes!!</p>
+              <div className="edit-server-modal__btn-container">
+                <button
+                  onClick={handleReset}
+                  className="edit-server-modal__reset-btn"
+                >
+                  Reset
+                </button>
+                <button className="edit-server-modal__submit-btn">
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          )}
         </form>
       </div>
     </div>
