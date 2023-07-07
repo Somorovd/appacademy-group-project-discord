@@ -78,7 +78,7 @@ export default function MessagePage() {
     <div className="channels-messages">
       <div className="channel-header">{singleChannel.name}</div>
       <div className="message-container">
-        {Object.keys(singleChannel).length &&
+        {Object.keys(singleChannel).length !== 0 &&
           singleChannel.serverId === Number(serverId) &&
           singleChannel.messages.map(message => (
             <MessageCard
