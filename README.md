@@ -10,6 +10,39 @@ For more details on features and application architecture see our wiki:
 * [React Components](https://github.com/Somorovd/appacademy-group-project-discord/wiki/React-Component-List)
 
 ## How to Build
+  In the root directory:
+
+  ```bash
+   pipenv install -r requirements.txt
+  ```
+      
+   ```bash
+   pipenv shell
+   ```
+
+   ```bash
+   flask db upgrade
+   ```
+
+   ```bash
+   flask seed all
+   ```
+
+   ```bash
+   flask run
+   ```
+In a second terminal:
+  ```bash
+   cd react-app
+  ```
+
+  ```bash
+   npm install
+  ```
+
+  ```bash
+   npm start
+  ```
 
 ## Screenshots
 ![image](https://github.com/Somorovd/appacademy-group-project-discord/assets/18534469/6b434f88-be38-4cef-be3e-6ae63e2e72e4)
