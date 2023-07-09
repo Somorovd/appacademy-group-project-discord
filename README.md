@@ -21,6 +21,10 @@ For more details on features and application architecture see our wiki:
    ```
 
    ```bash
+   cp .env.example .env
+   ```
+
+   ```bash
    flask db upgrade
    ```
 
