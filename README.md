@@ -14,37 +14,16 @@ For more details on features and application architecture see our wiki:
 
   ```bash
    pipenv install -r requirements.txt
-  ```
-      
-   ```bash
    pipenv shell
-   ```
-
-   ```bash
    cp .env.example .env
-   ```
-
-   ```bash
    flask db upgrade
-   ```
-
-   ```bash
    flask seed all
-   ```
-
-   ```bash
    flask run
    ```
 In a second terminal:
   ```bash
    cd react-app
-  ```
-
-  ```bash
    npm install
-  ```
-
-  ```bash
    npm start
   ```
 
