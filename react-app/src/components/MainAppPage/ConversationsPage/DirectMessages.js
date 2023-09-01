@@ -64,9 +64,13 @@ export default function DirectMessages() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const messageContent = currentMessage.trim();
+    if (!messageContent) {
+      return setCurrentMessage('');
+    }
     socket.emit('chat', {
       user,
-      content: currentMessage,
+      content: messageContent,
       room: communicationId,
       edited: false,
       deleted: false,
