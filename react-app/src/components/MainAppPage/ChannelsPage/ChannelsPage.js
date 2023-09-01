@@ -14,9 +14,12 @@ import './ChannelsPage.css';
 export default function ChannelsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { serverId, currentChannelId } = useParams();
+  const { serverId } = useParams();
 
   const singleUserServer = useSelector(state => state.servers.singleUserServer);
+  const channelIds = useSelector(
+    state => state.servers.singleUserServer.channelIds
+  );
   const user = useSelector(state => state.session.user);
 
   useEffect(() => {
@@ -75,7 +78,7 @@ export default function ChannelsPage() {
             )}
           </div>
           <ul className="channels-nav__list">
-            {singleUserServer.channelIds.map(channelId => (
+            {channelIds.map(channelId => (
               <ChannelLink
                 channelId={channelId}
                 key={channelId}

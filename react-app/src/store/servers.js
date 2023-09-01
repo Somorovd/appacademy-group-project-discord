@@ -3,10 +3,10 @@ const GET_SINGLE_SERVER = 'servers/GET_SINGLE_SERVER';
 const CREATE_SERVER = 'servers/CREATE_SERVER';
 const EDIT_SERVER = 'servers/EDIT_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
-const CREATE_CHANNEL = 'servers/CREATE_CHANNEL';
 const EDIT_CHANNEL = 'servers/EDIT_CHANNEL';
 const DELETE_CHANNEL = 'servers/DELETE_CHANNEL';
 const GET_ALL_PUBLIC_SERVERS = 'servers/GET_ALL_PUBLIC_SERVERS';
+const CREATE_CHANNEL = 'channels/CREATE_CHANNEL';
 const CLEAR_STATE = 'servers/CLEAR_STATE';
 
 const actionGetAllUserServers = servers => ({
@@ -32,11 +32,6 @@ const actionEditServer = server => ({
 const actionDeleteServer = serverId => ({
   type: DELETE_SERVER,
   payload: serverId,
-});
-
-const actionCreateChannel = channel => ({
-  type: CREATE_CHANNEL,
-  payload: channel,
 });
 
 const actionEditChannel = channel => ({
@@ -142,30 +137,6 @@ export const thunkDeleteServer = serverId => async dispatch => {
   }
 };
 
-export const thunkCreateChannel = (channel, serverId) => async dispatch => {
-  const res = await fetch(`/api/servers/${serverId}/channels`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(channel),
-  });
-
-  const resBody = await res.json();
-
-  if (res.ok) {
-    const channel = resBody;
-    dispatch(actionCreateChannel(channel));
-    return channel;
-  } else if (res.status < 500) {
-    if (resBody.errors) {
-      return { errors: resBody.errors };
-    }
-  } else {
-    return { errors: ['An error occurred. Please try again.'] };
-  }
-};
-
 export const thunkEditChannel = channel => async dispatch => {
   dispatch(actionEditChannel(channel));
 };
@@ -245,17 +216,13 @@ export default function serversReducer(state = initialState, action) {
       delete newState.discoverServers[action.payload];
       delete newState.allUserServers[action.payload];
       return newState;
-    case CREATE_CHANNEL:
-      return {
-        ...state,
-        singleUserServer: {
-          ...state.singleUserServer,
-          channels: {
-            ...state.singleUserServer.channels,
-            [action.payload.id]: action.payload,
-          },
-        },
-      };
+    case CREATE_CHANNEL: {
+      state.singleUserServer.channelIds = [
+        ...state.singleUserServer.channelIds,
+        action.payload.id,
+      ];
+      return state;
+    }
     case DELETE_CHANNEL:
       const channels = { ...state.singleUserServer.channels };
       delete channels[action.payload];

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
-import * as serverActions from '../../../../store/servers';
+import * as channelActions from '../../../../store/channels';
 import './CreateChannelFormModal.css';
 import { useHistory } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export default function CreateChannelFormModal({ serverId }) {
   const [type, setType] = useState('text');
   const [name, setName] = useState('');
   const [errors, setErrors] = useState([]);
-  const [attempted, setAttempted] = useState(false)
+  const [attempted, setAttempted] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function CreateChannelFormModal({ serverId }) {
     };
 
     const data = await dispatch(
-      serverActions.thunkCreateChannel(channel, serverId)
+      channelActions.thunkCreateChannel(channel, serverId)
     );
     if (data.errors) {
       setErrors(data.errors);
@@ -33,13 +33,12 @@ export default function CreateChannelFormModal({ serverId }) {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (name.trim() && name.length <= 20)
-        handleSubmit(e);
+      if (name.trim() && name.length <= 20) handleSubmit(e);
     }
-  }
+  };
 
   return (
     <div className="create-channel-modal">
@@ -93,8 +92,16 @@ export default function CreateChannelFormModal({ serverId }) {
               className="create-channel-form__input-label"
             >
               Channel Name
-              {attempted && name.length < 2 && <span className="create-channel__errors">-- Please input a name of 2 or greater</span>}
-              {name.length >= 20 && <span className="create-channel__errors">-- Max length of 20 reached</span>}
+              {attempted && name.length < 2 && (
+                <span className="create-channel__errors">
+                  -- Please input a name of 2 or greater
+                </span>
+              )}
+              {name.length >= 20 && (
+                <span className="create-channel__errors">
+                  -- Max length of 20 reached
+                </span>
+              )}
             </label>
             <div className="create-channel-form__input-container">
               <i className="fa-solid fa-hashtag"></i>
