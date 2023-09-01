@@ -36,6 +36,10 @@ export default function MessagePage() {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    if (!content.trim()) {
+      setContent('');
+      return;
+    }
     socket.emit('messages', {
       user,
       content,
