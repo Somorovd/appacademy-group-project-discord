@@ -179,8 +179,9 @@ export default function serversReducer(state = initialState, action) {
     case GET_USER_SERVERS:
       return { ...state, allUserServers: action.payload };
     case GET_SINGLE_SERVER:
-      const singleUserServer = action.payload;
+      const singleUserServer = { ...action.payload };
       singleUserServer.channelIds = Object.keys(singleUserServer.channels);
+      delete singleUserServer.channels;
       return { ...state, singleUserServer };
     case CREATE_SERVER: {
       const allUserServers = {

@@ -20,6 +20,7 @@ export default function ChannelsPage() {
   const channelIds = useSelector(
     state => state.servers.singleUserServer.channelIds
   );
+  const channels = useSelector(state => state.channels.allChannels);
   const user = useSelector(state => state.session.user);
 
   useEffect(() => {
@@ -32,22 +33,19 @@ export default function ChannelsPage() {
   }, [dispatch, serverId]);
 
   useEffect(() => {
-    if (singleUserServer.channels) {
-      const keys = Object.keys(singleUserServer.channels);
-      if (!keys.length) return;
-
+    if (singleUserServer.channelIds) {
       const channelId = Math.min(
-        ...keys.filter(k => singleUserServer.channels[k].type !== 'voice')
+        ...channelIds.filter(id => channels[id].type !== 'voice')
       );
       history.push(`/main/channels/${serverId}/${channelId}`);
     }
-  }, [singleUserServer]);
+  }, [singleUserServer, serverId]);
 
   if (!serverId) {
     history.push('/main/conversations');
   }
 
-  if (!singleUserServer.channels) {
+  if (!singleUserServer.channelIds) {
     // prevent page flashing
     return (
       <>
