@@ -94,12 +94,14 @@ export default function DirectMessages() {
     });
   };
 
-  console.log(otherUser)
-
   return (
     <div className="DM-page">
       <div className="DM-page__top">
-        <img className="DM-page__profile" src={otherUser?.userPic} /> {otherUser?.userName}
+        <img
+          className="DM-page__profile"
+          src={otherUser?.userPic}
+        />{' '}
+        {otherUser?.userName}
       </div>
       <ul className="DM-page__list">
         {chatMessages.map(message => {
