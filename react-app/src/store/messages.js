@@ -1,12 +1,17 @@
 const CREATE_MESSAGE = 'messages/CREATE_MESSAGES';
+const DELETE_MESSAGE = 'messages/DELETE_MESSAGE';
 
 const actionCreateMessage = message => ({
   type: CREATE_MESSAGE,
   payload: message,
 });
 
+const actionDeleteMessage = messageId => ({
+  type: DELETE_MESSAGE,
+  payload: messageId,
+});
+
 export const thunkCreateMessage = message => async dispatch => {
-  console.log('message thunk');
   const res = await fetch('/api/messages/new', {
     method: 'post',
     headers: {
@@ -17,14 +22,19 @@ export const thunkCreateMessage = message => async dispatch => {
   const resBody = await res.json();
 
   if (res.ok) {
-    const message = res;
+    const message = resBody.message;
     dispatch(actionCreateMessage(message));
     return message;
-  } else if (res.status < 500) {
-    if (resBody.errors) {
-      return { errors: resBody.errors };
-    } else {
-      return { errors: ['An error occurred. Please try again.'] };
-    }
+  }
+};
+
+export const thunkDeleteMessage = messageId => async dispatch => {
+  const res = await fetch(`/api/messages/${messageId}/delete`, {
+    method: 'delete',
+  });
+  const resBody = await res.json();
+
+  if (res.ok) {
+    dispatch(actionDeleteMessage(messageId));
   }
 };

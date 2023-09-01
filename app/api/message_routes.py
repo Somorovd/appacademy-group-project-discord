@@ -31,4 +31,23 @@ def create_message():
 
     res_message = new_message.to_dict()
     socketio.emit("messages", res_message, room=f"Channel-{res_message['channelId']}")
-    return res_message
+    return {"message": res_message}
+
+
+@message_routes.route("/<int:message_id>/delete", methods=["DELETE"])
+@login_required
+def delete_message(message_id):
+    message = Message.query.get(message_id)
+
+    if not message:
+        return {"errors": "Message not found"}, 404
+
+    if not message.user_id == current_user.id:
+        return {"errors": "Forbidden"}, 403
+
+    db.session.delete(message)
+    db.session.commit()
+
+    socketio.emit("messages", "refresh", room=f"Channel-{message.channel_id}")
+
+    return {"message": "Successfully deleted"}

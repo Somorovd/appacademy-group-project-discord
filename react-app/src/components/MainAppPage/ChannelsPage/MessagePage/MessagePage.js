@@ -54,13 +54,7 @@ export default function MessagePage() {
   };
 
   const handleDelete = messageId => {
-    socket.emit('messages', {
-      user,
-      content: '',
-      room: `Channel-${currentChannelId}`,
-      edited: false,
-      deleted: messageId,
-    });
+    dispatch(messageActions.thunkDeleteMessage(messageId));
   };
 
   const handleEdit = (messageId, content) => {

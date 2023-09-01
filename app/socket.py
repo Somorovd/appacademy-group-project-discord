@@ -48,15 +48,6 @@ def handle_DMs(data):
 def handle_messages(data):
     room = data["room"]
 
-    if data["deleted"]:
-        message_to_delete = Message.query.get(int(data["deleted"]))
-        if current_user.id != message_to_delete.user_id:
-            return
-        db.session.delete(message_to_delete)
-        db.session.commit()
-        emit("messages", "refresh", room=room)
-        return
-
     if data["edited"]:
         message_to_edit = Message.query.get(int(data["edited"]))
         if current_user.id != message_to_edit.user_id:
@@ -66,16 +57,3 @@ def handle_messages(data):
         db.session.commit()
         emit("messages", "refresh", room=room)
         return
-
-    new_message = Message(
-        user_id=data["user"]["id"],
-        channel_id=data["channel_id"],
-        content=data["content"],
-    )
-
-    db.session.add(new_message)
-    db.session.commit()
-
-    res_message = new_message.to_dict()
-
-    emit("messages", res_message, room=room)
