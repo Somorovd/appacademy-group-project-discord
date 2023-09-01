@@ -10,7 +10,7 @@ import './MessagePage.css';
 let socket;
 
 export default function MessagePage() {
-  const { serverId, channelId } = useParams();
+  const { serverId, currentChannelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
 
@@ -19,28 +19,28 @@ export default function MessagePage() {
 
   useEffect(() => {
     socket = io();
-    dispatch(channelActions.thunkGetChannel(channelId));
+    dispatch(channelActions.thunkGetChannel(currentChannelId));
 
     socket.on('messages', data => {
       if (data) {
-        dispatch(channelActions.thunkGetChannel(channelId));
+        dispatch(channelActions.thunkGetChannel(currentChannelId));
       }
     });
 
     socket.emit('join', {
-      room: `Channel-${channelId}`,
+      room: `Channel-${currentChannelId}`,
     });
 
     return () => socket.disconnect();
-  }, [dispatch, channelId]);
+  }, [dispatch, currentChannelId]);
 
   const handleSubmit = async e => {
     e.preventDefault();
     socket.emit('messages', {
       user,
       content,
-      room: `Channel-${channelId}`,
-      channel_id: channelId,
+      room: `Channel-${currentChannelId}`,
+      channel_id: currentChannelId,
       edited: false,
       deleted: false,
     });
@@ -52,7 +52,7 @@ export default function MessagePage() {
     socket.emit('messages', {
       user,
       content: '',
-      room: `Channel-${channelId}`,
+      room: `Channel-${currentChannelId}`,
       edited: false,
       deleted: messageId,
     });
@@ -62,7 +62,7 @@ export default function MessagePage() {
     socket.emit('messages', {
       user,
       content,
-      room: `Channel-${channelId}`,
+      room: `Channel-${currentChannelId}`,
       edited: messageId,
       deleted: false,
     });
