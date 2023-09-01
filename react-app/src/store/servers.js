@@ -164,20 +164,21 @@ export default function serversReducer(state = initialState, action) {
       return { ...state, allUserServers, singleUserServer: action.payload };
     }
     case EDIT_SERVER:
+      const server = { ...action.payload };
+      server.channelIds = Object.keys(server.channels);
+      delete server.channels;
       const allUserServers = {
         ...state.allUserServers,
-        [action.payload.id]: action.payload,
+        [action.payload.id]: server,
       };
       const publicServers = {
         ...state.publicServers,
-        [action.payload.id]: !action.payload.private
-          ? action.payload
-          : undefined,
+        [server.id]: !server.private ? server : undefined,
       };
       return {
         ...state,
         allUserServers,
-        singleUserServer: action.payload,
+        singleUserServer: server,
         publicServers,
       };
     case DELETE_SERVER:
