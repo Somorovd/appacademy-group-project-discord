@@ -2,7 +2,6 @@ const GET_CHANNEL = 'channels/GET_CHANNEL';
 const CREATE_CHANNEL = 'channels/CREATE_CHANNEL';
 const EDIT_CHANNEL = 'channels/EDIT_CHANNEL';
 const DELETE_CHANNEL = 'channels/DELETE_CHANNEL';
-const CLEAR_STATE = 'channels/CLEAR_STATE';
 const GET_SINGLE_SERVER = 'servers/GET_SINGLE_SERVER';
 
 const actionGetChannel = channel => ({
@@ -101,14 +100,6 @@ export const thunkDeleteChannel = channelId => async dispatch => {
   }
 };
 
-const actionClearState = () => ({
-  type: CLEAR_STATE,
-});
-
-export const thunkClearState = () => async dispatch => {
-  dispatch(actionClearState());
-};
-
 const initialState = { allChannels: {}, singleChannel: {} };
 
 export default function reducer(state = initialState, action) {
@@ -137,8 +128,6 @@ export default function reducer(state = initialState, action) {
       delete allChannels[action.payload.id];
       return { ...state, allChannels, singleChannel: {} };
     }
-    case CLEAR_STATE:
-      return { ...initialState };
     default:
       return state;
   }

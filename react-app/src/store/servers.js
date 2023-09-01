@@ -4,7 +4,6 @@ const CREATE_SERVER = 'servers/CREATE_SERVER';
 const EDIT_SERVER = 'servers/EDIT_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
 const GET_ALL_PUBLIC_SERVERS = 'servers/GET_ALL_PUBLIC_SERVERS';
-const CLEAR_STATE = 'servers/CLEAR_STATE';
 
 const CREATE_CHANNEL = 'channels/CREATE_CHANNEL';
 const DELETE_CHANNEL = 'channels/DELETE_CHANNEL';
@@ -141,14 +140,6 @@ export const thunkGetAllPublicServers = () => async dispatch => {
   }
 };
 
-const actionClearState = () => ({
-  type: CLEAR_STATE,
-});
-
-export const thunkClearState = () => async dispatch => {
-  dispatch(actionClearState());
-};
-
 const initialState = {
   publicServers: {},
   allUserServers: {},
@@ -219,8 +210,6 @@ export default function serversReducer(state = initialState, action) {
       };
     case GET_ALL_PUBLIC_SERVERS:
       return { ...state, discoverServers: action.payload };
-    case CLEAR_STATE:
-      return { ...initialState };
     default:
       return state;
   }
