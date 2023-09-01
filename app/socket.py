@@ -42,18 +42,3 @@ def handle_DMs(data):
         db.session.commit()
         emit("chat", "refresh", room=room)
         return
-
-
-@socketio.on("messages")
-def handle_messages(data):
-    room = data["room"]
-
-    if data["edited"]:
-        message_to_edit = Message.query.get(int(data["edited"]))
-        if current_user.id != message_to_edit.user_id:
-            return
-        message_to_edit.content = data["content"]
-        message_to_edit.was_edited = True
-        db.session.commit()
-        emit("messages", "refresh", room=room)
-        return

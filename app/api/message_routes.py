@@ -34,6 +34,30 @@ def create_message():
     return {"message": res_message}
 
 
+@message_routes.route("/<int:message_id>/edit", methods=["PUT"])
+@login_required
+def edit_message(message_id):
+    form = CreateMessageForm()
+    form["csrf_token"].data = request.cookies.get("csrf_token")
+
+    if not form.validate_on_submit():
+        return {"errors": validation_errors_to_dict(form.errors)}, 400
+
+    message = Message.query.get(message_id)
+
+    if not message:
+        return {"errors": "Message not found"}, 404
+
+    if not message.user_id == current_user.id:
+        return {"errors": "Forbidden"}, 403
+
+    message.content = form.data["content"]
+    db.session.commit()
+
+    socketio.emit("messages", "refresh", room=f"Channel-{message.channel_id}")
+    return {"message": message.to_dict()}
+
+
 @message_routes.route("/<int:message_id>/delete", methods=["DELETE"])
 @login_required
 def delete_message(message_id):
@@ -49,5 +73,4 @@ def delete_message(message_id):
     db.session.commit()
 
     socketio.emit("messages", "refresh", room=f"Channel-{message.channel_id}")
-
     return {"message": "Successfully deleted"}

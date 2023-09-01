@@ -38,15 +38,15 @@ export default function MessagePage() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const message_content = content.trim();
-    if (!message_content) {
+    const messageContent = content.trim();
+    if (!messageContent) {
       return setContent('');
     }
 
     const messageObj = {
       server_id: serverId,
       channel_id: currentChannelId,
-      content: message_content,
+      content: messageContent,
     };
 
     dispatch(messageActions.thunkCreateMessage(messageObj));
@@ -57,14 +57,16 @@ export default function MessagePage() {
     dispatch(messageActions.thunkDeleteMessage(messageId));
   };
 
-  const handleEdit = (messageId, content) => {
-    socket.emit('messages', {
-      user,
-      content,
-      room: `Channel-${currentChannelId}`,
-      edited: messageId,
-      deleted: false,
-    });
+  const handleEdit = (messageId, messageContent) => {
+    // need consistant validation for create and edit
+    const messageObj = {
+      message_id: messageId,
+      server_id: serverId,
+      channel_id: currentChannelId,
+      content: messageContent,
+    };
+
+    dispatch(messageActions.thunkEditMessage(messageObj));
   };
 
   const handleKeyPress = e => {
