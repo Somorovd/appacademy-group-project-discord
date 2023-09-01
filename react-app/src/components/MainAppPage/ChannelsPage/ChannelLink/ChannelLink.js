@@ -84,7 +84,6 @@ export default function ChannelLink({ channelId }) {
     if (data.errors) {
       setErrors(data.errors);
     } else {
-      dispatch(serverActions.thunkEditChannel(editedChannel));
       setIsEditting(false);
     }
   };
