@@ -14,15 +14,17 @@ export const thunkCreateMessage = message => async dispatch => {
     },
     body: JSON.stringify(message),
   });
-  dispatch(actionCreateMessage(message));
-};
+  const resBody = await res.json();
 
-export default function reducer(state = {}, action) {
-  switch (action.type) {
-    case CREATE_MESSAGE:
-      console.log('message reducer');
-      return state;
-    default:
-      return state;
+  if (res.ok) {
+    const message = res;
+    dispatch(actionCreateMessage(message));
+    return message;
+  } else if (res.status < 500) {
+    if (resBody.errors) {
+      return { errors: resBody.errors };
+    } else {
+      return { errors: ['An error occurred. Please try again.'] };
+    }
   }
-}
+};

@@ -23,6 +23,7 @@ export default function MessagePage() {
     dispatch(channelActions.thunkGetChannel(currentChannelId));
 
     socket.on('messages', data => {
+      console.log('recieved message', data);
       if (data) {
         dispatch(channelActions.thunkGetChannel(currentChannelId));
       }
@@ -37,23 +38,18 @@ export default function MessagePage() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!content.trim()) {
-      setContent('');
-      return;
+    const message_content = content.trim();
+    if (!message_content) {
+      return setContent('');
     }
-    console.log('sending');
 
-    dispatch(messageActions.thunkCreateMessage(content));
-
-    socket.emit('messages', {
-      user,
-      content,
-      room: `Channel-${currentChannelId}`,
+    const messageObj = {
+      server_id: serverId,
       channel_id: currentChannelId,
-      edited: false,
-      deleted: false,
-    });
+      content: message_content,
+    };
 
+    dispatch(messageActions.thunkCreateMessage(messageObj));
     setContent('');
   };
 
