@@ -46,13 +46,3 @@ export default function MainAppPage() {
     </>
   );
 }
-
-// Conversations
-// <Switch>
-// <Route path="/" exact>
-
-// </Route>
-// <Route path="/:id" exact>
-
-// </Route>
-// </Switch>

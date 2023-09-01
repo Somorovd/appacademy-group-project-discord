@@ -132,9 +132,11 @@ export default function reducer(state = initialState, action) {
         singleChannel.name = action.payload.name;
         return { ...state, singleChannel };
       } else return state;
-    case DELETE_CHANNEL:
-      if (state.singleChannel.id === action.payload) return { ...initialState };
-      else return state;
+    case DELETE_CHANNEL: {
+      const allChannels = { ...state.allChannels };
+      delete allChannels[action.payload.id];
+      return { ...state, allChannels, singleChannel: {} };
+    }
     case CLEAR_STATE:
       return { ...initialState };
     default:
