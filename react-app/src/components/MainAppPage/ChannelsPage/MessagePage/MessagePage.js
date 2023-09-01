@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import MessageCard from '../../MessageCard';
 import * as channelActions from '../../../../store/channels';
+import * as messageActions from '../../../../store/messages';
 
 import './MessagePage.css';
 
@@ -40,6 +41,10 @@ export default function MessagePage() {
       setContent('');
       return;
     }
+    console.log('sending');
+
+    dispatch(messageActions.thunkCreateMessage(content));
+
     socket.emit('messages', {
       user,
       content,

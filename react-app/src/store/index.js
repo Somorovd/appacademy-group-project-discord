@@ -4,6 +4,7 @@ import session from './session';
 import communications from './communications';
 import servers from './servers';
 import channels from './channels';
+import messages from './messages';
 
 const CLEAR_ALL = 'app/CLEAR_ALL';
 
@@ -17,6 +18,7 @@ const appReducer = combineReducers({
   communications,
   servers,
   channels,
+  messages,
 });
 
 const rootReducer = (state, action) => {
