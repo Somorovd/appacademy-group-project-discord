@@ -6,7 +6,7 @@ from random import randint
 
 # Adds a demo user, you can add other users here if you want
 def seed_channels():
-    for i in range(1, 4):
+    for i in range(1, 5):
         db.session.add(
             Channel(
                 server_id=i,
