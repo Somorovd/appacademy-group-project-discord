@@ -12,6 +12,15 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Baltar';
+  src: url('./resources/Baltar.otf');
+}
+@font-face {
+  font-family: 'FiraSans';
+  src: url('./resources/FiraSans.ttf');
+}
+
 * {
   font-family: 'gg sans Medium', sans-serif;
 }
