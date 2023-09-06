@@ -10,7 +10,7 @@ def is_image_url(form, field):
 
     image_name = image.split("/")[-1]
     split = image_name.split(".")
-    valid_extensions = ["jpg", "jpeg", "png"]
+    valid_extensions = ["jpg", "jpeg", "png", "webp"]
     if (not len(split) == 2) or (split[1] not in valid_extensions):
         raise ValidationError(
             "Image url must be of type " + ", ".join(valid_extensions)
