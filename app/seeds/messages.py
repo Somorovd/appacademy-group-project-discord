@@ -1,16 +1,25 @@
-from app.models import db, Message, environment, SCHEMA
+from app.models import db, Message, Server, Membership, User, environment, SCHEMA
 from sqlalchemy.sql import text
 from faker import Faker
+from random import choice, randint
 
 fake = Faker()
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_messages():
-    for i in range(1, 4):
-        db.session.add(
-            Message(user_id=1, channel_id=i * 5, content=fake.text(max_nb_chars=200))
-        )
+    servers = Server.query.all()
+    for server in servers:
+        members = Membership.query.filter(Membership.server_id == server.id).all()
+        for channel in server.channels:
+            for _ in range(1, 30):
+                db.session.add(
+                    Message(
+                        user_id=choice(members).user_id,
+                        channel_id=channel.id,
+                        content=fake.text(max_nb_chars=randint(20, 1000)),
+                    )
+                )
 
     db.session.commit()
 

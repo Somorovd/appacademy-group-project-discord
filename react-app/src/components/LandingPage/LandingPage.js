@@ -1,14 +1,12 @@
-import LandingIcon from "../../Images/LandingIcon.png";
-import Clouds from "../../Images/clouds.svg";
-import FriendsLeft from "../../Images/LandingTopLeft.svg";
-import FriendsRight from "../../Images/LandingTopRight.svg";
-import StudyGroup from "../../Images/StudyGroup.svg";
-import JustChillin from "../../Images/JustChillin.svg";
-import Coach from "../../Images/Coach.svg";
-import LandingBigChillin from "../../Images/LandingBigChillin.svg";
-import "./LandingPage.css";
-import { Link } from "react-router-dom";
-import discord from "../../Images/discord-mark-white.svg"
+import FriendsLeft from '../../Images/LandingTopLeft.svg';
+import FriendsRight from '../../Images/LandingTopRight.svg';
+import StudyGroup from '../../Images/StudyGroup.svg';
+import JustChillin from '../../Images/JustChillin.svg';
+import Coach from '../../Images/Coach.svg';
+import LandingBigChillin from '../../Images/LandingBigChillin.svg';
+import './LandingPage.css';
+import { Link } from 'react-router-dom';
+import discord from '../../Images/discord-mark-white.svg';
 
 export default function LandingPage() {
   return (
@@ -16,25 +14,67 @@ export default function LandingPage() {
       <div className="landing-page__top">
         <div className="landing-page__nav">
           <div className="landing-page__nav-icon">
-            <img src={discord} alt="Discord Logo" className="landing-page__logo" /> Concord
+            <img
+              src={discord}
+              alt="Discord Logo"
+              className="landing-page__logo"
+            />{' '}
+            Concord
           </div>
 
           <div className="landing-page__nav-options">
-            <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS <i class="fa-brands fa-css3-alt"></i></a>
-            <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML <i class="fa-brands fa-html5"></i></a>
-            <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JS <i class="fa-brands fa-js"></i></a>
-            <a target="_blank" href="https://react.dev/">React <i class="fa-brands fa-react"></i></a>
-            <a target="_blank" href="https://www.python.org/">Python <i class="fa-brands fa-python"></i></a>
-            <a target="_blank" href="https://flask.palletsprojects.com/en/2.3.x/">Flask <i class="fa-solid fa-flask"></i></a>
-            <a target="_blank" href="https://redux.js.org/">Redux <i class="fa-solid fa-atom"></i></a>
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+            >
+              CSS <i class="fa-brands fa-css3-alt"></i>
+            </a>
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML"
+            >
+              HTML <i class="fa-brands fa-html5"></i>
+            </a>
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+            >
+              JS <i class="fa-brands fa-js"></i>
+            </a>
+            <a
+              target="_blank"
+              href="https://react.dev/"
+            >
+              React <i class="fa-brands fa-react"></i>
+            </a>
+            <a
+              target="_blank"
+              href="https://www.python.org/"
+            >
+              Python <i class="fa-brands fa-python"></i>
+            </a>
+            <a
+              target="_blank"
+              href="https://flask.palletsprojects.com/en/2.3.x/"
+            >
+              Flask <i class="fa-solid fa-flask"></i>
+            </a>
+            <a
+              target="_blank"
+              href="https://redux.js.org/"
+            >
+              Redux <i class="fa-solid fa-atom"></i>
+            </a>
           </div>
 
-          <div className="landing-page__nav-options-button">
-            <Link to="/login" className="landing-page__button--rounded">
-              Login
-            </Link>
+          <div>
+            <a
+              href="#personal-links"
+              className="landing-page__connect"
+            >
+              Connect With Us
+            </a>
           </div>
-
         </div>
 
         <div className="landing-page__top-mid">
@@ -49,21 +89,27 @@ export default function LandingPage() {
             <Link
               to="/login"
               className="landing-page__button--rounded"
-              id="landing-page__top-mid-left-button">
+              id="landing-page__top-mid-left-button"
+            >
               Login
             </Link>
             <Link
               to="/signup"
               className="landing-page__button--rounded"
-              id="landing-page__top-mid-right-button">
+              id="landing-page__top-mid-right-button"
+            >
               Signup
             </Link>
           </div>
         </div>
-        <div className="landing-page__top-bottom-pics">
-          <img className="landing-page__top-pic-left" src={FriendsLeft} />
-          <img className="landing-page__top-pic-right" src={FriendsRight} />
-        </div>
+        <img
+          className="landing-page__top-friends-left"
+          src={FriendsLeft}
+        />
+        <img
+          className="landing-page__top-friends-right"
+          src={FriendsRight}
+        />
       </div>
 
       <div className="landing-page__sections landing-page__section--light">
@@ -92,7 +138,7 @@ export default function LandingPage() {
 
       <div className="landing-page__sections landing-page__section--light">
         <img src={Coach} />
-        <div className="landing-page__sections-descriptionss">
+        <div className="landing-page__sections-descriptions">
           <h1>From few to a fandom</h1>
           <p>
             Get any community running with moderation tools and custom member
@@ -113,49 +159,101 @@ export default function LandingPage() {
         </div>
 
         <img src={LandingBigChillin} />
-
       </div>
 
       <div className="landing-page__footer-section">
-        <div className="landing-page__footer-links">
-
+        <div
+          id="personal-links"
+          className="landing-page__footer-links"
+        >
           <div className="landing-page__footer-column">
             <div id="landing-page__footer-column-top">Daniel Somorov</div>
-            <a className="landing-page__personal" target="_blank" href="https://github.com/Somorovd">Github</a>
-            <a className="landing-page__personal" target="_blank" href="https://www.linkedin.com/in/daniel-somorov-05705313b/">LinkedIn</a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://github.com/Somorovd"
+            >
+              <i className="fa-brands fa-github"></i>
+              Github
+            </a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://www.linkedin.com/in/daniel-somorov-05705313b/"
+            >
+              <i className="fa-brands fa-linkedin"></i>
+              LinkedIn
+            </a>
           </div>
 
           <div className="landing-page__footer-column">
             <div id="landing-page__footer-column-top">Edward Huffstetler</div>
-            <a className="landing-page__personal" target="_blank" href="https://github.com/Edward932">Github</a>
-            <a className="landing-page__personal" target="_blank" href="https://www.linkedin.com/in/edwardhuffstetler/">LinkedIn</a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://github.com/Edward932"
+            >
+              <i className="fa-brands fa-github"></i>
+              Github
+            </a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://www.linkedin.com/in/edwardhuffstetler/"
+            >
+              <i className="fa-brands fa-linkedin"></i>
+              LinkedIn
+            </a>
           </div>
 
           <div className="landing-page__footer-column">
             <div id="landing-page__footer-column-top">Christian Spada</div>
-            <a className="landing-page__personal" target="_blank" href="https://github.com/christian-spada">Github</a>
-            <a className="landing-page__personal" target="_blank" href="https://www.linkedin.com/in/christian-s-82a24a23b/">LinkedIn</a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://github.com/christian-spada"
+            >
+              <i className="fa-brands fa-github"></i>
+              Github
+            </a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://www.linkedin.com/in/christian-s-82a24a23b/"
+            >
+              <i className="fa-brands fa-linkedin"></i>
+              LinkedIn
+            </a>
           </div>
 
           <div className="landing-page__footer-column">
             <div id="landing-page__footer-column-top">Ruben Ramirez</div>
-            <a className="landing-page__personal" target="_blank" href="https://github.com/RubenRamirez12">Github</a>
-            <a className="landing-page__personal" target="_blank" href="https://www.linkedin.com/in/ruben-ramirez-64a6a7265/">LinkedIn</a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://github.com/RubenRamirez12"
+            >
+              <i className="fa-brands fa-github"></i>
+              Github
+            </a>
+            <a
+              className="landing-page__personal"
+              target="_blank"
+              href="https://www.linkedin.com/in/ruben-ramirez-64a6a7265/"
+            >
+              <i className="fa-brands fa-linkedin"></i>
+              LinkedIn
+            </a>
           </div>
         </div>
 
         <div className="landing-page__footer-bottom">
           <div className="landing__footer__bottom__left">
-            <img src={discord} alt="Discord Logo" className="landing-page__logo-bottom"/>
-          </div>
-
-          <div className="landing-page__footer-bottom-right">
-          <Link
-              to="/signup"
-              className="landing-page__button--rounded"
-              id="landing-page__bottom-button">
-              Signup
-            </Link>
+            <img
+              src={discord}
+              alt="Discord Logo"
+              className="landing-page__logo-bottom"
+            />
           </div>
         </div>
       </div>
