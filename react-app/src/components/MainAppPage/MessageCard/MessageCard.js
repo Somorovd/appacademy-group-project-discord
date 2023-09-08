@@ -24,12 +24,12 @@ export default function MessageCard({ message, handleEdit, handleDelete }) {
   };
 
   return (
-    <div className="message-card__div">
+    <div className="message-card">
       <div className="message-card__image">
         <img
           src={message.profilePic}
           alt=""
-          className='message-card__img'
+          className="message-card__img"
         />
       </div>
 
