@@ -145,12 +145,13 @@
   width: 20%;
 }
 
-.landing-page__sections-descriptions > h1 {
+.landing-page__section-header {
   font-family: 'FiraSans';
   font-size: 2.5rem;
   margin-bottom: 2rem;
 }
-.landing-page__sections-descriptions > p {
+
+.landing-page__section-text {
   font-size: 1.1rem;
   line-height: 1.8rem;
 }
@@ -188,6 +189,10 @@
 
 .landing-page__section--dark {
   background-color: rgb(230, 230, 230);
+}
+
+.font-wide {
+  font-family: 'Baltar';
 }
 
 /* Landing page Footer */
