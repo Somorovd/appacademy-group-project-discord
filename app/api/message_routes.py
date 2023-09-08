@@ -29,7 +29,7 @@ def create_message():
     db.session.add(new_message)
     db.session.commit()
 
-    res_message = new_message.to_dict()
+    res_message = new_message.to_dict(timestamps=True)
     socket_data = {
         "payload": res_message,
         "type": "messages/CREATE_MESSAGES",

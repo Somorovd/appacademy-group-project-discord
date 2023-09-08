@@ -137,7 +137,7 @@ export default function reducer(state = initialState, action) {
         return state;
       }
       const singleChannel = { ...state.singleChannel };
-      singleChannel.messages.push(action.payload);
+      singleChannel.messages.unshift(action.payload);
       return { ...state, singleChannel };
     }
     default:
