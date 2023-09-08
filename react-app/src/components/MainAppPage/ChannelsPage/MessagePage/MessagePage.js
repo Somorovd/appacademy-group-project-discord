@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import MessageCard from '../../MessageCard';
+import { store } from '../../../../';
 import * as channelActions from '../../../../store/channels';
 import * as messageActions from '../../../../store/messages';
 
@@ -23,10 +24,12 @@ export default function MessagePage() {
     dispatch(channelActions.thunkGetChannel(currentChannelId));
 
     socket.on('messages', data => {
-      console.log('recieved message', data);
-      if (data) {
-        dispatch(channelActions.thunkGetChannel(currentChannelId));
+      if (data.type && data.payload.user.id !== user.id) {
+        store.dispatch(data);
       }
+      // if (data) {
+      //   dispatch(channelActions.thunkGetChannel(currentChannelId));
+      // }
     });
 
     socket.emit('join', {

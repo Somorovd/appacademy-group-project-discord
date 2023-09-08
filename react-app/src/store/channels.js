@@ -4,6 +4,10 @@ const EDIT_CHANNEL = 'channels/EDIT_CHANNEL';
 const DELETE_CHANNEL = 'channels/DELETE_CHANNEL';
 const GET_SINGLE_SERVER = 'servers/GET_SINGLE_SERVER';
 
+const CREATE_MESSAGE = 'messages/CREATE_MESSAGES';
+const EDIT_MESSAGE = 'messages/EDIT_MESSAGE';
+const DELETE_MESSAGE = 'messages/DELETE_MESSAGE';
+
 const actionGetChannel = channel => ({
   type: GET_CHANNEL,
   payload: channel,
@@ -127,6 +131,14 @@ export default function reducer(state = initialState, action) {
       const allChannels = { ...state.allChannels };
       delete allChannels[action.payload.id];
       return { ...state, allChannels, singleChannel: {} };
+    }
+    case CREATE_MESSAGE: {
+      if (state.singleChannel.id !== action.payload.channelId) {
+        return state;
+      }
+      const singleChannel = { ...state.singleChannel };
+      singleChannel.messages.push(action.payload);
+      return { ...state, singleChannel };
     }
     default:
       return state;

@@ -30,7 +30,11 @@ def create_message():
     db.session.commit()
 
     res_message = new_message.to_dict()
-    socketio.emit("messages", res_message, room=f"Channel-{res_message['channelId']}")
+    socket_data = {
+        "payload": res_message,
+        "type": "messages/CREATE_MESSAGES",
+    }
+    socketio.emit("messages", socket_data, room=f"Channel-{res_message['channelId']}")
     return {"message": res_message}
 
 
