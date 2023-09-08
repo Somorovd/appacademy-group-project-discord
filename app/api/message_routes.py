@@ -32,7 +32,7 @@ def create_message():
     res_message = new_message.to_dict(timestamps=True)
     socket_data = {
         "payload": res_message,
-        "type": "messages/CREATE_MESSAGES",
+        "type": "messages/CREATE_MESSAGE",
     }
     socketio.emit("messages", socket_data, room=f"Channel-{res_message['channelId']}")
     return {"message": res_message}
@@ -76,5 +76,16 @@ def delete_message(message_id):
     db.session.delete(message)
     db.session.commit()
 
-    socketio.emit("messages", "refresh", room=f"Channel-{message.channel_id}")
-    return {"message": "Successfully deleted"}
+    message_dict = {
+        "id": message_id,
+        "channelId": message.channel_id,
+        "user": {"id": current_user.id},
+    }
+
+    socket_data = {
+        "payload": message_dict,
+        "type": "messages/DELETE_MESSAGE",
+    }
+    socketio.emit("messages", socket_data, room=f"Channel-{message.channel_id}")
+
+    return {"message": message_dict}

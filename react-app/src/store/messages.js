@@ -41,7 +41,7 @@ export const thunkDeleteMessage = messageId => async dispatch => {
   const resBody = await res.json();
 
   if (res.ok) {
-    dispatch(actionDeleteMessage(messageId));
+    dispatch(actionDeleteMessage(resBody.message));
   }
 };
 

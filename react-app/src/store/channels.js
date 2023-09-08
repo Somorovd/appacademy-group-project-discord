@@ -4,7 +4,7 @@ const EDIT_CHANNEL = 'channels/EDIT_CHANNEL';
 const DELETE_CHANNEL = 'channels/DELETE_CHANNEL';
 const GET_SINGLE_SERVER = 'servers/GET_SINGLE_SERVER';
 
-const CREATE_MESSAGE = 'messages/CREATE_MESSAGES';
+const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
 const EDIT_MESSAGE = 'messages/EDIT_MESSAGE';
 const DELETE_MESSAGE = 'messages/DELETE_MESSAGE';
 
@@ -138,6 +138,16 @@ export default function reducer(state = initialState, action) {
       }
       const singleChannel = { ...state.singleChannel };
       singleChannel.messages.unshift(action.payload);
+      return { ...state, singleChannel };
+    }
+    case DELETE_MESSAGE: {
+      if (state.singleChannel.id !== action.payload.channelId) {
+        return state;
+      }
+      const singleChannel = { ...state.singleChannel };
+      singleChannel.messages = singleChannel.messages.filter(
+        m => m.id !== action.payload.id
+      );
       return { ...state, singleChannel };
     }
     default:
