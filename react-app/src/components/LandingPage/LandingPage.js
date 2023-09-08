@@ -115,8 +115,10 @@ export default function LandingPage() {
       <div className="landing-page__sections landing-page__section--light">
         <img src={StudyGroup} />
         <div className="landing-page__sections-descriptions">
-          <h1>Create an invite-only place where you belong</h1>
-          <p>
+          <h1 className="landing-page__section-header">
+            Create an invite-only place where you belong
+          </h1>
+          <p className="landing-page__section-text">
             Concord servers are organized into topic-based channels where you
             can collaborate, share, and just talk about your day without
             clogging up a group chat.
@@ -126,8 +128,10 @@ export default function LandingPage() {
 
       <div className="landing-page__sections landing-page__section--dark">
         <div className="landing-page__sections-descriptions">
-          <h1>Where hanging out is easy</h1>
-          <p>
+          <h1 className="landing-page__section-header">
+            Where hanging out is easy
+          </h1>
+          <p className="landing-page__section-text">
             Grab a seat in a voice channel when you’re free. Friends in your
             server can see you’re around and instantly pop in to talk without
             having to call.
@@ -139,8 +143,8 @@ export default function LandingPage() {
       <div className="landing-page__sections landing-page__section--light">
         <img src={Coach} />
         <div className="landing-page__sections-descriptions">
-          <h1>From few to a fandom</h1>
-          <p>
+          <h1 className="landing-page__section-header">From few to a fandom</h1>
+          <p className="landing-page__section-text">
             Get any community running with moderation tools and custom member
             access. Give members special powers, set up private channels, and
             more.
@@ -150,8 +154,10 @@ export default function LandingPage() {
 
       <div className="landing-page__big-section landing-page__section--dark">
         <div className="landing-page__big-section-description">
-          <h1>RELIABLE TECH FOR STAYING CLOSE</h1>
-          <p>
+          <h1 className="landing-page__section-header font-wide">
+            RELIABLE TECH FOR STAYING CLOSE
+          </h1>
+          <p className="landing-page__section-text">
             Low-latency voice and video feels like you’re in the same room. Wave
             hello over video, watch friends stream their games, or gather up and
             have a drawing session with screen share.
