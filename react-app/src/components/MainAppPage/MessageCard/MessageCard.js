@@ -40,7 +40,7 @@ export default function MessageCard({ message, handleEdit, handleDelete }) {
             {formattedDate}
           </span>
           {message.wasEdited && (
-            <span className="message-card__list-message-date">- edited</span>
+            <span className="message-card__list-message-date"> - edited</span>
           )}
         </div>
 

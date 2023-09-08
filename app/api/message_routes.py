@@ -56,6 +56,7 @@ def edit_message(message_id):
         return {"errors": "Forbidden"}, 403
 
     message.content = form.data["content"]
+    message.was_edited = True
     db.session.commit()
 
     res_message = message.to_dict(timestamps=True)
@@ -65,7 +66,7 @@ def edit_message(message_id):
     }
 
     socketio.emit("messages", socket_data, room=f"Channel-{res_message['channelId']}")
-    return {"message": message.to_dict()}
+    return {"message": res_message}
 
 
 @message_routes.route("/<int:message_id>/delete", methods=["DELETE"])
