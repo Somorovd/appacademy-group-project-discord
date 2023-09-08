@@ -27,9 +27,6 @@ export default function MessagePage() {
       if (data.type && data.payload.user.id !== user.id) {
         store.dispatch(data);
       }
-      // if (data) {
-      //   dispatch(channelActions.thunkGetChannel(currentChannelId));
-      // }
     });
 
     socket.emit('join', {
