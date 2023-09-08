@@ -58,7 +58,13 @@ def edit_message(message_id):
     message.content = form.data["content"]
     db.session.commit()
 
-    socketio.emit("messages", "refresh", room=f"Channel-{message.channel_id}")
+    res_message = message.to_dict(timestamps=True)
+    socket_data = {
+        "payload": res_message,
+        "type": "messages/EDIT_MESSAGE",
+    }
+
+    socketio.emit("messages", socket_data, room=f"Channel-{res_message['channelId']}")
     return {"message": message.to_dict()}
 
 

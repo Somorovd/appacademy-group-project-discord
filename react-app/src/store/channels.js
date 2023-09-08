@@ -140,6 +140,21 @@ export default function reducer(state = initialState, action) {
       singleChannel.messages.unshift(action.payload);
       return { ...state, singleChannel };
     }
+    case EDIT_MESSAGE: {
+      if (state.singleChannel.id !== action.payload.channelId) {
+        return state;
+      }
+
+      for (let i = 0; i < state.singleChannel.messages.length; i++) {
+        const m = state.singleChannel.messages[i];
+        if (m.id === action.payload.id) {
+          state.singleChannel.messages[i] = action.payload;
+          break;
+        }
+      }
+
+      return { ...state, singleChannel: { ...state.singleChannel } };
+    }
     case DELETE_MESSAGE: {
       if (state.singleChannel.id !== action.payload.channelId) {
         return state;

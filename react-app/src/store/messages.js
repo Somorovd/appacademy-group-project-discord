@@ -1,4 +1,4 @@
-const CREATE_MESSAGE = 'messages/CREATE_MESSAGES';
+const CREATE_MESSAGE = 'messages/CREATE_MESSAGE';
 const EDIT_MESSAGE = 'messages/EDIT_MESSAGE';
 const DELETE_MESSAGE = 'messages/DELETE_MESSAGE';
 
