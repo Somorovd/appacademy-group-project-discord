@@ -22,6 +22,15 @@
   padding: 3px;
 }
 
+.channels-nav__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.channels-nav__list .channel-item--voice {
+  order: 1;
+}
+
 .channels-nav__create-channel-btn {
   cursor: pointer;
   border: none;

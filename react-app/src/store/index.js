@@ -1,17 +1,31 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import session from './session'
+import session from './session';
 import communications from './communications';
-import servers from './servers'
-import channels from './channels'
+import servers from './servers';
+import channels from './channels';
 
-const rootReducer = combineReducers({
+const CLEAR_ALL = 'app/CLEAR_ALL';
+
+export const clearAll = () => ({
+  type: CLEAR_ALL,
+  payload: null,
+});
+
+const appReducer = combineReducers({
   session,
   communications,
   servers,
   channels,
 });
 
+const rootReducer = (state, action) => {
+  if (action.type === CLEAR_ALL) {
+    return appReducer(undefined, action);
+  } else {
+    return appReducer(state, action);
+  }
+};
 
 let enhancer;
 
@@ -24,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
   enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
-const configureStore = (preloadedState) => {
+const configureStore = preloadedState => {
   return createStore(rootReducer, preloadedState, enhancer);
 };
 

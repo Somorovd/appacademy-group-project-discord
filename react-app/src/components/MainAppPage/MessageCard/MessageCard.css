@@ -1,14 +1,14 @@
-.message-card__div {
+.message-card {
   display: grid;
   grid-template-columns: 40px 90% auto;
   color: var(--font-white);
   padding: 15px;
+  position: relative;
 }
 
-.message-card__div:hover {
+.message-card:hover {
   background-color: var(--bg-medium-gray);
 }
-
 
 .message-card__message {
   display: flex;
@@ -19,7 +19,7 @@
 
 .message-card__list-message-date {
   font-size: var(--font-size-sm);
-  color: var(--font-gray)
+  color: var(--font-gray);
 }
 
 .message-card__list-message-content {
@@ -42,7 +42,7 @@
   background-color: transparent;
   border: none;
   outline: none;
-  color: var(--primary-blue)
+  color: var(--primary-blue);
 }
 
 .message-card__hidden-save {
@@ -60,12 +60,29 @@
 }
 
 .message-card__buttons {
+  visibility: hidden;
   display: flex;
-  gap: 10px;
+  position: absolute;
+  border-radius: 5px;
+  background: var(--black-500);
+  border: 1px solid var(--black-200);
+  transform: translate(0, -50%);
+  right: 20px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.message-card:hover .message-card__buttons {
+  visibility: visible;
+}
+
+.message-card__option-buttons {
+  padding: 5px 10px;
 }
 
 .message-card__option-buttons:hover {
   color: var(--icon-white-active);
+  background: var(--black-700);
 }
 
 .message-card__image {

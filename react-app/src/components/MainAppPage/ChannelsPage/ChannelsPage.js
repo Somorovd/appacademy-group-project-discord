@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import CreateChannelFormModal from './CreateChannelFormModal';
@@ -14,45 +14,50 @@ import './ChannelsPage.css';
 export default function ChannelsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { serverId, channelId } = useParams();
+  const { serverId } = useParams();
 
   const singleUserServer = useSelector(state => state.servers.singleUserServer);
+  const channelIds = useSelector(
+    state => state.servers.singleUserServer.channelIds
+  );
+  const channels = useSelector(state => state.channels.allChannels);
   const user = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async () => {
-      const server = await dispatch(serverActions.thunkGetSingleServer(serverId));
-      if (!server.id) history.push("/main/conversations")
+      const server = await dispatch(
+        serverActions.thunkGetSingleServer(serverId)
+      );
+      if (!server.id) history.push('/main/conversations');
     })();
   }, [dispatch, serverId]);
 
   useEffect(() => {
-    if (singleUserServer.channels) {
-      const keys = Object.keys(singleUserServer.channels);
-      if (!keys.length) return;
-
-      const channelId = Math.min(...keys.filter(k => singleUserServer.channels[k].type !== "voice"));
+    if (singleUserServer.channelIds) {
+      const channelId = Math.min(
+        ...channelIds.filter(id => channels[id].type !== 'voice')
+      );
       history.push(`/main/channels/${serverId}/${channelId}`);
     }
-  }, [singleUserServer]);
+  }, [singleUserServer, serverId]);
 
-  if (!serverId) history.push("/main/conversations")
+  if (!serverId) {
+    history.push('/main/conversations');
+  }
 
-  if (!singleUserServer.channels) // prevent page flashing
+  if (!singleUserServer.channelIds) {
+    // prevent page flashing
     return (
       <>
         <div className="app-nav">
           <div className="channels-nav"></div>
         </div>
         <div className="messages">
-          <div className="channels-messages">
-
-          </div>
+          <div className="channels-messages"></div>
         </div>
       </>
     );
-
-  const channels = Object.values(singleUserServer.channels);
+  }
 
   return (
     <>
@@ -70,24 +75,20 @@ export default function ChannelsPage() {
               />
             )}
           </div>
-          <ul>
-            {channels.filter(channel => channel.type === "text").map(channel => (
+          <ul className="channels-nav__list">
+            {channelIds.map(channelId => (
               <ChannelLink
-                channel={channel}
-                key={channel.id}
-              />
-            ))}
-            {channels.filter(channel => channel.type === "voice").map(channel => (
-              <ChannelLink
-                channel={channel}
-                key={channel.id}
+                channelId={channelId}
+                key={channelId}
               />
             ))}
           </ul>
         </div>
         <UserProfile />
       </div>
-      <div className="messages"> <MessagePage /> </div>
+      <div className="messages">
+        <MessagePage />
+      </div>
     </>
   );
 }

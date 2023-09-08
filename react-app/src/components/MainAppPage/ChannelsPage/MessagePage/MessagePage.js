@@ -3,14 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import MessageCard from '../../MessageCard';
+import { store } from '../../../../';
 import * as channelActions from '../../../../store/channels';
+import * as messageActions from '../../../../store/messages';
 
 import './MessagePage.css';
 
 let socket;
 
 export default function MessagePage() {
-  const { serverId, channelId } = useParams();
+  const { serverId, currentChannelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
 
@@ -19,53 +21,52 @@ export default function MessagePage() {
 
   useEffect(() => {
     socket = io();
-    dispatch(channelActions.thunkGetChannel(channelId));
+    dispatch(channelActions.thunkGetChannel(currentChannelId));
 
     socket.on('messages', data => {
-      if (data) {
-        dispatch(channelActions.thunkGetChannel(channelId));
+      if (data.type && data.payload.user.id !== user.id) {
+        store.dispatch(data);
       }
     });
 
     socket.emit('join', {
-      room: `Channel-${channelId}`,
+      room: `Channel-${currentChannelId}`,
     });
 
     return () => socket.disconnect();
-  }, [dispatch, channelId]);
+  }, [dispatch, currentChannelId]);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    socket.emit('messages', {
-      user,
-      content,
-      room: `Channel-${channelId}`,
-      channel_id: channelId,
-      edited: false,
-      deleted: false,
-    });
+    const messageContent = content.trim();
+    if (!messageContent) {
+      return setContent('');
+    }
 
+    const messageObj = {
+      server_id: serverId,
+      channel_id: currentChannelId,
+      content: messageContent,
+    };
+
+    dispatch(messageActions.thunkCreateMessage(messageObj));
     setContent('');
   };
 
   const handleDelete = messageId => {
-    socket.emit('messages', {
-      user,
-      content: '',
-      room: `Channel-${channelId}`,
-      edited: false,
-      deleted: messageId,
-    });
+    dispatch(messageActions.thunkDeleteMessage(messageId));
   };
 
-  const handleEdit = (messageId, content) => {
-    socket.emit('messages', {
-      user,
-      content,
-      room: `Channel-${channelId}`,
-      edited: messageId,
-      deleted: false,
-    });
+  const handleEdit = (messageId, messageContent) => {
+    // need consistant validation for create and edit
+    const messageObj = {
+      message_id: messageId,
+      server_id: serverId,
+      channel_id: currentChannelId,
+      content: messageContent,
+    };
+
+    dispatch(messageActions.thunkEditMessage(messageObj));
   };
 
   const handleKeyPress = e => {
@@ -78,7 +79,7 @@ export default function MessagePage() {
     <div className="channels-messages">
       <div className="channel-header">{singleChannel.name}</div>
       <div className="message-container">
-        {Object.keys(singleChannel).length !== 0 &&
+        {singleChannel.messages &&
           singleChannel.serverId === Number(serverId) &&
           singleChannel.messages.map(message => (
             <MessageCard

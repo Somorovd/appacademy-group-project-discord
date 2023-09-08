@@ -24,12 +24,12 @@ export default function MessageCard({ message, handleEdit, handleDelete }) {
   };
 
   return (
-    <div className="message-card__div">
+    <div className="message-card">
       <div className="message-card__image">
         <img
           src={message.profilePic}
           alt=""
-          className='message-card__img'
+          className="message-card__img"
         />
       </div>
 
@@ -40,7 +40,7 @@ export default function MessageCard({ message, handleEdit, handleDelete }) {
             {formattedDate}
           </span>
           {message.wasEdited && (
-            <span className="message-card__list-message-date">- edited</span>
+            <span className="message-card__list-message-date"> - edited</span>
           )}
         </div>
 

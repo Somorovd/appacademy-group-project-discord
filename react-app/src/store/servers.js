@@ -3,12 +3,10 @@ const GET_SINGLE_SERVER = 'servers/GET_SINGLE_SERVER';
 const CREATE_SERVER = 'servers/CREATE_SERVER';
 const EDIT_SERVER = 'servers/EDIT_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
-const CREATE_CHANNEL = 'servers/CREATE_CHANNEL';
-const EDIT_CHANNEL = 'servers/EDIT_CHANNEL';
-const DELETE_CHANNEL = 'servers/DELETE_CHANNEL';
 const GET_ALL_PUBLIC_SERVERS = 'servers/GET_ALL_PUBLIC_SERVERS';
-const CLEAR_STATE = "servers/CLEAR_STATE"
 
+const CREATE_CHANNEL = 'channels/CREATE_CHANNEL';
+const DELETE_CHANNEL = 'channels/DELETE_CHANNEL';
 
 const actionGetAllUserServers = servers => ({
   type: GET_USER_SERVERS,
@@ -35,25 +33,10 @@ const actionDeleteServer = serverId => ({
   payload: serverId,
 });
 
-const actionCreateChannel = channel => ({
-  type: CREATE_CHANNEL,
-  payload: channel,
-});
-
-const actionEditChannel = channel => ({
-  type: EDIT_CHANNEL,
-  payload: channel,
-});
-
-const actionDeleteChannel = channelId => ({
-  type: DELETE_CHANNEL,
-  payload: channelId,
-});
-
 const actionGetAllPublicServers = servers => ({
   type: GET_ALL_PUBLIC_SERVERS,
-  payload: servers
-})
+  payload: servers,
+});
 
 export const thunkGetAllUserServers = () => async dispatch => {
   const res = await fetch('/api/servers/current');
@@ -143,38 +126,6 @@ export const thunkDeleteServer = serverId => async dispatch => {
   }
 };
 
-export const thunkCreateChannel = (channel, serverId) => async dispatch => {
-  const res = await fetch(`/api/servers/${serverId}/channels`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(channel),
-  });
-
-  const resBody = await res.json();
-
-  if (res.ok) {
-    const channel = resBody;
-    dispatch(actionCreateChannel(channel));
-    return channel;
-  } else if (res.status < 500) {
-    if (resBody.errors) {
-      return { errors: resBody.errors };
-    }
-  } else {
-    return { errors: ['An error occurred. Please try again.'] };
-  }
-};
-
-export const thunkEditChannel = channel => async dispatch => {
-  dispatch(actionEditChannel(channel));
-};
-
-export const thunkDeleteChannel = channelId => async dispatch => {
-  dispatch(actionDeleteChannel(channelId));
-};
-
 export const thunkGetAllPublicServers = () => async dispatch => {
   const res = await fetch('/api/servers/discover');
 
@@ -187,21 +138,13 @@ export const thunkGetAllPublicServers = () => async dispatch => {
 
     return dispatch(actionGetAllPublicServers(normalized));
   }
-}
-
-const actionClearState = () => ({
-  type: CLEAR_STATE
-})
-
-export const thunkClearState = () => async dispatch => {
-  dispatch(actionClearState())
-}
+};
 
 const initialState = {
   publicServers: {},
   allUserServers: {},
   singleUserServer: {},
-  discoverServers: {}
+  discoverServers: {},
 };
 
 export default function serversReducer(state = initialState, action) {
@@ -209,7 +152,10 @@ export default function serversReducer(state = initialState, action) {
     case GET_USER_SERVERS:
       return { ...state, allUserServers: action.payload };
     case GET_SINGLE_SERVER:
-      return { ...state, singleUserServer: action.payload };
+      const singleUserServer = { ...action.payload };
+      singleUserServer.channelIds = Object.keys(singleUserServer.channels);
+      delete singleUserServer.channels;
+      return { ...state, singleUserServer };
     case CREATE_SERVER: {
       const allUserServers = {
         ...state.allUserServers,
@@ -218,20 +164,21 @@ export default function serversReducer(state = initialState, action) {
       return { ...state, allUserServers, singleUserServer: action.payload };
     }
     case EDIT_SERVER:
+      const server = { ...action.payload };
+      server.channelIds = Object.keys(server.channels);
+      delete server.channels;
       const allUserServers = {
         ...state.allUserServers,
-        [action.payload.id]: action.payload,
+        [action.payload.id]: server,
       };
       const publicServers = {
         ...state.publicServers,
-        [action.payload.id]: !action.payload.private
-          ? action.payload
-          : undefined,
+        [server.id]: !server.private ? server : undefined,
       };
       return {
         ...state,
         allUserServers,
-        singleUserServer: action.payload,
+        singleUserServer: server,
         publicServers,
       };
     case DELETE_SERVER:
@@ -244,37 +191,26 @@ export default function serversReducer(state = initialState, action) {
       delete newState.discoverServers[action.payload];
       delete newState.allUserServers[action.payload];
       return newState;
-    case CREATE_CHANNEL:
+    case CREATE_CHANNEL: {
+      state.singleUserServer.channelIds = [
+        ...state.singleUserServer.channelIds,
+        action.payload.id.toString(),
+      ];
+      return state;
+    }
+    case DELETE_CHANNEL:
+      const channelIds = state.singleUserServer.channelIds.filter(
+        id => Number(id) !== action.payload
+      );
       return {
         ...state,
         singleUserServer: {
           ...state.singleUserServer,
-          channels: {
-            ...state.singleUserServer.channels,
-            [action.payload.id]: action.payload,
-          },
+          channelIds,
         },
       };
-    case DELETE_CHANNEL:
-      const channels = { ...state.singleUserServer.channels }
-      delete channels[action.payload];
-      return {
-        ...state,
-        singleUserServer: {
-          ...state.singleUserServer,
-          channels
-        }
-      }
-    case EDIT_CHANNEL:
-      state.singleUserServer.channels[action.payload.id] = {
-        ...state.singleUserServer.channels[action.payload.id],
-        name: action.payload.name
-      }
-      return state
     case GET_ALL_PUBLIC_SERVERS:
-      return { ...state, discoverServers: action.payload }
-    case CLEAR_STATE:
-      return { ...initialState }
+      return { ...state, discoverServers: action.payload };
     default:
       return state;
   }

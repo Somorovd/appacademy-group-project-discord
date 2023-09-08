@@ -8,10 +8,10 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import DiscoverPage from './DiscoverPage/DiscoverPage';
 
 export default function MainAppPage() {
-  const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user);
 
   if (!user) {
-    return <Redirect to="/" />
+    return <Redirect to="/" />;
   }
 
   return (
@@ -29,7 +29,7 @@ export default function MainAppPage() {
           </Route>
           <Route
             path={[
-              '/main/channels/:serverId/:channelId',
+              '/main/channels/:serverId/:currentChannelId',
               '/main/channels/:serverId',
               '/main/channels',
             ]}
@@ -46,13 +46,3 @@ export default function MainAppPage() {
     </>
   );
 }
-
-// Conversations
-// <Switch>
-// <Route path="/" exact>
-
-// </Route>
-// <Route path="/:id" exact>
-
-// </Route>
-// </Switch>

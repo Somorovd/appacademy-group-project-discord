@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+from datetime import datetime
 
 
 class Message(db.Model):
@@ -34,7 +35,8 @@ class Message(db.Model):
             "wasEdited": self.was_edited,
         }
         if timestamps:
-            dct["createdAt"] = self.created_at
-            dct["updatedAt"] = self.updated_at
+            # socket cant serialize datetime object, so time converted to milliseconds
+            dct["createdAt"] = self.created_at.timestamp() * 1000
+            dct["updatedAt"] = self.updated_at.timestamp() * 1000
 
         return dct
