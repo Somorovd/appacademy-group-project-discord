@@ -136,8 +136,13 @@ export default function reducer(state = initialState, action) {
       if (state.singleChannel.id !== action.payload.channelId) {
         return state;
       }
+
       const singleChannel = { ...state.singleChannel };
-      singleChannel.messages.unshift(action.payload);
+      if (singleChannel.messages[0].id === action.payload.id) {
+        singleChannel.messages[0] = action.payload;
+      } else {
+        singleChannel.messages.unshift(action.payload);
+      }
       return { ...state, singleChannel };
     }
     case EDIT_MESSAGE: {

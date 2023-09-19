@@ -31,9 +31,8 @@ export default function ServerPage() {
     socket = io();
 
     socket.on('messages', data => {
-      if (data.payload.user.id !== user.id) {
-        store.dispatch(data);
-      }
+      // data formatted as an action. Goes to Channels reducer.
+      store.dispatch(data);
     });
 
     socket.emit('join', {
