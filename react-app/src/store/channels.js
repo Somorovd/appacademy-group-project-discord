@@ -138,7 +138,10 @@ export default function reducer(state = initialState, action) {
       }
 
       const singleChannel = { ...state.singleChannel };
-      if (singleChannel.messages[0].id === action.payload.id) {
+      if (
+        singleChannel.messages[0] &&
+        singleChannel.messages[0].id === action.payload.id
+      ) {
         singleChannel.messages[0] = action.payload;
       } else {
         singleChannel.messages.unshift(action.payload);
