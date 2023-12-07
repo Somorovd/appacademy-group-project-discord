@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Message
+from app.models import db, Message, Channel
 from ..forms.create_message_form import CreateMessageForm
 from ..socket import socketio
 
@@ -31,10 +31,12 @@ def create_message():
 
     res_message = new_message.to_dict(timestamps=True)
     socket_data = {
+        "channelId": res_message["channelId"],
+        "serverId": form.data["server_id"],
         "payload": res_message,
         "type": "messages/CREATE_MESSAGE",
     }
-    socketio.emit("messages", socket_data, room=f"Channel-{res_message['channelId']}")
+    socketio.emit("messages", socket_data, room=f"Server-{form.data['server_id']}")
     return {"message": res_message}
 
 
@@ -61,18 +63,20 @@ def edit_message(message_id):
 
     res_message = message.to_dict(timestamps=True)
     socket_data = {
+        "channelId": res_message["channelId"],
+        "serverId": form.data["server_id"],
         "payload": res_message,
         "type": "messages/EDIT_MESSAGE",
     }
 
-    socketio.emit("messages", socket_data, room=f"Channel-{res_message['channelId']}")
+    socketio.emit("messages", socket_data, room=f"Server-{form.data['server_id']}")
     return {"message": res_message}
 
 
 @message_routes.route("/<int:message_id>/delete", methods=["DELETE"])
 @login_required
 def delete_message(message_id):
-    message = Message.query.get(message_id)
+    message = Message.query.join(Channel).filter(Message.id == message_id)[0]
 
     if not message:
         return {"errors": "Message not found"}, 404
@@ -80,19 +84,20 @@ def delete_message(message_id):
     if not message.user_id == current_user.id:
         return {"errors": "Forbidden"}, 403
 
-    db.session.delete(message)
-    db.session.commit()
-
     message_dict = {
         "id": message_id,
+        "serverId": message.channel.server_id,
         "channelId": message.channel_id,
         "user": {"id": current_user.id},
     }
+
+    db.session.delete(message)
+    db.session.commit()
 
     socket_data = {
         "payload": message_dict,
         "type": "messages/DELETE_MESSAGE",
     }
-    socketio.emit("messages", socket_data, room=f"Channel-{message.channel_id}")
+    socketio.emit("messages", socket_data, room=f"Server-{message_dict['serverId']}")
 
     return {"message": message_dict}

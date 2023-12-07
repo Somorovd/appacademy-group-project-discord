@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import ServerSidebar from './ServerSiderbar';
 import ConversationsPage from './ConversationsPage';
-import ChannelsPage from './ChannelsPage';
+import ServerPage from './ServerPage';
 import './MainAppPage.css';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
@@ -35,7 +35,7 @@ export default function MainAppPage() {
             ]}
           >
             <ServerSidebar />
-            <ChannelsPage />
+            <ServerPage />
           </Route>
           <Route path="/main/discover">
             <ServerSidebar />

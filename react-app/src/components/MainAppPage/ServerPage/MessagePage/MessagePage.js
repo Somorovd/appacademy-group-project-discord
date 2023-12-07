@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { io } from 'socket.io-client';
 import MessageCard from '../../MessageCard';
-import { store } from '../../../../';
 import * as channelActions from '../../../../store/channels';
 import * as messageActions from '../../../../store/messages';
 
 import './MessagePage.css';
-
-let socket;
 
 export default function MessagePage() {
   const { serverId, currentChannelId } = useParams();
@@ -17,23 +13,9 @@ export default function MessagePage() {
   const [content, setContent] = useState('');
 
   const singleChannel = useSelector(state => state.channels.singleChannel);
-  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
-    socket = io();
     dispatch(channelActions.thunkGetChannel(currentChannelId));
-
-    socket.on('messages', data => {
-      if (data.type && data.payload.user.id !== user.id) {
-        store.dispatch(data);
-      }
-    });
-
-    socket.emit('join', {
-      room: `Channel-${currentChannelId}`,
-    });
-
-    return () => socket.disconnect();
   }, [dispatch, currentChannelId]);
 
   const handleSubmit = async e => {

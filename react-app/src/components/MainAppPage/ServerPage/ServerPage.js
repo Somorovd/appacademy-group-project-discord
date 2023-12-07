@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { io } from 'socket.io-client';
 
 import CreateChannelFormModal from './CreateChannelFormModal';
 import ServerMenu from './ServerMenu';
@@ -8,10 +9,13 @@ import ChannelLink from './ChannelLink';
 import MessagePage from './MessagePage';
 import OpenModalButton from '../../OpenModalButton';
 import UserProfile from '../UserProfile';
+import { store } from '../../../';
 import * as serverActions from '../../../store/servers';
-import './ChannelsPage.css';
+import './ServerPage.css';
 
-export default function ChannelsPage() {
+let socket;
+
+export default function ServerPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { serverId } = useParams();
@@ -22,6 +26,21 @@ export default function ChannelsPage() {
   );
   const channels = useSelector(state => state.channels.allChannels);
   const user = useSelector(state => state.session.user);
+
+  useEffect(() => {
+    socket = io();
+
+    socket.on('messages', data => {
+      // data formatted as an action. Goes to Channels reducer.
+      store.dispatch(data);
+    });
+
+    socket.emit('join', {
+      room: `Server-${serverId}`,
+    });
+
+    return () => socket.disconnect();
+  }, []);
 
   useEffect(() => {
     (async () => {

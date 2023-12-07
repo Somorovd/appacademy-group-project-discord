@@ -1,54 +1,53 @@
-import React, { useState } from "react";
-import { login } from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { login } from '../../store/session';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const sessionUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const sessionUser = useSelector(state => state.session.user);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) history.push("/main/conversations");
+  if (sessionUser) history.push('/main/conversations');
 
   const handleSubmit = async (e, user) => {
     if (e) e.preventDefault();
+    console.log(`email: ${email}`);
     let data;
 
-    if (user)
-      data = await dispatch(login(user.email, user.password));
-    else
-      data = await dispatch(login(email, password));
+    if (user) data = await dispatch(login(user.email, user.password));
+    else data = await dispatch(login(email, password));
 
     if (data) setErrors(data);
   };
 
-  const handleClickDemo = (id) => {
+  const handleClickDemo = id => {
     const demoUsers = {
       1: {
-        email: "bobbie@aa.io",
-        password: "password"
+        email: 'bobbie@aa.io',
+        password: 'password',
       },
       2: {
-        email: "demo@aa.io",
-        password: "password"
+        email: 'demo@aa.io',
+        password: 'password',
       },
-    }
+    };
 
     const user = demoUsers[id];
     handleSubmit(null, user);
-  }
+  };
 
   const handleForgotPassword = () => {
-    alert("Oops! Try logging in with a demo user.")
-  }
+    alert('Oops! Try logging in with a demo user.');
+  };
 
   const handleRegister = () => {
-    history.push("/signup");
-  }
+    history.push('/signup');
+  };
 
   return (
     <div className="login-page">
@@ -67,11 +66,7 @@ function LoginFormPage() {
                 <label htmlFor="login-email">
                   Email
                   <span className="warning">
-                    {
-                      errors.password
-                        ? ` -- ${errors.email}`
-                        : "*"
-                    }
+                    {errors.password ? ` -- ${errors.email}` : ''}
                   </span>
                 </label>
                 <input
@@ -80,20 +75,20 @@ function LoginFormPage() {
                   value={email}
                   minLength={4}
                   maxLength={255}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={e => setEmail(e.target.value)}
                   required
                 />
-                {email.length >= 255 && <span className="login-page__errors">Max username length of 255 has been reached</span>}
+                {email.length >= 255 && (
+                  <span className="login-page__errors">
+                    Max username length of 255 has been reached
+                  </span>
+                )}
               </div>
               <div>
                 <label htmlFor="login-password">
                   Password
                   <span className="warning">
-                    {
-                      errors.password
-                        ? ` -- ${errors.password}`
-                        : "*"
-                    }
+                    {errors.password ? ` -- ${errors.password}` : ''}
                   </span>
                 </label>
                 <input
@@ -101,10 +96,14 @@ function LoginFormPage() {
                   value={password}
                   minLength={2}
                   maxLength={50}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={e => setPassword(e.target.value)}
                   required
                 />
-                {password.length >= 50 && <span className="login-page__errors">Max username length of 50 has been reached</span>}
+                {password.length >= 50 && (
+                  <span className="login-page__errors">
+                    Max username length of 50 has been reached
+                  </span>
+                )}
                 <p
                   className="login-link"
                   onClick={handleForgotPassword}
@@ -121,7 +120,7 @@ function LoginFormPage() {
                 Log In
               </button>
               <p>
-                Need an account&nbsp;
+                Need an account?&nbsp;
                 <span
                   className="login-link"
                   onClick={handleRegister}
@@ -145,15 +144,11 @@ function LoginFormPage() {
           >
             Demo User 2
           </button>
-          <h2>
-            Log in as a demo user
-          </h2>
-          <p>
-            Click one of these links to log in instantly.
-          </p>
+          <h2>Log in as a demo user</h2>
+          <p>Click one of these links to log in instantly.</p>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
